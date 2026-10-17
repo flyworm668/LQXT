@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101a33"/>
+      <stop offset="1" stop-color="#070a12"/>
+    </linearGradient>
+    <linearGradient id="tower" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd166"/>
+      <stop offset="1" stop-color="#ff8a4c"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="24" fill="url(#sky)"/>
+  <circle cx="64" cy="38" r="20" fill="#ffd166" opacity="0.14"/>
+  <circle cx="64" cy="38" r="11" fill="#ffd166" opacity="0.55"/>
+  <path d="M64 20 L70 34 L64 30 L58 34 Z" fill="#fff2c4"/>
+  <path d="M46 108 L52 56 L64 40 L76 56 L82 108 Z" fill="url(#tower)" opacity="0.92"/>
+  <path d="M58 62 L70 62 L73 84 L55 84 Z" fill="#2a1a12" opacity="0.75"/>
+  <path d="M60 88 L68 88 L69 104 L59 104 Z" fill="#2a1a12" opacity="0.75"/>
+  <circle cx="34" cy="78" r="2" fill="#cfe6ff"/>
+  <circle cx="94" cy="66" r="1.6" fill="#cfe6ff"/>
+  <circle cx="100" cy="96" r="1.2" fill="#cfe6ff"/>
+</svg>
