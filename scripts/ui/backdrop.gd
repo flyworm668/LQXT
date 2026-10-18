@@ -35,9 +35,9 @@ func setup(mid: String) -> void:
 func _build_particles() -> void:
 	_particles.clear()
 	_distant.clear()
-	var n := 34
+	var n := 26
 	if style in ["storm", "night", "void"]:
-		n = 60
+		n = 40
 	for i in range(n):
 		var p := {
 			"x": _rng.randf_range(0.0, 1.0),
@@ -61,7 +61,7 @@ func _process(delta: float) -> void:
 		return
 	_time += delta
 	_acc += delta
-	if _acc >= 0.033:
+	if _acc >= 0.066:
 		_acc = 0.0
 		queue_redraw()
 

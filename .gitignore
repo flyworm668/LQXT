@@ -3,3 +3,6 @@ shots/
 *.tmp
 *.log
 export/
+__pycache__/
+*.pyc
+docs/screenshots/*.import

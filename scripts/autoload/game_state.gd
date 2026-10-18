@@ -83,9 +83,7 @@ func start_run(p_trainer_id: String, starter_id: String, seed_value: int = 0) ->
 		var a := ContentDB.random_affix(rng)
 		if not a.is_empty():
 			attach_affix(starter["uid"], "normal", a["id"])
-	auto_deploy()
 	formation_presets = [[], [], []]
-	formation_presets[0] = deployed.duplicate(true)
 	active_preset = 0
 	generate_encounter(1)
 	if persist_enabled:
@@ -193,19 +191,6 @@ func add_owned_species(pid: String) -> Dictionary:
 	emit_signal("state_changed")
 	return {"kind": "resonance", "entry": target, "species": pid,
 		"name": pet_name(target), "stacks": int(target["resonance"])}
-
-
-func auto_deploy() -> void:
-	deployed.clear()
-	var count := mini(roster.size(), MAX_DEPLOY)
-	var templates: Dictionary = ContentDB.data["formation"].get("player_templates", {})
-	var positions: Array = templates.get(str(count), [])
-	for i in range(mini(count, positions.size())):
-		deployed.append({
-			"uid": int(roster[i]["uid"]),
-			"row": int(positions[i][0]),
-			"col": int(positions[i][1]),
-		})
 
 
 func set_deployment(placements: Array) -> bool:
@@ -671,8 +656,6 @@ func advance_floor() -> bool:
 		return false
 	current_floor += 1
 	pending_rewards = {}
-	if deployed.size() < mini(roster.size(), MAX_DEPLOY):
-		auto_deploy()
 	generate_encounter(current_floor)
 	emit_signal("state_changed")
 	return true

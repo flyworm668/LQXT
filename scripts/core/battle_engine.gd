@@ -391,6 +391,9 @@ func _use_normal(u: Dictionary) -> void:
 			var h := _heal(ally, int(float(ally["max_hp"]) * 0.05))
 			if int(h["amount"]) > 0:
 				action["heals"].append(h)
+	elif str(u["class"]) == "guardian":
+		var guard_shield := _add_shield(u, int(float(u["max_hp"]) * 0.03))
+		action["shields"].append(guard_shield)
 	_apply_on_hit_affixes(u, target, "normal", int(entry["damage"]), action, true, deaths)
 	_apply_item_on_hit(u, target, "normal", action, true)
 	if bool(u.get("is_boss", false)) and int(target["hp"]) > 0:
@@ -422,7 +425,7 @@ func _use_ultimate(u: Dictionary) -> void:
 					deaths.append(e["uid"])
 				_apply_on_hit_affixes(u, t, "ultimate", primary_damage, action, true, deaths)
 				_apply_item_on_hit(u, t, "ultimate", action, true)
-			var sh := _add_shield(u, int(float(u["max_hp"]) * 0.20))
+			var sh := _add_shield(u, int(float(u["max_hp"]) * 0.12))
 			action["shields"].append(sh)
 		"ult_warrior":
 			var t := _front_target(u)
@@ -459,7 +462,7 @@ func _use_ultimate(u: Dictionary) -> void:
 		"ult_archer":
 			var t := _lowest_target(u)
 			if not t.is_empty():
-				var info := _calc_damage(u, t, float(skill.get("mult", 2.4)), "ultimate", 0.30)
+				var info := _calc_damage(u, t, float(skill.get("mult", 2.0)), "ultimate", 0.25)
 				var e := _deal_damage(u, t, int(info["amount"]), bool(info["crit"]), float(info["element"]), true)
 				action["targets"].append(e)
 				primary_damage = int(e["damage"])
@@ -660,9 +663,8 @@ func _calc_damage(src: Dictionary, tgt: Dictionary, mult: float, slot: String,
 	var defense := _def_eff(tgt)
 	var def_coeff := float(combat.get("def_coefficient", 0.4))
 	var damage := atk * mult * 100.0 / (100.0 + defense * def_coeff)
-	var row_data: Dictionary = ContentDB.data.get("formation", {}).get("row_damage", {})
-	var row_mult := float(row_data.get(str(int(src["col"])), 1.0))
-	damage *= row_mult
+	# Formation position affects targeting only; it no longer changes damage.
+	var row_mult := 1.0
 	var elem_mult := ContentDB.element_multiplier(str(src["element"]), str(tgt["element"]))
 	damage *= elem_mult
 	# affix: sharp / execute
@@ -738,7 +740,6 @@ func _deal_damage(src: Dictionary, tgt: Dictionary, amount: int, crit: bool,
 		"absorbed": absorbed, "crit": crit, "element": element_mult,
 		"hp": int(tgt["hp"]), "max_hp": int(tgt["max_hp"]), "shield": int(tgt.get("shield", 0)),
 		"dead": dead, "saved": saved, "rage": int(tgt.get("rage", 0)),
-		"statuses": (tgt.get("statuses", {}) as Dictionary).duplicate(true),
 	}
 
 

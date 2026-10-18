@@ -122,10 +122,10 @@ ELEMENT_ULT_TEXT = {
 }
 
 SKILL_DESC = {
-    "guardian": ("重盾猛击前排，自身获得少量护盾。", "击退前排目标，自身获得 20% 最大生命护盾，{extra}。"),
-    "warrior": ("挥刃攻击敌方前排。", "对前排目标造成 2.6 倍重击，并溅射 30% 伤害至相邻敌人，{extra}。"),
+    "guardian": ("重盾猛击前排，自身获得少量护盾。", "击退前排目标，自身获得 12% 最大生命护盾，{extra}。"),
+    "warrior": ("挥刃攻击敌方前排。", "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，{extra}。"),
     "mage": ("凝聚元素弹攻击敌方后排。", "对最多 3 名敌人造成 1.35 倍元素风暴，{extra}。"),
-    "archer": ("射出一箭，优先攻击残血敌人。", "狙击生命最低的敌人，造成 2.4 倍伤害且暴击率 +30%，{extra}。"),
+    "archer": ("射出一箭，优先攻击残血敌人。", "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，{extra}。"),
     "support": ("攻击前排，并为生命最低的友方回复少量生命。", "为全体友方回复 15% 最大生命并提升 10% 攻击，{extra}。"),
 }
 
@@ -157,8 +157,8 @@ def make_pets():
             "name": ULT_PREFIX[element] + ULT_BASE[cls],
             "kind": "ult_" + cls,
             "target": CLASSES[cls]["target"],
-            "mult": {"guardian": 1.8, "warrior": 2.6, "mage": 1.35, "archer": 2.4, "support": 0.0}[cls],
-            "splash": 0.3 if cls == "warrior" else 0.0,
+            "mult": {"guardian": 1.8, "warrior": 2.15, "mage": 1.35, "archer": 2.0, "support": 0.0}[cls],
+            "splash": 0.25 if cls == "warrior" else 0.0,
             "desc": SKILL_DESC[cls][1].format(extra=ELEMENT_ULT_TEXT[element]),
         }
         pets.append({
@@ -346,7 +346,7 @@ def make_floors(pets):
 
 
 FORMATION = {
-    "row_damage": {"0": 1.20, "1": 1.00, "2": 0.85},
+    "row_damage": {"0": 1.00, "1": 1.00, "2": 1.00},
     "row_names": {"0": "前排", "1": "中排", "2": "后排"},
     "player_templates": {
         "1": [[1, 0]],

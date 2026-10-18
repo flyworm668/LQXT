@@ -15,6 +15,8 @@ func _ready() -> void:
 	add_dim(0.45)
 	_build_static()
 	_refresh()
+	if placements.is_empty():
+		tip_label.text = "请从右侧仓库选择精灵，再点击九宫格放置。布阵会自动保存。"
 
 
 func _build_static() -> void:
@@ -51,7 +53,7 @@ func _build_static() -> void:
 	preset_row.add_child(UI.grow())
 	preset_row.add_child(UI.label("切换时会自动保存当前阵型", 11, UI.FAINT))
 	root.add_child(preset_row)
-	tip_label = UI.label("点击精灵，再点击格子放置。再次点击已选精灵可下阵。", 13, UI.MUTED)
+	tip_label = UI.label("点击精灵，再点击格子放置；布阵会自动保存。再次点击已选精灵可下阵。", 13, UI.MUTED)
 	root.add_child(tip_label)
 
 	var main := UI.hbox(24)
@@ -64,7 +66,7 @@ func _build_static() -> void:
 	var col_labels := UI.hbox(8)
 	col_labels.add_theme_constant_override("separation", 8)
 	for col in range(2, -1, -1):
-		var cap_text: String = ["前排 · 伤害 +20%", "中排 · 无加成", "后排 · 伤害 -15%"][col]
+		var cap_text: String = ["前排", "中排", "后排"][col]
 		var cap := UI.label(cap_text, 12, UI.GOLD if col == 0 else UI.MUTED)
 		cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		cap.custom_minimum_size = Vector2(194, 0)
@@ -76,9 +78,7 @@ func _build_static() -> void:
 	grid_host.add_theme_constant_override("v_separation", 8)
 	left.add_child(grid_host)
 	var legend := UI.hbox(8)
-	legend.add_child(UI.pill("前排伤害 +20%", UI.GOLD, 11))
-	legend.add_child(UI.pill("中排无加成", UI.MUTED, 11))
-	legend.add_child(UI.pill("后排伤害 -15%", UI.BLUE, 11))
+	legend.add_child(UI.label("站位只影响目标选择：近战优先攻击前排，远程会绕过前排。", 11, UI.MUTED))
 	legend.add_child(UI.grow())
 	legend.add_child(UI.label("靠近敌方的列是前排", 11, UI.FAINT))
 	left.add_child(legend)
@@ -103,15 +103,12 @@ func _build_static() -> void:
 	scroll.add_child(roster_host)
 
 	var bottom := UI.hbox(10)
-	var auto := UI.button("自动布阵", Color.TRANSPARENT, 15)
-	auto.custom_minimum_size = Vector2(132, 48)
-	auto.pressed.connect(_auto_deploy)
-	bottom.add_child(auto)
 	var clear := UI.ghost_button("全部下阵", 14)
 	clear.custom_minimum_size = Vector2(110, 40)
 	clear.pressed.connect(func():
 		placements.clear()
 		selected_uid = -1
+		_persist()
 		_refresh())
 	bottom.add_child(clear)
 	bottom.add_child(UI.grow())
@@ -261,6 +258,7 @@ func _on_cell_clicked(row: int, col: int) -> void:
 		placements.erase(old)
 		selected_uid = -1
 		tip_label.text = "已下阵。点击精灵后选择格子重新上阵。"
+		_persist()
 		_refresh()
 		return
 	if old.is_empty() and placements.size() >= GameState.MAX_DEPLOY:
@@ -284,7 +282,8 @@ func _on_cell_clicked(row: int, col: int) -> void:
 			placements.erase(here)
 		placements.append({"uid": selected_uid, "row": row, "col": col})
 	selected_uid = -1
-	tip_label.text = "布阵已更新。"
+	tip_label.text = "布阵已更新并保存。"
+	_persist()
 	_refresh()
 
 
@@ -296,46 +295,29 @@ func _name_for_uid(uid: int) -> String:
 func _switch_preset(index: int) -> void:
 	GameState.save_preset(int(GameState.active_preset), placements)
 	GameState.active_preset = index
-	var loaded: Array = GameState.load_preset(index)
 	selected_uid = -1
-	if loaded.is_empty():
-		_auto_deploy()
-		tip_label.text = "阵型 %d 为空，已按推荐阵型填充。" % (index + 1)
+	placements = GameState.load_preset(index)
+	if placements.is_empty():
+		tip_label.text = "阵型 %d 为空，请手动布阵。" % (index + 1)
 	else:
-		placements = loaded
 		tip_label.text = "已切换到阵型 %d。" % (index + 1)
-		_refresh()
-
-
-func _auto_deploy() -> void:
-	placements.clear()
-	selected_uid = -1
-	var count := mini(GameState.roster.size(), GameState.MAX_DEPLOY)
-	var templates: Dictionary = ContentDB.data["formation"].get("player_templates", {})
-	var positions: Array = templates.get(str(count), [])
-	for i in range(mini(count, positions.size())):
-		placements.append({
-			"uid": int(GameState.roster[i]["uid"]),
-			"row": int(positions[i][0]),
-			"col": int(positions[i][1]),
-		})
-	tip_label.text = "已按推荐阵型自动布阵。"
+	_persist()
 	_refresh()
 
 
-func _save() -> bool:
-	if placements.is_empty():
-		toast("至少需要上阵一只精灵", UI.DANGER)
-		return false
+func _persist() -> void:
 	GameState.save_preset(int(GameState.active_preset), placements)
-	return GameState.set_deployment(placements)
+	GameState.set_deployment(placements)
 
 
 func _save_and_back() -> void:
-	if _save():
-		goto_screen("res://scripts/ui/map_screen.gd")
+	_persist()
+	goto_screen("res://scripts/ui/map_screen.gd")
 
 
 func _save_and_fight() -> void:
-	if _save():
-		goto_screen("res://scripts/ui/battle_screen.gd")
+	if placements.is_empty():
+		toast("至少需要上阵一只精灵", UI.DANGER)
+		return
+	_persist()
+	goto_screen("res://scripts/ui/battle_screen.gd")

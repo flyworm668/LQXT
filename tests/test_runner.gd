@@ -190,7 +190,7 @@ func _test_encounters() -> void:
 func _simulate_run(trainer_id: String, starter_id: String, seed_value: int) -> Dictionary:
 	GameState.start_run(trainer_id, starter_id, seed_value)
 	for f in range(1, 11):
-		GameState.auto_deploy()
+		_place_test_formation()
 		var engine = BattleEngineScript.new()
 		var result: Dictionary = engine.simulate(
 			GameState.build_player_units(), GameState.build_enemy_units(),
@@ -233,6 +233,20 @@ func _simulate_run(trainer_id: String, starter_id: String, seed_value: int) -> D
 			return {"won": true, "floor": 10, "rounds": int(result.get("rounds", 0))}
 		GameState.advance_floor()
 	return {"won": false, "floor": 10, "rounds": 0}
+
+
+func _place_test_formation() -> void:
+	var count := mini(GameState.roster.size(), 5)
+	var templates: Dictionary = ContentDB.data["formation"].get("player_templates", {})
+	var positions: Array = templates.get(str(count), [])
+	var placements: Array = []
+	for i in range(mini(count, positions.size())):
+		placements.append({
+			"uid": int(GameState.roster[i]["uid"]),
+			"row": int(positions[i][0]),
+			"col": int(positions[i][1]),
+		})
+	GameState.set_deployment(placements)
 
 
 func _test_full_runs(count: int) -> void:
@@ -289,16 +303,18 @@ func _test_ui_flow() -> void:
 		return
 	starter_btn.pressed.emit()
 	await get_tree().create_timer(0.75).timeout
-	var map_screen = main.current_screen
-	check(map_screen != null and map_screen.has_method("_start_battle"), "map screen loaded")
-	check(GameState.current_floor == 1, "run starts on floor 1")
-	check(GameState.roster.size() == 1, "run starts with one pet")
-	check(not GameState.encounter.is_empty(), "encounter generated")
-	var fight_btn = _find_button(map_screen, "挑战本层")
-	check(fight_btn != null, "map challenge button wired")
-	if fight_btn == null:
+	var first_formation = main.current_screen
+	check(first_formation != null and first_formation.has_method("_save_and_fight"), "first formation screen loaded")
+	check(GameState.deployed.is_empty(), "formation starts empty")
+	if first_formation == null:
 		return
-	fight_btn.pressed.emit()
+	first_formation.placements = [{"uid": int(GameState.roster[0]["uid"]), "row": 1, "col": 0}]
+	first_formation.call("_persist")
+	var begin_btn = _find_button(first_formation, "保存并挑战")
+	check(begin_btn != null, "manual formation challenge button wired")
+	if begin_btn == null:
+		return
+	begin_btn.pressed.emit()
 	await get_tree().create_timer(0.75).timeout
 	var battle = main.current_screen
 	check(battle != null and battle.has_method("_claim_victory"), "battle screen loaded")
@@ -320,18 +336,22 @@ func _test_ui_flow() -> void:
 	continue_btn.pressed.emit()
 	await get_tree().create_timer(0.75).timeout
 	check(GameState.current_floor == 2, "continue advances the floor")
-	check(GameState.deployed.size() == 2, "deployment grows with the roster")
+	check(GameState.deployed.size() == 1, "formation is preserved across floors")
 	await main.goto("res://scripts/ui/formation_screen.gd")
 	await get_tree().create_timer(0.5).timeout
 	var formation = main.current_screen
 	check(formation != null and formation.has_method("_save_and_back"), "formation screen loaded")
 	if formation != null:
-		formation.call("_auto_deploy")
+		var saved: Array = GameState.deployed.duplicate(true)
+		saved.append({"uid": int(GameState.roster[1]["uid"]), "row": 2, "col": 0})
+		formation.placements = saved
+		formation.call("_persist")
 		formation.call("_switch_preset", 1)
 		check(GameState.active_preset == 1, "formation preset switch")
-		check((formation.placements as Array).size() > 0, "preset fills deployment")
+		check((formation.placements as Array).is_empty(), "empty preset stays empty")
 		formation.call("_switch_preset", 0)
 		check(GameState.active_preset == 0, "formation preset switch back")
+		check((formation.placements as Array).size() > 0, "saved preset restores deployment")
 		var save_btn = _find_button(formation, "保存并返回")
 		check(save_btn != null, "formation save button wired")
 		if save_btn != null:

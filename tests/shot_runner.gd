@@ -30,6 +30,7 @@ func _ready() -> void:
 
 	GameState.persist_enabled = false
 	GameState.start_run("veteran", "p01", 20261018)
+	_place_roster()
 	await main.goto("res://scripts/ui/map_screen.gd")
 	await _shot("04_map")
 	var map_screen = main.current_screen
@@ -89,7 +90,7 @@ func _ready() -> void:
 		entry["level"] = 50
 	GameState.current_floor = 5
 	GameState.generate_encounter(5)
-	GameState.auto_deploy()
+	_place_roster()
 	await main.goto("res://scripts/ui/map_screen.gd")
 	await _shot("12_map_5v5")
 	await main.goto("res://scripts/ui/battle_screen.gd")
@@ -101,15 +102,56 @@ func _ready() -> void:
 		entry["level"] = 40
 	GameState.current_floor = 4
 	GameState.generate_encounter(4)
-	GameState.auto_deploy()
+	_place_roster()
 	await main.goto("res://scripts/ui/map_screen.gd")
 	await _shot("14_map_boss")
 	await main.goto("res://scripts/ui/battle_screen.gd")
 	await get_tree().create_timer(1.2).timeout
 	await _shot("15_battle_boss")
 
+	# --- floor 8 stress / FPS sample ---
+	GameState.start_run("veteran", "p01", 888888)
+	var added := 0
+	for pid in ContentDB.all_pet_ids():
+		if added >= 4:
+			break
+		if not GameState.owned_species.has(pid):
+			GameState.add_owned_species(str(pid))
+			added += 1
+	for entry in GameState.roster:
+		entry["level"] = 80
+	for i in range(6):
+		var it := ContentDB.random_item(GameState.rng)
+		if not it.is_empty():
+			GameState.items.append(str(it["id"]))
+	GameState.current_floor = 8
+	GameState.generate_encounter(8)
+	_place_roster()
+	await main.goto("res://scripts/ui/battle_screen.gd")
+	await get_tree().create_timer(0.8).timeout
+	await _shot("18_battle_floor8")
+	var samples: Array = []
+	for i in range(10):
+		await get_tree().create_timer(0.35).timeout
+		samples.append(Engine.get_frames_per_second())
+	print("FLOOR8 FPS SAMPLES: ", samples)
+
 	print("SHOTS SAVED: ", abs_dir)
 	get_tree().quit()
+
+
+func _place_roster() -> void:
+	var count := mini(GameState.roster.size(), 5)
+	var templates: Dictionary = ContentDB.data["formation"].get("player_templates", {})
+	var positions: Array = templates.get(str(count), [])
+	var placements: Array = []
+	for i in range(mini(count, positions.size())):
+		placements.append({
+			"uid": int(GameState.roster[i]["uid"]),
+			"row": int(positions[i][0]),
+			"col": int(positions[i][1]),
+		})
+	GameState.set_deployment(placements)
 
 
 func _shot(shot_name: String) -> void:

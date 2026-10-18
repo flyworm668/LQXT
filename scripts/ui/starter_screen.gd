@@ -147,4 +147,4 @@ func _confirm() -> void:
 	if selected_id.is_empty():
 		return
 	GameState.start_run(trainer_id, selected_id)
-	goto_screen("res://scripts/ui/map_screen.gd")
+	goto_screen("res://scripts/ui/formation_screen.gd", {"first": true})

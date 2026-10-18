@@ -1,5 +1,8 @@
 extends PanelContainer
 ## Compact battlefield card used by the battle screen.
+## Style boxes and text are cached: during a long 5v5 fight this card is updated
+## hundreds of times, and rebuilding theme overrides each time caused the
+## late-floor stutter.
 
 const BattleEngineScript = preload("res://scripts/core/battle_engine.gd")
 
@@ -12,7 +15,21 @@ var shield_label: Label
 var status_label: Label
 var pips: Array = []
 var dead_label: Label
+
+var _class_name: String = ""
 var _hp_fill_styles: Dictionary = {}
+var _hp_color_key: String = ""
+var _sub_text: String = ""
+var _rage_value: int = -1
+var _shield_value: int = -1
+var _status_text: String = ""
+var _active_state: bool = false
+var _dead_state: bool = false
+var _style_normal: StyleBoxFlat
+var _style_active: StyleBoxFlat
+var _pip_on: StyleBoxFlat
+var _pip_off: StyleBoxFlat
+var _hp_bg: StyleBoxFlat
 
 
 func setup(unit: Dictionary, enemy: bool) -> void:
@@ -21,6 +38,7 @@ func setup(unit: Dictionary, enemy: bool) -> void:
 	custom_minimum_size = Vector2(172, 128)
 	size = Vector2(172, 128)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_class_name = ContentDB.class_name_for(str(unit_data.get("class", "")))
 	_build()
 	refresh_all()
 
@@ -59,10 +77,12 @@ func _build() -> void:
 	info.add_child(sub_label)
 	var rages := UI.hbox(3)
 	info.add_child(rages)
+	_pip_on = UI.soft_style(UI.GOLD, Color.TRANSPARENT, 0, 3, 0)
+	_pip_off = UI.soft_style(Color("#243044"), Color.TRANSPARENT, 0, 3, 0)
 	for i in range(int(ContentDB.combat().get("rage_max", 2))):
 		var pip := PanelContainer.new()
 		pip.custom_minimum_size = Vector2(15, 5)
-		pip.add_theme_stylebox_override("panel", UI.soft_style(Color("#243044"), Color.TRANSPARENT, 0, 3, 0))
+		pip.add_theme_stylebox_override("panel", _pip_off)
 		rages.add_child(pip)
 		pips.append(pip)
 
@@ -76,6 +96,8 @@ func _build() -> void:
 	hp_bar.value = 100
 	hp_bar.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	hp_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_hp_bg = UI.soft_style(Color(0.03, 0.05, 0.08, 0.95), Color(0.2, 0.26, 0.36, 0.6), 0, 3, 0)
+	hp_bar.add_theme_stylebox_override("background", _hp_bg)
 	hp_wrap.add_child(hp_bar)
 
 	var foot := UI.hbox(4)
@@ -84,7 +106,7 @@ func _build() -> void:
 	foot.add_child(shield_label)
 	var grow := UI.grow()
 	foot.add_child(grow)
-	status_label = UI.label("", 9, UI.MUTED)
+	status_label = UI.label("", 9, UI.PURPLE)
 	status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	foot.add_child(status_label)
 
@@ -100,7 +122,9 @@ func _build() -> void:
 	var border := ContentDB.element_color(element).darkened(0.45)
 	if bool(unit_data.get("is_boss", false)):
 		border = UI.GOLD
-	add_theme_stylebox_override("panel", UI.soft_style(Color(0.045, 0.06, 0.10, 0.94), border, 1, 10, 8))
+	_style_normal = UI.soft_style(Color(0.045, 0.06, 0.10, 0.94), border, 1, 10, 8)
+	_style_active = UI.soft_style(Color(0.06, 0.08, 0.13, 0.98), Color.WHITE, 2, 10, 8)
+	add_theme_stylebox_override("panel", _style_normal)
 
 
 func refresh_all() -> void:
@@ -108,8 +132,6 @@ func refresh_all() -> void:
 	set_rage(int(unit_data.get("rage", 0)))
 	set_shield(int(unit_data.get("shield", 0)))
 	set_statuses(unit_data.get("statuses", {}))
-	var cls := ContentDB.class_name_for(str(unit_data.get("class", "")))
-	sub_label.text = "Lv.%d · %s" % [int(unit_data.get("level", 1)), cls]
 	if int(unit_data.get("hp", 0)) <= 0:
 		die()
 
@@ -120,26 +142,33 @@ func refresh_hp(hp: int, max_hp: int) -> void:
 	var ratio := float(hp) / float(maxi(1, max_hp))
 	var color := UI.hp_color(ratio)
 	var key := color.to_html(false)
-	if not _hp_fill_styles.has(key):
-		_hp_fill_styles[key] = UI.soft_style(color, Color.TRANSPARENT, 0, 3, 0)
-	hp_bar.add_theme_stylebox_override("fill", _hp_fill_styles[key])
-	hp_bar.add_theme_stylebox_override("background", UI.soft_style(Color(0.03, 0.05, 0.08, 0.95), Color(0.2, 0.26, 0.36, 0.6), 0, 3, 0))
-	sub_label.text = "Lv.%d · %s · %s/%s" % [
-		int(unit_data.get("level", 1)),
-		ContentDB.class_name_for(str(unit_data.get("class", ""))),
+	if key != _hp_color_key:
+		_hp_color_key = key
+		if not _hp_fill_styles.has(key):
+			_hp_fill_styles[key] = UI.soft_style(color, Color.TRANSPARENT, 0, 3, 0)
+		hp_bar.add_theme_stylebox_override("fill", _hp_fill_styles[key])
+	var text := "Lv.%d · %s · %s/%s" % [
+		int(unit_data.get("level", 1)), _class_name,
 		ContentDB.fmt(hp), ContentDB.fmt(max_hp)]
+	if text != _sub_text:
+		_sub_text = text
+		sub_label.text = text
 	if hp <= 0:
 		die()
 
 
 func set_rage(value: int) -> void:
+	if value == _rage_value:
+		return
+	_rage_value = value
 	for i in range(pips.size()):
-		var on := i < value
-		var color := UI.GOLD if on else Color("#243044")
-		pips[i].add_theme_stylebox_override("panel", UI.soft_style(color, Color.TRANSPARENT, 0, 3, 0))
+		pips[i].add_theme_stylebox_override("panel", _pip_on if i < value else _pip_off)
 
 
 func set_shield(value: int) -> void:
+	if value == _shield_value:
+		return
+	_shield_value = value
 	if value > 0:
 		shield_label.text = "盾 %s" % ContentDB.fmt(value)
 		shield_label.visible = true
@@ -154,25 +183,23 @@ func set_statuses(statuses: Dictionary) -> void:
 		var st: Dictionary = statuses[key]
 		var nm := BattleEngineScript.status_name(str(key))
 		parts.append(nm + ("%d" % int(st.get("dur", 0)) if int(st.get("dur", 0)) < 90 else ""))
-	if parts.is_empty():
-		status_label.text = ""
-	else:
-		status_label.text = " ".join(parts)
-		status_label.add_theme_color_override("font_color", UI.PURPLE)
+	var text := " ".join(parts)
+	if text == _status_text:
+		return
+	_status_text = text
+	status_label.text = text
 
 
 func die() -> void:
+	if _dead_state:
+		return
+	_dead_state = true
 	dead_label.visible = true
 	modulate = Color(0.45, 0.45, 0.5, 0.8)
 
 
 func set_active(active: bool) -> void:
-	var element := str(unit_data.get("element", "fire"))
-	var border := ContentDB.element_color(element).darkened(0.45)
-	if bool(unit_data.get("is_boss", false)):
-		border = UI.GOLD
-	if active:
-		border = Color.WHITE
-	add_theme_stylebox_override("panel", UI.soft_style(
-		Color(0.06, 0.08, 0.13, 0.98) if active else Color(0.045, 0.06, 0.10, 0.94),
-		border, 2 if active else 1, 10, 8))
+	if active == _active_state:
+		return
+	_active_state = active
+	add_theme_stylebox_override("panel", _style_active if active else _style_normal)

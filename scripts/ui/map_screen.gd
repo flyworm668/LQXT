@@ -188,7 +188,9 @@ func _team_panel() -> Control:
 			continue
 		rows.add_child(_team_row(entry, int(d["row"]), int(d["col"])))
 
-	if GameState.roster.size() > GameState.deployed.size():
+	if GameState.deployed.is_empty():
+		rows.add_child(UI.label("尚未布阵。点击「调整阵型」把精灵放入九宫格。", 13, UI.DANGER, true))
+	elif GameState.roster.size() > GameState.deployed.size():
 		rows.add_child(UI.label("仓库中还有 %d 只精灵待命" % (GameState.roster.size() - GameState.deployed.size()), 12, UI.FAINT))
 
 	var items_head := UI.hbox(8)
@@ -273,7 +275,9 @@ func _bottom_bar() -> Control:
 	formation.custom_minimum_size = Vector2(132, 50)
 	formation.pressed.connect(func(): goto_screen("res://scripts/ui/formation_screen.gd"))
 	buttons.add_child(formation)
-	var fight := UI.button("挑战本层" if floor_num < 10 else "挑战塔顶", UI.ACCENT, 19)
+	var fight := UI.button(
+		("挑战本层" if floor_num < 10 else "挑战塔顶") if not GameState.deployed.is_empty() else "请先布阵",
+		UI.ACCENT, 19)
 	fight.custom_minimum_size = Vector2(236, 50)
 	fight.pressed.connect(_start_battle)
 	buttons.add_child(fight)
@@ -283,7 +287,8 @@ func _bottom_bar() -> Control:
 
 func _start_battle() -> void:
 	if GameState.deployed.is_empty():
-		toast("至少需要上阵一只精灵", UI.DANGER)
+		toast("请先布阵：从仓库选择精灵放入九宫格", UI.DANGER)
+		goto_screen("res://scripts/ui/formation_screen.gd")
 		return
 	goto_screen("res://scripts/ui/battle_screen.gd")
 

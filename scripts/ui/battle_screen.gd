@@ -3,6 +3,7 @@ extends "res://scripts/ui/screen_base.gd"
 
 const BattleEngineScript = preload("res://scripts/core/battle_engine.gd")
 const UnitCardScript = preload("res://scripts/ui/unit_card.gd")
+const BattleFxScript = preload("res://scripts/ui/battle_fx.gd")
 
 const CARD_W := 172.0
 const CARD_H := 128.0
@@ -12,11 +13,13 @@ var events: Array = []
 var cards: Dictionary = {}
 var hp_by_uid: Dictionary = {}
 var status_by_uid: Dictionary = {}
-var speed: float = 2.0
+var speed: float = 0.5
 var skipping: bool = false
 var finished: bool = false
 var winner: String = ""
 var field: Control
+var fx: Control
+var _silent: bool = false
 var round_label: Label
 var alive_player: Label
 var alive_enemy: Label
@@ -71,9 +74,9 @@ func _build_hud() -> void:
 				h.add_child(UI.pill("首领·" + str(b["name"]), UI.DANGER, 10))
 	h.add_child(UI.grow())
 	h.add_child(UI.label("速度", 12, UI.MUTED))
-	for mult in [1.0, 2.0, 4.0]:
-		var b := UI.ghost_button("%d×" % int(mult), 13)
-		b.custom_minimum_size = Vector2(46, 30)
+	for mult in [0.5, 1.0, 2.0, 4.0]:
+		var b := UI.ghost_button(_speed_text(mult), 13)
+		b.custom_minimum_size = Vector2(52, 30)
 		b.pressed.connect(_set_speed.bind(mult))
 		speed_buttons.append([mult, b])
 		h.add_child(b)
@@ -81,7 +84,7 @@ func _build_hud() -> void:
 	skip_button.custom_minimum_size = Vector2(64, 30)
 	skip_button.pressed.connect(_skip)
 	h.add_child(skip_button)
-	_set_speed(2.0)
+	_set_speed(0.5)
 
 	skill_label = UI.label("", 20, UI.GOLD)
 	skill_label.position = Vector2(0, 68)
@@ -122,6 +125,10 @@ func _build_field() -> void:
 	alive_enemy.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	field.add_child(alive_enemy)
 	_add_column_labels()
+	fx = BattleFxScript.new()
+	fx.z_index = 50
+	field.add_child(fx)
+	fx.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 
 func _build_log() -> void:
@@ -173,9 +180,9 @@ func _prepare_battle() -> void:
 
 func _add_column_labels() -> void:
 	var cols := [
-		[20.0, "后排 -15%", UI.BLUE],
+		[20.0, "后排", UI.MUTED],
 		[200.0, "中排", UI.MUTED],
-		[380.0, "前排 +20%", UI.GOLD],
+		[380.0, "前排", UI.GOLD],
 	]
 	for c in cols:
 		var l := UI.label(str(c[1]), 10, c[2])
@@ -184,9 +191,9 @@ func _add_column_labels() -> void:
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		field.add_child(l)
 	var ecols := [
-		[728.0, "前排 +20%", UI.GOLD],
+		[728.0, "前排", UI.GOLD],
 		[908.0, "中排", UI.MUTED],
-		[1088.0, "后排 -15%", UI.BLUE],
+		[1088.0, "后排", UI.MUTED],
 	]
 	for c in ecols:
 		var l := UI.label(str(c[1]), 10, c[2])
@@ -204,6 +211,10 @@ func _slot_position(u: Dictionary) -> Vector2:
 	return Vector2(x, y)
 
 
+func _speed_text(value: float) -> String:
+	return "0.5×" if value < 1.0 else "%d×" % int(value)
+
+
 func _set_speed(value: float) -> void:
 	speed = value
 	for pair in speed_buttons:
@@ -217,6 +228,8 @@ func _skip() -> void:
 	skipping = true
 	skip_button.text = "跳过中"
 	skip_button.disabled = true
+	if fx != null:
+		fx.clear()
 
 
 func _play() -> void:
@@ -224,10 +237,12 @@ func _play() -> void:
 		if not is_inside_tree():
 			return
 		if skipping:
+			_silent = true
 			for j in range(i, events.size()):
-				_apply_event(events[j])
+				_apply_event(events[j], false)
+			_silent = false
 			break
-		_apply_event(events[i])
+		_apply_event(events[i], true)
 		var d := _delay_for(events[i]) / maxf(0.25, speed)
 		if d > 0.002:
 			await get_tree().create_timer(d).timeout
@@ -239,7 +254,7 @@ func _delay_for(ev: Dictionary) -> float:
 		"round":
 			return 0.12
 		"action":
-			return 0.62 if str(ev.get("slot", "")) == "ultimate" else 0.45
+			return 0.75 if str(ev.get("slot", "")) == "ultimate" else 0.5
 		"tick":
 			return 0.4
 		"stun":
@@ -254,7 +269,7 @@ func _delay_for(ev: Dictionary) -> float:
 			return 0.1
 
 
-func _apply_event(ev: Dictionary) -> void:
+func _apply_event(ev: Dictionary, visual: bool = true) -> void:
 	match str(ev.get("t", "")):
 		"round":
 			round_label.text = "回合 %d" % int(ev.get("round", 1))
@@ -264,22 +279,23 @@ func _apply_event(ev: Dictionary) -> void:
 			if c != null:
 				c.set_rage(int(ev.get("rage", 0)))
 		"action":
-			_apply_action(ev)
+			_apply_action(ev, visual)
 		"tick":
-			_apply_tick(ev)
+			_apply_tick(ev, visual)
 		"status":
 			_apply_single_status(ev)
 		"stunned":
 			_append_log(str(ev.get("text", "")), UI.BLUE)
 			var c = cards.get(int(ev.get("uid", 0)))
-			if c != null:
-				_float_on(c, "眩晕", UI.BLUE, 16)
+			if c != null and visual:
+				_float_on(c, "眩晕", UI.BLUE, 20)
 		"death":
 			_handle_death(ev)
 		"phase":
 			_append_log(str(ev.get("text", "")), UI.DANGER)
-			_flash(Color(1, 0.2, 0.2, 0.12))
-			banner(str(ev.get("text", "首领进入新阶段！")), UI.DANGER, 1.6)
+			if visual:
+				_flash(Color(1, 0.2, 0.2, 0.12))
+				banner(str(ev.get("text", "首领进入新阶段！")), UI.DANGER, 1.6)
 		"log":
 			_append_log(str(ev.get("text", "")), UI.MUTED)
 		"end":
@@ -290,17 +306,20 @@ func _apply_event(ev: Dictionary) -> void:
 			pass
 
 
-func _apply_action(ev: Dictionary) -> void:
+func _apply_action(ev: Dictionary, visual: bool = true) -> void:
 	var actor_uid := int(ev.get("actor", 0))
 	for uid in cards.keys():
 		cards[uid].set_active(uid == actor_uid)
 	var actor = cards.get(actor_uid)
 	var is_ult := str(ev.get("slot", "")) == "ultimate"
 	var skill_name := str(ev.get("skill_name", ""))
-	_skill_callout(("【%s】" % skill_name), UI.GOLD if is_ult else UI.TEXT)
+	if visual:
+		_skill_callout(("【%s】" % skill_name), UI.GOLD if is_ult else UI.TEXT)
 	_append_log(str(ev.get("text", "")), UI.GOOD if str(ev.get("side", "")) == "player" else UI.DANGER)
 	if actor != null:
 		actor.set_active(true)
+		if visual:
+			_play_attack_fx(actor, ev, is_ult)
 
 	for t in ev.get("targets", []):
 		var uid := int(t.get("uid", 0))
@@ -316,22 +335,35 @@ func _apply_action(ev: Dictionary) -> void:
 				card.set_statuses(status_by_uid[uid])
 			var dmg := int(t.get("damage", 0))
 			var absorbed := int(t.get("absorbed", 0))
-			if dmg > 0:
-				var col := Color.WHITE
-				var elem := float(t.get("element", 1.0))
-				if elem > 1.05:
-					col = UI.ACCENT
-				elif elem < 0.95:
-					col = UI.BLUE
-				if bool(t.get("crit", false)):
-					col = UI.GOLD
-				var text := ("暴击 -%s" if bool(t.get("crit", false)) else "-%s") % ContentDB.fmt(dmg)
-				_float_on(card, text, col, 24 if bool(t.get("crit", false)) else 18)
-				_shake(card)
-			if absorbed > 0:
-				_float_on(card, "格挡 %s" % ContentDB.fmt(absorbed), UI.BLUE, 13)
-			if bool(t.get("saved", false)):
-				_float_on(card, "不屈!", UI.GOLD, 17)
+			var crit := bool(t.get("crit", false))
+			var elem := float(t.get("element", 1.0))
+			var col := UI.TEXT
+			var size := 26
+			var text := ""
+			if crit:
+				col = UI.GOLD
+				size = 36
+				text = "暴击 -%s" % ContentDB.fmt(dmg)
+			elif elem > 1.05:
+				col = UI.ACCENT
+				size = 30
+				text = "克制 -%s" % ContentDB.fmt(dmg)
+			elif elem < 0.95:
+				col = UI.BLUE
+				size = 22
+				text = "弱效 -%s" % ContentDB.fmt(dmg)
+			else:
+				col = UI.TEXT
+				size = 26
+				text = "-%s" % ContentDB.fmt(dmg)
+			if dmg > 0 and visual:
+				_float_on(card, text, col, size, crit)
+				if fx != null:
+					fx.add_hit(_card_center(card), col, crit, 1.25 if crit else 1.0)
+			if absorbed > 0 and visual:
+				_float_on(card, "格挡 %s" % ContentDB.fmt(absorbed), UI.BLUE, 18)
+			if bool(t.get("saved", false)) and visual:
+				_float_on(card, "不屈!", UI.GOLD, 24)
 			if bool(t.get("dead", false)):
 				card.die()
 	for h in ev.get("heals", []):
@@ -340,12 +372,16 @@ func _apply_action(ev: Dictionary) -> void:
 		hp_by_uid[uid] = int(h.get("hp", 0))
 		if card != null:
 			card.refresh_hp(int(h.get("hp", 0)), int(h.get("max_hp", 1)))
-			if int(h.get("amount", 0)) > 0:
-				_float_on(card, "+%s" % ContentDB.fmt(int(h["amount"])), UI.GOOD, 18)
+			if int(h.get("amount", 0)) > 0 and visual:
+				_float_on(card, "+%s" % ContentDB.fmt(int(h["amount"])), UI.GOOD, 26)
+				if fx != null:
+					fx.add_heal(_card_center(card), UI.GOOD)
 	for sh in ev.get("shields", []):
 		var card = cards.get(int(sh.get("uid", 0)))
 		if card != null:
 			card.set_shield(int(sh.get("shield", 0)))
+			if visual and fx != null:
+				fx.add_burst(_card_center(card), UI.BLUE, 34.0)
 	for st in ev.get("statuses", []):
 		var uid := int(st.get("uid", 0))
 		var card = cards.get(uid)
@@ -365,7 +401,7 @@ func _apply_action(ev: Dictionary) -> void:
 	_update_alive_labels()
 
 
-func _apply_tick(ev: Dictionary) -> void:
+func _apply_tick(ev: Dictionary, visual: bool = true) -> void:
 	for t in ev.get("targets", []):
 		var uid := int(t.get("uid", 0))
 		var card = cards.get(uid)
@@ -373,8 +409,10 @@ func _apply_tick(ev: Dictionary) -> void:
 		if card != null:
 			card.refresh_hp(int(t.get("hp", 0)), int(t.get("max_hp", 1)))
 			card.set_shield(int(t.get("shield", 0)))
-			if int(t.get("damage", 0)) > 0:
-				_float_on(card, "-%s" % ContentDB.fmt(int(t["damage"])), UI.ACCENT, 15)
+			if int(t.get("damage", 0)) > 0 and visual:
+				_float_on(card, "-%s" % ContentDB.fmt(int(t["damage"])), UI.ACCENT, 21)
+				if fx != null:
+					fx.add_hit(_card_center(card), UI.ACCENT, false, 0.8)
 			if bool(t.get("dead", false)):
 				card.die()
 	for h in ev.get("heals", []):
@@ -383,8 +421,10 @@ func _apply_tick(ev: Dictionary) -> void:
 		hp_by_uid[uid] = int(h.get("hp", 0))
 		if card != null:
 			card.refresh_hp(int(h.get("hp", 0)), int(h.get("max_hp", 1)))
-			if int(h.get("amount", 0)) > 0:
-				_float_on(card, "+%s" % ContentDB.fmt(int(h["amount"])), UI.GOOD, 13)
+			if int(h.get("amount", 0)) > 0 and visual:
+				_float_on(card, "+%s" % ContentDB.fmt(int(h["amount"])), UI.GOOD, 20)
+				if fx != null:
+					fx.add_heal(_card_center(card), UI.GOOD)
 	_append_log(str(ev.get("text", "回合结算")), UI.MUTED)
 	_update_alive_labels()
 
@@ -428,7 +468,7 @@ func _update_alive_labels() -> void:
 
 
 func _append_log(text: String, color: Color) -> void:
-	if text.is_empty():
+	if text.is_empty() or _silent:
 		return
 	var esc := text.replace("[", "［").replace("]", "］")
 	log_lines.append("[color=#%s]%s[/color]" % [color.to_html(false), esc])
@@ -449,27 +489,51 @@ func _skill_callout(text: String, color: Color) -> void:
 	callout_tween.tween_property(skill_label, "modulate:a", 0.0, 0.25)
 
 
-func _float_on(card: Control, text: String, color: Color, size: int = 18) -> void:
-	var label := UI.label(text, size, color)
-	label.z_index = 60
-	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	label.size = Vector2(card.size.x, 30)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	field.add_child(label)
-	var base := card.position + Vector2(0, -24)
-	label.position = base
-	var t := create_tween()
-	t.tween_property(label, "position:y", base.y - 48.0, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	t.parallel().tween_property(label, "modulate:a", 0.0, 0.55).set_delay(0.25)
-	t.tween_callback(label.queue_free)
+func _float_on(card: Control, text: String, color: Color, size: int = 26, crit: bool = false) -> void:
+	if fx == null:
+		return
+	var center: Vector2 = card.position + Vector2(card.size.x * card.scale.x * 0.5, -14.0)
+	fx.add_text(text, center, color, size, crit)
 
 
-func _shake(card: Control) -> void:
-	var base: Vector2 = card.get_meta("base_pos", card.position)
-	var t := create_tween()
-	t.tween_property(card, "position", base + Vector2(7, 0), 0.04)
-	t.tween_property(card, "position", base - Vector2(7, 0), 0.04)
-	t.tween_property(card, "position", base, 0.07)
+func _card_center(card: Control) -> Vector2:
+	return card.position + card.size * card.scale * 0.5
+
+
+func _play_attack_fx(actor: Control, ev: Dictionary, is_ult: bool) -> void:
+	if fx == null:
+		return
+	var actor_center := _card_center(actor)
+	var element := str(actor.unit_data.get("element", "fire"))
+	var color := ContentDB.element_color(element)
+	if is_ult:
+		fx.add_charge(actor_center, color)
+		fx.add_burst(actor_center, color, 46.0)
+		_flash(Color(color.r, color.g, color.b, 0.07))
+		for t in ev.get("targets", []):
+			var tc = cards.get(int(t.get("uid", 0)))
+			if tc != null:
+				fx.add_burst(_card_center(tc), color, 76.0)
+		return
+	var target_card = null
+	for t in ev.get("targets", []):
+		var c = cards.get(int(t.get("uid", 0)))
+		if c != null:
+			target_card = c
+			break
+	if target_card == null:
+		return
+	var target_center := _card_center(target_card)
+	var ranged := str(actor.unit_data.get("class", "")) in ["mage", "archer", "support"]
+	if ranged:
+		fx.add_projectile(actor_center, target_center, color, 0.28)
+	else:
+		var base: Vector2 = actor.get_meta("base_pos", actor.position)
+		var dir := (target_center - actor_center).normalized()
+		var tw := create_tween()
+		tw.tween_property(actor, "position", base + dir * 24.0, 0.08)
+		tw.tween_property(actor, "position", base, 0.13)
+	fx.add_slash(target_center, color)
 
 
 func _flash(color: Color) -> void:
@@ -489,6 +553,8 @@ func _finish() -> void:
 		return
 	finished = true
 	await get_tree().create_timer(0.55).timeout
+	if fx != null:
+		fx.clear()
 	_show_result()
 
 
