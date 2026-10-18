@@ -7,6 +7,7 @@ var grid_host: GridContainer
 var roster_host: VBoxContainer
 var count_label: Label
 var tip_label: Label
+var preset_buttons: Array = []
 
 
 func _ready() -> void:
@@ -50,6 +51,7 @@ func _build_static() -> void:
 			pb.add_theme_color_override("font_color", UI.GOLD)
 		pb.pressed.connect(_switch_preset.bind(i))
 		preset_row.add_child(pb)
+		preset_buttons.append(pb)
 	preset_row.add_child(UI.grow())
 	preset_row.add_child(UI.label("切换时会自动保存当前阵型", 11, UI.FAINT))
 	root.add_child(preset_row)
@@ -78,7 +80,7 @@ func _build_static() -> void:
 	grid_host.add_theme_constant_override("v_separation", 8)
 	left.add_child(grid_host)
 	var legend := UI.hbox(8)
-	legend.add_child(UI.label("站位只影响目标选择：近战优先攻击前排，远程会绕过前排。", 11, UI.MUTED))
+	legend.add_child(UI.label("站位只影响目标选择：坦克/战士优先前排，法师优先后排，射手打残血。", 11, UI.MUTED))
 	legend.add_child(UI.grow())
 	legend.add_child(UI.label("靠近敌方的列是前排", 11, UI.FAINT))
 	left.add_child(legend)
@@ -302,7 +304,15 @@ func _switch_preset(index: int) -> void:
 	else:
 		tip_label.text = "已切换到阵型 %d。" % (index + 1)
 	_persist()
+	_update_preset_buttons()
 	_refresh()
+
+
+func _update_preset_buttons() -> void:
+	for i in range(preset_buttons.size()):
+		var b: Button = preset_buttons[i]
+		b.add_theme_color_override("font_color", UI.GOLD if i == int(GameState.active_preset) else UI.MUTED)
+		b.add_theme_color_override("font_hover_color", UI.GOLD if i == int(GameState.active_preset) else UI.TEXT)
 
 
 func _persist() -> void:

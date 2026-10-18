@@ -4,7 +4,7 @@ extends Control
 ## creating Labels/Tweens for every hit (the main source of late-floor stutter).
 
 const MAX_EFFECTS := 72
-const TEXT_WIDTH := 240.0
+const TEXT_WIDTH := 300.0
 
 var effects: Array = []
 var _font: Font
