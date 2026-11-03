@@ -2,9 +2,7 @@
 
 轻量化怀旧肉鸽爬塔单机版，使用 **Godot 4.7 + GDScript** 制作。
 
-> 这是一个对 2010 年代「精灵收集 + 九宫格自动战斗 + 爬塔」玩法的**机制致敬作品**。
-> 项目中的 50 只精灵、训练家、首领、技能、词条、道具、名称与全部矢量美术均为原创；
-> 不包含、不复制任何第三方游戏的素材、文本或数据文件。
+
 
 ![标题画面](docs/screenshots/title.png)
 ![精灵契约](docs/screenshots/starter.png)
@@ -19,24 +17,6 @@
 
 ## 快速开始
 
-```bat
-run_game.bat
-```
-
-Windows 默认使用 `D:\Claude_test\godot_4.7.2\Godot_v4.7.2-stable_win64.exe`。
-如果 Godot 安装位置不同，修改 `run_game.bat` 里的 `GODOT` 变量即可。
-
-macOS 使用项目内的 Godot 4.7.2：
-
-```bash
-./run_game.sh
-```
-
-也可以在项目目录执行：
-
-```bat
-"D:\Claude_test\godot_4.7.2\Godot_v4.7.2-stable_win64.exe" --path .
-```
 
 - 分辨率：1280 × 720，可缩放窗口，自动保持比例。
 - `F11`：全屏切换。
