@@ -16,8 +16,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 XLSX_PATH = os.path.join(ROOT, "data", "StarTower_Content.xlsx")
 JSON_PATH = os.path.join(ROOT, "data", "content.json")
 
-REQUIRED_COUNTS = {"Pets_50": 50, "Items": 20, "Affixes": 18, "Trainers": 3,
-                   "Starters": 3, "Bosses": 3, "Floors": 10}
+REQUIRED_COUNTS = {"Pets_50": 50, "Items": 20, "Affixes": 19, "Trainers": 3,
+                   "Starters": 3, "Bosses": 8, "Floors": 40}
 BANNED_TERMS = ("mirror", "highestStat")
 
 
@@ -29,7 +29,7 @@ def sheet_rows(wb, title):
         return []
     header_idx = 0
     for i, row in enumerate(rows[:3]):
-        if row and str(row[0] or "").strip() in ("id", "floor", "section", "key", "owner_id", "check"):
+        if row and str(row[0] or "").strip() in ("id", "floor", "section", "key", "owner_id", "check", "element"):
             header_idx = i
             break
     header = [str(h).strip() if h is not None else "" for h in rows[header_idx]]
@@ -97,6 +97,7 @@ def build_from_workbook(wb):
             "color": str(r["color"]).strip(),
             "beats": split_pipe(r.get("beats")),
             "loses_to": split_pipe(r.get("loses_to")),
+            "immune": split_pipe(r.get("immune")),
             "mutual": split_pipe(r.get("mutual")),
         }
 
@@ -124,6 +125,14 @@ def build_from_workbook(wb):
             "item_bonus": as_float(r.get("item_bonus")),
             "start_affix": as_int(r.get("start_affix")),
         })
+        picks = as_int(r.get("pick_items"))
+        if picks > 0:
+            trainers[-1]["pick_items"] = picks
+        if str(r.get("hero_starter") or "").strip() in ["1", "true", "True"]:
+            trainers[-1]["hero_starter"] = True
+        special = str(r.get("starter_affix") or "").strip()
+        if special:
+            trainers[-1]["starter_affix"] = special
 
     starters = [{"id": str(r["id"]).strip(), "note": str(r.get("note") or "").strip()}
                 for r in sheet_rows(wb, "Starters")]
@@ -150,22 +159,38 @@ def build_from_workbook(wb):
         skills = skills_by_owner.get(pid, {})
         if "normal" not in skills or "ultimate" not in skills:
             errors.append(f"Pets_50 {pid}: missing normal/ultimate skill row")
-        pets.append({
+        pet = {
             "id": pid,
             "names": names if len(names) == 3 else (names + [names[-1] if names else pid] * 3)[:3],
             "element": str(r["element"]).strip(),
             "class": str(r["class"]).strip(),
+            "rarity": str(r.get("rarity") or "common").strip(),
             "starter": bool(as_int(r.get("starter"))),
             "stats": {"hp": as_int(r.get("hp")), "atk": as_int(r.get("atk")),
                       "def": as_int(r.get("def")), "spd": as_int(r.get("spd"))},
             "skills": {"normal": skills.get("normal", {}), "ultimate": skills.get("ultimate", {})},
-        })
+        }
+        mark = jload(r.get("mark"), {})
+        art = jload(r.get("art"), {})
+        signature = jload(r.get("signature"), {})
+        if mark:
+            pet["mark"] = mark
+        if art:
+            pet["art"] = art
+        if signature and pet["skills"]["ultimate"]:
+            pet["skills"]["ultimate"]["signature"] = signature
+        pets.append(pet)
 
-    affixes = [{
-        "id": str(r["id"]).strip(), "name": str(r["name"]).strip(),
-        "rarity": str(r["rarity"]).strip(), "desc": str(r.get("desc") or "").strip(),
-        "value": as_float(r.get("value")),
-    } for r in sheet_rows(wb, "Affixes")]
+    affixes = []
+    for r in sheet_rows(wb, "Affixes"):
+        affix = {
+            "id": str(r["id"]).strip(), "name": str(r["name"]).strip(),
+            "rarity": str(r["rarity"]).strip(), "desc": str(r.get("desc") or "").strip(),
+            "value": as_float(r.get("value")),
+        }
+        if str(r.get("pool") or "").strip() in ["0", "false", "False"]:
+            affix["pool"] = False
+        affixes.append(affix)
 
     items = []
     for r in sheet_rows(wb, "Items"):
@@ -181,6 +206,8 @@ def build_from_workbook(wb):
             item["value"] = as_float(r.get("value"))
             if str(r.get("hook_value") or "").strip():
                 item["hook_value"] = as_float(r.get("hook_value"))
+        if str(r.get("max_stack") or "").strip():
+            item["max_stack"] = as_int(r.get("max_stack"))
         items.append(item)
 
     bosses = []
@@ -199,6 +226,10 @@ def build_from_workbook(wb):
             "phases": jload(r.get("phases"), []),
             "skills": {"normal": skills.get("normal", {}), "ultimate": skills.get("ultimate", {})},
         })
+        if str(r.get("demon_king") or "").strip() in ("1", "true", "True"):
+            bosses[-1]["demon_king"] = True
+            bosses[-1]["generation"] = as_int(r.get("generation"))
+            bosses[-1]["reward_demon"] = str(r.get("reward_demon") or "").strip()
 
     boss_buffs = [{"id": str(r["id"]).strip(), "name": str(r["name"]).strip(),
                    "desc": str(r.get("desc") or "").strip()}
@@ -223,6 +254,7 @@ def build_from_workbook(wb):
             "minion_level_offset": as_int(r.get("minion_level_offset")),
             "minion_stat_mult": as_float(r.get("minion_stat_mult"), 1.0),
             "enemy_stat_mult": as_float(r.get("enemy_stat_mult"), 1.0),
+            "minion_affix_count": as_int(r.get("minion_affix_count")),
             "elite": bool(as_int(r.get("elite"))),
         })
 
@@ -236,15 +268,52 @@ def build_from_workbook(wb):
     for r in sheet_rows(wb, "Combat"):
         combat[str(r["key"]).strip()] = jload(r.get("value"))
 
+    resonance = {}
+    for r in sheet_rows(wb, "Resonance"):
+        eid = str(r["element"]).strip()
+        resonance[eid] = {
+            "name": str(r.get("name") or "").strip(),
+            "color": str(r.get("color") or "#ffffff").strip(),
+            "tiers": jload(r.get("tiers"), []),
+        }
+
+    demons = []
+    if "Demons" in wb.sheetnames:
+        for r in sheet_rows(wb, "Demons"):
+            did = str(r["id"]).strip()
+            skills = skills_by_owner.get(did, {})
+            demon = {
+                "id": did, "name": str(r.get("name") or did).strip(),
+                "names": [str(r.get("name") or did).strip()] * 3,
+                "element": str(r["element"]).strip(), "class": str(r["class"]).strip(),
+                "rarity": str(r.get("rarity") or "demon").strip(),
+                "starter": False,
+                "from_boss": str(r.get("from_boss") or "").strip(),
+                "stats": {"hp": as_int(r.get("hp")), "atk": as_int(r.get("atk")),
+                          "def": as_int(r.get("def")), "spd": as_int(r.get("spd"))},
+                "skills": {"normal": skills.get("normal", {}), "ultimate": skills.get("ultimate", {})},
+            }
+            mark = jload(r.get("mark"), {})
+            art = jload(r.get("art"), {})
+            signature = jload(r.get("signature"), {})
+            if mark:
+                demon["mark"] = mark
+            if art:
+                demon["art"] = art
+            if signature and demon["skills"]["ultimate"]:
+                demon["skills"]["ultimate"]["signature"] = signature
+            demons.append(demon)
+
     content = {
-        "version": 1, "title": "灵契·星塔远征", "subtitle": "怀旧肉鸽爬塔",
+        "version": 3, "title": "灵契·星塔远征", "subtitle": "怀旧肉鸽爬塔",
         "meta": {"pets": len(pets), "affixes": len(affixes), "items": len(items),
                  "bosses": len(bosses), "floors": len(floors),
                  "note": "All names and vector art are original; no third-party assets are bundled."},
         "elements": elements, "classes": classes, "trainers": trainers, "starters": starters,
-        "pets": pets, "affixes": affixes, "items": items, "bosses": bosses,
+        "pets": pets, "demons": demons, "type_chart": combat.get("type_chart", {}),
+        "affixes": affixes, "items": items, "bosses": bosses,
         "boss_buff_pool": boss_buffs, "maps": maps, "floors": floors,
-        "formation": formation, "combat": combat,
+        "formation": formation, "combat": combat, "resonance": resonance,
     }
     return content, errors, warnings
 
@@ -315,9 +384,31 @@ def validate(content):
         if b["id"] not in boss_templates:
             errors.append(f"Formation: missing boss template for {b['id']}")
     for eid, el in content["elements"].items():
-        for target in el.get("beats", []) + el.get("loses_to", []) + el.get("mutual", []):
+        for target in el.get("beats", []) + el.get("loses_to", []) + el.get("immune", []) + el.get("mutual", []):
             if target not in element_ids:
                 errors.append(f"element {eid}: unknown relation {target}")
+
+    resonance = content.get("resonance", {})
+    for eid in element_ids:
+        if eid not in resonance:
+            warnings.append(f"Resonance: missing entry for element {eid}")
+            continue
+        tiers = resonance[eid].get("tiers", [])
+        if not tiers:
+            errors.append(f"Resonance {eid}: empty tier list")
+        for tier in tiers:
+            if as_int(tier.get("count")) < 2:
+                errors.append(f"Resonance {eid}: tier count must be >= 2")
+            for key in tier.get("mods", {}):
+                if key not in ("hp", "atk", "def", "spd", "crit"):
+                    errors.append(f"Resonance {eid}: unknown mod {key}")
+
+    for f in content["floors"]:
+        if int(f.get("minion_affix_count", 0)) < 0:
+            errors.append(f"floor {f['floor']}: minion_affix_count must be >= 0")
+    for item in content["items"]:
+        if "max_stack" in item and as_int(item["max_stack"]) < 1:
+            errors.append(f"item {item['id']}: max_stack must be >= 1")
 
     rarity_weights = content["combat"].get("affix_weights", {})
     for a in content["affixes"]:

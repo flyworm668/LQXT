@@ -4,6 +4,9 @@ extends Control
 var params: Dictionary = {}
 
 
+const RunMenuScript = preload("res://scripts/ui/run_menu.gd")
+
+
 func goto_screen(path: String, p: Dictionary = {}) -> void:
 	var main := get_tree().current_scene
 	if main != null and main.has_method("goto"):
@@ -14,6 +17,25 @@ func add_background(map_id: String) -> void:
 	var bg := UI.backdrop(map_id)
 	add_child(bg)
 	move_child(bg, 0)
+
+
+func open_run_menu() -> void:
+	RunMenuScript.toggle(self)
+
+
+func open_load_menu() -> void:
+	RunMenuScript.open_load_only(self)
+
+
+func add_menu_button() -> void:
+	if not GameState.run_active:
+		return
+	var b := UI.ghost_button("菜单", 13)
+	b.custom_minimum_size = Vector2(64, 30)
+	b.position = Vector2(1196, 14)
+	b.z_index = 40
+	b.pressed.connect(open_run_menu)
+	add_child(b)
 
 
 func add_dim(alpha: float = 0.35) -> void:
@@ -35,6 +57,8 @@ func show_modal(title_text: String, body: Control, width: float = 760.0, height:
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	overlay.add_child(center)
+	var view := get_viewport_rect().size
+	width = minf(width, maxf(360.0, view.x - 48.0))
 	var panel := UI.panel(UI.PANEL, UI.BORDER, 18, 22)
 	panel.custom_minimum_size = Vector2(width, 0)
 	center.add_child(panel)
@@ -44,19 +68,29 @@ func show_modal(title_text: String, body: Control, width: float = 760.0, height:
 	head.add_child(UI.label(title_text, 24, UI.GOLD))
 	var grow := UI.grow()
 	head.add_child(grow)
-	var close := UI.ghost_button("关闭", 15)
-	close.custom_minimum_size = Vector2(76, 34)
+	var close := UI.button("返回", UI.ACCENT, 16)
+	close.clip_text = false
+	close.size_flags_horizontal = Control.SIZE_SHRINK_END
+	close.custom_minimum_size = Vector2(128, 46)
 	close.pressed.connect(func(): overlay.queue_free())
 	head.add_child(close)
 	v.add_child(head)
 	v.add_child(UI.hline(UI.BORDER, 1))
+	var view_h := view.y
+	var scroll_h := minf(height, maxf(160.0, view_h - 220.0))
 	var scroll := ScrollContainer.new()
-	scroll.custom_minimum_size = Vector2(width - 44, height)
+	scroll.custom_minimum_size = Vector2(width - 44, scroll_h)
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(body)
 	v.add_child(scroll)
+	var back := UI.button("返回", UI.ACCENT, 18)
+	back.clip_text = false
+	back.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	back.custom_minimum_size = Vector2(220, 48)
+	back.pressed.connect(func(): overlay.queue_free())
+	v.add_child(back)
 	return overlay
 
 
@@ -73,8 +107,15 @@ func make_click_overlay(panel: Control, callback: Callable) -> Button:
 	hit.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	hit.add_theme_stylebox_override("disabled", StyleBoxEmpty.new())
 	panel.add_child(hit)
+	hit.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	hit.pressed.connect(callback)
 	return hit
+
+
+func close_modals() -> void:
+	for child in get_children():
+		if child is ColorRect and int(child.z_index) >= 100 and int(child.z_index) < 200:
+			child.queue_free()
 
 
 func toast(text: String, color: Color = UI.TEXT) -> void:
@@ -114,19 +155,23 @@ func banner(text: String, color: Color = UI.GOLD, duration: float = 1.2) -> void
 	t.tween_callback(p.queue_free)
 
 
-func progress_pips(current: int, total: int = 10) -> HBoxContainer:
-	var row := UI.hbox(5)
+func progress_pips(current: int, total: int = 0) -> HBoxContainer:
+	if total <= 0:
+		total = ContentDB.total_floors()
+	var row := UI.hbox(3)
+	var width := 22.0 if total <= 12 else (8.0 if total > 24 else 14.0)
 	for i in range(1, total + 1):
 		var color := UI.FAINT
 		if i < current:
 			color = UI.GOOD
 		elif i == current:
 			color = UI.ACCENT
-		if i == 4 or i == 8 or i == 10:
-			color = color.lerp(UI.GOLD, 0.55) if i != current else UI.GOLD
+		if str(ContentDB.floor(i).get("kind", "")) == "boss":
+			color = UI.GOLD if i == current else color.lerp(UI.GOLD, 0.55)
 		var pip := ColorRect.new()
 		pip.color = color
-		pip.custom_minimum_size = Vector2(22, 6)
+		pip.custom_minimum_size = Vector2(width, 6)
+		pip.tooltip_text = "第 %d 层" % i
 		pip.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		row.add_child(pip)
 	return row

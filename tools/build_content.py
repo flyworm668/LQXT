@@ -50,22 +50,24 @@ def build_xlsx(content):
     wb = openpyxl.Workbook()
     wb.remove(wb.active)
 
-    write_sheet(wb, "Elements", ["id", "name", "color", "beats", "loses_to", "mutual"],
+    write_sheet(wb, "Elements", ["id", "name", "color", "beats", "loses_to", "immune", "mutual"],
                 [[eid, e["name"], e["color"], "|".join(e.get("beats", [])),
-                  "|".join(e.get("loses_to", [])), "|".join(e.get("mutual", []))]
+                  "|".join(e.get("loses_to", [])), "|".join(e.get("immune", [])),
+                  "|".join(e.get("mutual", []))]
                  for eid, e in content["elements"].items()],
-                [12, 10, 12, 16, 16, 14])
+                [12, 10, 12, 28, 28, 16, 14])
 
     write_sheet(wb, "Classes", ["id", "name", "color", "hp", "atk", "def", "spd", "role", "target"],
                 [[cid, c["name"], c["color"], c["hp"], c["atk"], c["def"], c["spd"], c["role"], c["target"]]
                  for cid, c in content["classes"].items()],
                 [12, 10, 12, 8, 8, 8, 8, 26, 12])
 
-    write_sheet(wb, "Trainers", ["id", "name", "title", "color", "desc", "mods", "start_items", "item_bonus", "start_affix"],
+    write_sheet(wb, "Trainers", ["id", "name", "title", "color", "desc", "mods", "start_items", "item_bonus", "start_affix", "pick_items", "hero_starter", "starter_affix"],
                 [[t["id"], t["name"], t["title"], t["color"], t["desc"], as_json(t["mods"]),
-                  t.get("start_items", 0), t.get("item_bonus", 0.0), t.get("start_affix", 0)]
+                  t.get("start_items", 0), t.get("item_bonus", 0.0), t.get("start_affix", 0),
+                  t.get("pick_items", 0), 1 if t.get("hero_starter") else 0, t.get("starter_affix", "")]
                  for t in content["trainers"]],
-                [12, 16, 14, 12, 44, 32, 12, 12, 12])
+                [12, 16, 14, 12, 44, 32, 12, 12, 12, 12, 14, 16])
 
     write_sheet(wb, "Starters", ["id", "note"],
                 [[s["id"], s["note"]] for s in content["starters"]], [10, 44])
@@ -74,14 +76,17 @@ def build_xlsx(content):
     for p in content["pets"]:
         n, u = p["skills"]["normal"], p["skills"]["ultimate"]
         pet_rows.append([
-            p["id"], "|".join(p["names"]), p["element"], p["class"], 1 if p["starter"] else 0,
+            p["id"], "|".join(p["names"]), p["element"], p["class"], p.get("rarity", "common"),
+            1 if p["starter"] else 0,
             p["stats"]["hp"], p["stats"]["atk"], p["stats"]["def"], p["stats"]["spd"],
             n["id"], u["id"],
+            as_json(p.get("mark", {})), as_json(u.get("signature", {})), as_json(p.get("art", {})),
         ])
-    write_sheet(wb, "Pets_50", ["id", "names", "element", "class", "starter",
-                               "hp", "atk", "def", "spd", "normal_id", "ult_id"],
-                pet_rows, [10, 30, 10, 10, 9, 8, 8, 8, 8, 12, 12],
-                note="names = 3 evolution stages separated by | ; stats are level-1 base values")
+    write_sheet(wb, "Pets_50", ["id", "names", "element", "class", "rarity", "starter",
+                               "hp", "atk", "def", "spd", "normal_id", "ult_id",
+                               "mark", "signature", "art"],
+                pet_rows, [10, 30, 10, 10, 10, 9, 8, 8, 8, 8, 12, 12, 36, 36, 24],
+                note="names = 3 evolution stages separated by | ; mark/signature/art are JSON")
 
     skill_rows = []
     for p in content["pets"]:
@@ -89,22 +94,24 @@ def build_xlsx(content):
             s = p["skills"][slot]
             skill_rows.append([p["id"], slot, s["id"], s["name"], s["kind"], s["target"],
                                s["mult"], s.get("splash", 0.0), s["desc"]])
-    for b in content["bosses"]:
-        for slot in ("normal", "ultimate"):
-            s = b["skills"][slot]
-            skill_rows.append([b["id"], slot, s["id"], s["name"], s["kind"], s["target"],
-                               s["mult"], s.get("splash", 0.0), s["desc"]])
+    for owner_list in (content["bosses"], content.get("demons", [])):
+        for b in owner_list:
+            for slot in ("normal", "ultimate"):
+                s = b["skills"][slot]
+                skill_rows.append([b["id"], slot, s["id"], s["name"], s["kind"], s["target"],
+                                   s["mult"], s.get("splash", 0.0), s["desc"]])
     write_sheet(wb, "Skills", ["owner_id", "slot", "skill_id", "name", "kind", "target", "mult", "splash", "desc"],
                 skill_rows, [10, 10, 14, 16, 16, 12, 8, 8, 52])
 
-    write_sheet(wb, "Affixes", ["id", "name", "rarity", "desc", "value"],
-                [[a["id"], a["name"], a["rarity"], a["desc"], a["value"]] for a in content["affixes"]],
-                [16, 14, 10, 52, 8])
+    write_sheet(wb, "Affixes", ["id", "name", "rarity", "desc", "value", "pool"],
+                [[a["id"], a["name"], a["rarity"], a["desc"], a["value"], 0 if a.get("pool", True) is False else 1]
+                 for a in content["affixes"]],
+                [16, 14, 10, 52, 8, 8])
 
-    write_sheet(wb, "Items", ["id", "name", "rarity", "desc", "stat", "value", "hook", "hook_value"],
+    write_sheet(wb, "Items", ["id", "name", "rarity", "desc", "stat", "value", "hook", "hook_value", "max_stack"],
                 [[i["id"], i["name"], i["rarity"], i["desc"], i.get("stat", ""), i.get("value", ""),
-                  i.get("hook", ""), i.get("hook_value", "")] for i in content["items"]],
-                [18, 14, 10, 52, 8, 8, 16, 10])
+                  i.get("hook", ""), i.get("hook_value", ""), i.get("max_stack", "")] for i in content["items"]],
+                [18, 14, 10, 52, 8, 8, 16, 10, 10])
 
     boss_rows = []
     for b in content["bosses"]:
@@ -112,11 +119,14 @@ def build_xlsx(content):
         n, u = b["skills"]["normal"], b["skills"]["ultimate"]
         boss_rows.append([b["id"], b["name"], b["element"], b["class"], b["level_offset"],
                           m["hp"], m["atk"], m["def"], m["spd"], b["buff_count"], b["tier"],
-                          as_json(b["phases"]), n["id"], u["id"]])
+                          as_json(b["phases"]), n["id"], u["id"],
+                          1 if b.get("demon_king") else 0, b.get("generation", ""),
+                          b.get("reward_demon", "")])
     write_sheet(wb, "Bosses", ["id", "name", "element", "class", "level_offset",
                               "hp_mult", "atk_mult", "def_mult", "spd_mult",
-                              "buff_count", "tier", "phases", "normal_id", "ult_id"],
-                boss_rows, [8, 22, 10, 10, 12, 10, 10, 10, 10, 11, 8, 48, 12, 12])
+                              "buff_count", "tier", "phases", "normal_id", "ult_id",
+                              "demon_king", "generation", "reward_demon"],
+                boss_rows, [8, 22, 10, 10, 12, 10, 10, 10, 10, 11, 8, 48, 12, 12, 12, 12, 14])
 
     write_sheet(wb, "Boss_Buffs", ["id", "name", "desc"],
                 [[b["id"], b["name"], b["desc"]] for b in content["boss_buff_pool"]],
@@ -129,24 +139,45 @@ def build_xlsx(content):
 
     write_sheet(wb, "Floors", ["floor", "name", "map", "kind", "enemy_count", "level", "pool",
                               "boss", "minion_count", "minion_level_offset", "minion_stat_mult",
-                              "enemy_stat_mult", "elite"],
+                              "enemy_stat_mult", "minion_affix_count", "elite"],
                 [[f["floor"], f["name"], f["map"], f["kind"], f["enemy_count"], f["level"],
                   ",".join(f["pool"]), f.get("boss") or "", f["minion_count"],
                   f["minion_level_offset"], f["minion_stat_mult"], f["enemy_stat_mult"],
-                  1 if f["elite"] else 0]
+                  f.get("minion_affix_count", 0), 1 if f["elite"] else 0]
                  for f in content["floors"]],
-                [8, 22, 10, 10, 13, 8, 60, 8, 13, 18, 16, 16, 8])
+                [8, 22, 10, 10, 13, 8, 60, 8, 13, 18, 16, 16, 18, 8])
 
     form = content["formation"]
     form_rows = [["row_damage", "front/mid/back", as_json(form["row_damage"])],
                  ["row_names", "front/mid/back", as_json(form["row_names"])]]
-    for key in ("player_templates", "enemy_templates", "boss_templates"):
-        form_rows.append([key, "all", as_json(form[key])])
+    for key in ("player_templates", "enemy_templates", "boss_templates", "links"):
+        if key in form:
+            form_rows.append([key, "all", as_json(form[key])])
     write_sheet(wb, "Formation", ["section", "key", "value"], form_rows, [22, 18, 80],
                 note="value is JSON. Templates are [row, col] pairs; row 0/1/2 = top/mid/bottom, col 0/1/2 = front/mid/back")
 
     write_sheet(wb, "Combat", ["key", "value"],
                 [[k, as_json(v)] for k, v in content["combat"].items()], [28, 24])
+
+    write_sheet(wb, "Resonance", ["element", "name", "color", "tiers"],
+                [[eid, r["name"], r["color"], as_json(r["tiers"])]
+                 for eid, r in content["resonance"].items()], [12, 16, 12, 90],
+                note="tiers is JSON: [{count, name, desc, mods:{hp/atk/def/spd/crit}}]")
+
+    demon_rows = []
+    for d in content.get("demons", []):
+        n, u = d["skills"]["normal"], d["skills"]["ultimate"]
+        demon_rows.append([
+            d["id"], d["name"], d["element"], d["class"], d["rarity"], d.get("from_boss", ""),
+            d["stats"]["hp"], d["stats"]["atk"], d["stats"]["def"], d["stats"]["spd"],
+            n["id"], u["id"], as_json(d.get("mark", {})), as_json(u.get("signature", {})),
+            as_json(d.get("art", {})),
+        ])
+    write_sheet(wb, "Demons", ["id", "name", "element", "class", "rarity", "from_boss",
+                              "hp", "atk", "def", "spd", "normal_id", "ult_id",
+                              "mark", "signature", "art"],
+                demon_rows, [8, 22, 10, 10, 10, 12, 8, 8, 8, 8, 12, 12, 36, 36, 24],
+                note="Event-only. Never rolled from chests.")
 
     write_sheet(wb, "Import_Report", ["check", "status", "detail"],
                 [["build", "OK", f"generated {len(content['pets'])} pets / {len(content['floors'])} floors"]],

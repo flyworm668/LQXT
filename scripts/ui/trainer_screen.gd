@@ -1,4 +1,5 @@
 extends "res://scripts/ui/screen_base.gd"
+const ScreenFit = preload("res://scripts/ui/screen_fit.gd")
 ## Step 1/2 — trainer selection.
 
 var selected_id: String = ""
@@ -24,6 +25,8 @@ func _build() -> void:
 	margin.add_theme_constant_override("margin_bottom", 40)
 	add_child(margin)
 	var root := UI.vbox(18)
+	root.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	root.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	margin.add_child(root)
 
 	var top := UI.hbox(12)
@@ -38,12 +41,16 @@ func _build() -> void:
 	root.add_child(UI.label("选择训练家", 34, UI.TEXT))
 	root.add_child(UI.label("不同的启程方式，会改变整局远征的节奏。", 15, UI.MUTED))
 
+	var slot: Array = ScreenFit.scroll_slot(true)
+	root.add_child(slot[0])
 	var row := UI.hbox(22)
 	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	root.add_child(row)
-	for t in ContentDB.data.get("trainers", []):
-		row.add_child(_trainer_card(t))
+	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	(slot[1] as ScrollContainer).add_child(row)
+	var trainers: Array = ContentDB.data.get("trainers", [])
+	var box := ScreenFit.card_box(self, trainers.size(), 22.0, 70.0, 250.0)
+	for t in trainers:
+		row.add_child(_trainer_card(t, box))
 
 	var bottom := UI.hbox(12)
 	bottom.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -54,10 +61,11 @@ func _build() -> void:
 	root.add_child(bottom)
 
 
-func _trainer_card(t: Dictionary) -> Control:
+func _trainer_card(t: Dictionary, box: Vector2) -> Control:
 	var color := Color.from_string(str(t.get("color", "#ff8a4c")), UI.ACCENT)
 	var p := UI.panel(Color(0.05, 0.07, 0.11, 0.88), UI.BORDER, 18, 22)
-	p.custom_minimum_size = Vector2(350, 392)
+	p.custom_minimum_size = Vector2(box.x, 0)
+	p.clip_contents = false
 	p.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	p.mouse_filter = Control.MOUSE_FILTER_STOP
 	p.gui_input.connect(func(ev):
@@ -85,29 +93,45 @@ func _trainer_card(t: Dictionary) -> Control:
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	v.add_child(title_label)
 	v.add_child(UI.hline(Color(color.r, color.g, color.b, 0.35), 1))
+	var scroll := ScreenFit.scrolling_body()
+	scroll.custom_minimum_size = Vector2(0, maxf(72.0, box.y - 280.0))
+	var body := UI.vbox(8)
+	body.custom_minimum_size = Vector2(maxf(160.0, box.x - 56.0), 0)
 	var desc := UI.label(str(t.get("desc", "")), 14, UI.MUTED, true)
-	desc.custom_minimum_size = Vector2(300, 48)
-	v.add_child(desc)
+	body.add_child(desc)
 	var chips := UI.hbox(6)
 	chips.alignment = BoxContainer.ALIGNMENT_CENTER
 	var mods: Dictionary = t.get("mods", {})
-	if float(mods.get("hp_mult", 0)) > 0:
-		chips.add_child(UI.pill("生命 +%d%%" % int(float(mods["hp_mult"]) * 100), UI.GOOD, 11))
-	if float(mods.get("atk_mult", 0)) > 0:
-		chips.add_child(UI.pill("攻击 +%d%%" % int(float(mods["atk_mult"]) * 100), UI.ACCENT, 11))
-	if float(mods.get("spd_mult", 0)) > 0:
-		chips.add_child(UI.pill("速度 +%d%%" % int(float(mods["spd_mult"]) * 100), UI.BLUE, 11))
-	if float(mods.get("crit", 0)) > 0:
-		chips.add_child(UI.pill("暴击 +%d%%" % int(float(mods["crit"]) * 100), UI.GOLD, 11))
-	v.add_child(chips)
+	var all_stat := float(mods.get("hp_mult", 0))
+	if all_stat > 0.0 and is_equal_approx(all_stat, float(mods.get("atk_mult", 0))) \
+			and is_equal_approx(all_stat, float(mods.get("def_mult", 0))) \
+			and is_equal_approx(all_stat, float(mods.get("spd_mult", 0))):
+		chips.add_child(UI.pill("全属性 +%d%%" % int(all_stat * 100), UI.GOLD, 11))
+	else:
+		if float(mods.get("hp_mult", 0)) > 0:
+			chips.add_child(UI.pill("生命 +%d%%" % int(float(mods["hp_mult"]) * 100), UI.GOOD, 11))
+		if float(mods.get("atk_mult", 0)) > 0:
+			chips.add_child(UI.pill("攻击 +%d%%" % int(float(mods["atk_mult"]) * 100), UI.ACCENT, 11))
+		if float(mods.get("def_mult", 0)) > 0:
+			chips.add_child(UI.pill("防御 +%d%%" % int(float(mods["def_mult"]) * 100), UI.BLUE, 11))
+		if float(mods.get("spd_mult", 0)) > 0:
+			chips.add_child(UI.pill("速度 +%d%%" % int(float(mods["spd_mult"]) * 100), UI.BLUE, 11))
+		if float(mods.get("crit", 0)) > 0:
+			chips.add_child(UI.pill("暴击 +%d%%" % int(float(mods["crit"]) * 100), UI.GOLD, 11))
+	body.add_child(chips)
 	var extra := UI.vbox(3)
+	if str(t.get("starter_affix", "")) == "miracle":
+		extra.add_child(UI.label("· 主宠普通技能上的词条：2% 概率造成 99999 伤害", 12, UI.MUTED))
+	if int(t.get("pick_items", 0)) > 0:
+		extra.add_child(UI.label("· 开局自选 %d 件道具" % int(t["pick_items"]), 12, UI.MUTED))
+	if bool(t.get("hero_starter", false)):
+		extra.add_child(UI.label("· 初始精灵从英雄中选择", 12, UI.MUTED))
 	if int(t.get("start_items", 0)) > 0:
 		extra.add_child(UI.label("· 开局获得 %d 件随机道具" % int(t["start_items"]), 12, UI.MUTED))
-	if float(t.get("item_bonus", 0)) > 0:
-		extra.add_child(UI.label("· 道具宝箱概率 +%d%%" % int(float(t["item_bonus"]) * 100), 12, UI.MUTED))
-	if int(t.get("start_affix", 0)) > 0:
-		extra.add_child(UI.label("· 初始精灵自带 %d 条随机词条" % int(t["start_affix"]), 12, UI.MUTED))
-	v.add_child(extra)
+	extra.add_child(UI.label("· 选中的主宠不封顶，词条可无限叠加", 12, UI.GOLD))
+	body.add_child(extra)
+	scroll.add_child(body)
+	v.add_child(scroll)
 	make_click_overlay(p, func(): _select(str(t["id"])))
 	cards[str(t["id"])] = p
 	return p

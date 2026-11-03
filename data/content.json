@@ -1,81 +1,299 @@
 {
-  "version": 1,
+  "version": 3,
   "title": "灵契·星塔远征",
   "subtitle": "怀旧肉鸽爬塔",
   "meta": {
-    "pets": 50,
-    "affixes": 18,
-    "items": 20,
-    "bosses": 3,
-    "floors": 10,
+    "pets": 53,
+    "affixes": 25,
+    "items": 26,
+    "bosses": 8,
+    "floors": 40,
     "note": "All names and vector art are original; no third-party assets are bundled."
   },
   "elements": {
+    "normal": {
+      "name": "一般",
+      "color": "#b9c4d8",
+      "beats": [],
+      "loses_to": [
+        "rock",
+        "steel"
+      ],
+      "immune": [
+        "ghost"
+      ],
+      "mutual": []
+    },
     "fire": {
       "name": "火",
       "color": "#ff7043",
       "beats": [
-        "wind"
+        "grass",
+        "ice",
+        "bug",
+        "steel"
       ],
       "loses_to": [
-        "water"
+        "fire",
+        "water",
+        "rock",
+        "dragon"
       ],
+      "immune": [],
       "mutual": []
     },
     "water": {
       "name": "水",
       "color": "#41a6ff",
       "beats": [
-        "fire"
+        "fire",
+        "ground",
+        "rock"
       ],
       "loses_to": [
-        "earth"
+        "water",
+        "grass",
+        "dragon"
       ],
+      "immune": [],
       "mutual": []
     },
-    "wind": {
-      "name": "风",
-      "color": "#3ddc97",
+    "electric": {
+      "name": "电",
+      "color": "#f5d76e",
       "beats": [
-        "earth"
+        "water",
+        "flying"
       ],
       "loses_to": [
-        "fire"
+        "electric",
+        "grass",
+        "dragon"
+      ],
+      "immune": [
+        "ground"
       ],
       "mutual": []
     },
-    "earth": {
-      "name": "土",
+    "grass": {
+      "name": "草",
+      "color": "#7dce6a",
+      "beats": [
+        "water",
+        "ground",
+        "rock"
+      ],
+      "loses_to": [
+        "fire",
+        "grass",
+        "poison",
+        "flying",
+        "bug",
+        "dragon",
+        "steel"
+      ],
+      "immune": [],
+      "mutual": []
+    },
+    "ice": {
+      "name": "冰",
+      "color": "#9fd7ff",
+      "beats": [
+        "grass",
+        "ground",
+        "flying",
+        "dragon"
+      ],
+      "loses_to": [
+        "fire",
+        "water",
+        "ice",
+        "steel"
+      ],
+      "immune": [],
+      "mutual": []
+    },
+    "fighting": {
+      "name": "格斗",
+      "color": "#e07050",
+      "beats": [
+        "normal",
+        "ice",
+        "rock",
+        "dark",
+        "steel"
+      ],
+      "loses_to": [
+        "poison",
+        "flying",
+        "psychic",
+        "bug"
+      ],
+      "immune": [
+        "ghost"
+      ],
+      "mutual": []
+    },
+    "poison": {
+      "name": "毒",
+      "color": "#b06ad4",
+      "beats": [
+        "grass"
+      ],
+      "loses_to": [
+        "poison",
+        "ground",
+        "rock",
+        "ghost"
+      ],
+      "immune": [
+        "steel"
+      ],
+      "mutual": []
+    },
+    "ground": {
+      "name": "地面",
       "color": "#d9a94c",
       "beats": [
-        "water"
+        "fire",
+        "electric",
+        "poison",
+        "rock",
+        "steel"
       ],
       "loses_to": [
-        "wind"
+        "grass",
+        "bug"
+      ],
+      "immune": [
+        "flying"
       ],
       "mutual": []
     },
-    "light": {
-      "name": "光",
-      "color": "#ffd76a",
+    "flying": {
+      "name": "飞行",
+      "color": "#8fd0c8",
       "beats": [
+        "grass",
+        "fighting",
+        "bug"
+      ],
+      "loses_to": [
+        "electric",
+        "rock",
+        "steel"
+      ],
+      "immune": [],
+      "mutual": []
+    },
+    "psychic": {
+      "name": "超能",
+      "color": "#ff8fb8",
+      "beats": [
+        "fighting",
+        "poison"
+      ],
+      "loses_to": [
+        "psychic",
+        "steel"
+      ],
+      "immune": [
         "dark"
       ],
-      "loses_to": [],
-      "mutual": [
+      "mutual": []
+    },
+    "bug": {
+      "name": "虫",
+      "color": "#b6c44a",
+      "beats": [
+        "grass",
+        "psychic",
         "dark"
-      ]
+      ],
+      "loses_to": [
+        "fire",
+        "fighting",
+        "poison",
+        "flying",
+        "ghost",
+        "steel"
+      ],
+      "immune": [],
+      "mutual": []
+    },
+    "rock": {
+      "name": "岩石",
+      "color": "#b08a62",
+      "beats": [
+        "fire",
+        "ice",
+        "flying",
+        "bug"
+      ],
+      "loses_to": [
+        "fighting",
+        "ground",
+        "steel"
+      ],
+      "immune": [],
+      "mutual": []
+    },
+    "ghost": {
+      "name": "幽灵",
+      "color": "#8a6ad4",
+      "beats": [
+        "psychic",
+        "ghost"
+      ],
+      "loses_to": [
+        "dark"
+      ],
+      "immune": [
+        "normal"
+      ],
+      "mutual": []
+    },
+    "dragon": {
+      "name": "龙",
+      "color": "#6a7dff",
+      "beats": [
+        "dragon"
+      ],
+      "loses_to": [
+        "steel"
+      ],
+      "immune": [],
+      "mutual": []
     },
     "dark": {
-      "name": "暗",
-      "color": "#a875ff",
+      "name": "恶",
+      "color": "#6d6480",
       "beats": [
-        "light"
+        "psychic",
+        "ghost"
       ],
-      "loses_to": [],
-      "mutual": [
-        "light"
-      ]
+      "loses_to": [
+        "fighting",
+        "dark"
+      ],
+      "immune": [],
+      "mutual": []
+    },
+    "steel": {
+      "name": "钢",
+      "color": "#b9c6d6",
+      "beats": [
+        "ice",
+        "rock"
+      ],
+      "loses_to": [
+        "fire",
+        "water",
+        "electric",
+        "steel"
+      ],
+      "immune": [],
+      "mutual": []
     }
   },
   "classes": {
@@ -134,56 +352,59 @@
     {
       "id": "novice",
       "name": "新手训练家",
-      "title": "初次启程",
+      "title": "天命一击",
       "color": "#7ed6a5",
-      "desc": "全队最大生命 +12%，开局获得 1 件随机道具。",
-      "mods": {
-        "hp_mult": 0.12
-      },
-      "start_items": 1,
+      "desc": "没有属性加成。开局「天命」放在词条背包里，自己决定贴给谁。另有「无限」，只能赋予开局选定的精灵。",
+      "mods": {},
+      "start_items": 0,
       "item_bonus": 0.0,
-      "start_affix": 0
+      "starter_affix": "miracle"
     },
     {
       "id": "veteran",
-      "name": "高玩训练家",
-      "title": "老练指挥",
+      "name": "高级训练家",
+      "title": "整装出发",
       "color": "#ffb35c",
-      "desc": "全队攻击 +12%，道具宝箱判定概率 +10%。",
+      "desc": "全队生命、攻击、防御、速度 +10%。开局自选 3 件道具。",
       "mods": {
-        "atk_mult": 0.12
-      },
-      "start_items": 0,
-      "item_bonus": 0.1,
-      "start_affix": 0
-    },
-    {
-      "id": "master",
-      "name": "大神训练家",
-      "title": "天赋异禀",
-      "color": "#c49bff",
-      "desc": "全队速度 +12%、暴击率 +8%，初始精灵自带 1 条随机词条。",
-      "mods": {
-        "spd_mult": 0.12,
-        "crit": 0.08
+        "hp_mult": 0.1,
+        "atk_mult": 0.1,
+        "def_mult": 0.1,
+        "spd_mult": 0.1
       },
       "start_items": 0,
       "item_bonus": 0.0,
-      "start_affix": 1
+      "pick_items": 3
+    },
+    {
+      "id": "master",
+      "name": "老练训练家",
+      "title": "英雄之契",
+      "color": "#c49bff",
+      "desc": "全队生命、攻击、防御、速度 +20%。初始精灵从英雄中选择。",
+      "mods": {
+        "hp_mult": 0.2,
+        "atk_mult": 0.2,
+        "def_mult": 0.2,
+        "spd_mult": 0.2
+      },
+      "start_items": 0,
+      "item_bonus": 0.0,
+      "hero_starter": true
     }
   ],
   "starters": [
     {
       "id": "p01",
-      "note": "火系战士，稳健的前排核心，大招带溅射。"
+      "note": "火系战士，稳健的前排核心，普攻叠狐火。"
     },
     {
       "id": "p10",
-      "note": "水系辅助，普攻即可治疗，续航极佳。"
+      "note": "水系辅助，普攻治疗，泡影保护最脆弱的队友。"
     },
     {
-      "id": "p19",
-      "note": "风系射手，高速狙击残血，收割利器。"
+      "id": "p25",
+      "note": "草系法师，绒种会在回合结束时蔓延到相邻敌人。"
     }
   ],
   "pets": [
@@ -191,147 +412,215 @@
       "id": "p01",
       "names": [
         "焰狐",
-        "炎·焰狐",
-        "焚天·焰狐王"
+        "觉醒·焰狐",
+        "焰狐王"
       ],
       "element": "fire",
       "class": "warrior",
+      "rarity": "epic",
       "starter": true,
       "stats": {
-        "hp": 1009,
-        "atk": 119,
-        "def": 72,
-        "spd": 103
+        "hp": 1661,
+        "atk": 166,
+        "def": 124,
+        "spd": 151
       },
       "skills": {
         "normal": {
           "id": "n_p01",
-          "name": "焰刃斩",
+          "name": "火斩击",
           "kind": "normal",
           "target": "front",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "burn",
           "desc": "挥刃攻击敌方前排。"
         },
         "ultimate": {
           "id": "u_p01",
-          "name": "烈焰破军",
+          "name": "焰狐破军",
           "kind": "ult_warrior",
           "target": "front",
           "mult": 2.15,
           "splash": 0.25,
-          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并附加 2 回合灼烧。"
+          "rider": "burn",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，对前排连击 3 次（0.7 倍）；第 3 击在目标有狐火时变为全体。。",
+          "signature": {
+            "style": "triple",
+            "text": "对前排连击 3 次（0.7 倍）；第 3 击在目标有狐火时变为全体。",
+            "hits": 3,
+            "ratio": 0.7
+          }
         }
+      },
+      "mark": {
+        "id": "fox_fire",
+        "name": "狐火",
+        "on": "foe",
+        "max": 3,
+        "fx": "vuln",
+        "per": 0.08
+      },
+      "art": {
+        "body": "fox",
+        "trait": "twin_tail",
+        "aura": "epic"
       }
     },
     {
       "id": "p02",
       "names": [
         "赤雀",
-        "炎·赤雀",
-        "焚天·赤雀王"
+        "觉醒·赤雀",
+        "赤雀王"
       ],
       "element": "fire",
       "class": "archer",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 760,
-        "atk": 120,
-        "def": 48,
-        "spd": 115
+        "hp": 996,
+        "atk": 164,
+        "def": 62,
+        "spd": 169
       },
       "skills": {
         "normal": {
           "id": "n_p02",
-          "name": "焰羽箭",
+          "name": "火射击",
           "kind": "normal",
           "target": "lowest",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "burn",
           "desc": "射出一箭，优先攻击残血敌人。"
         },
         "ultimate": {
           "id": "u_p02",
-          "name": "烈焰狙击",
+          "name": "赤雀狙击",
           "kind": "ult_archer",
           "target": "lowest",
           "mult": 2.0,
           "splash": 0.0,
-          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并附加 2 回合灼烧。"
+          "rider": "burn",
+          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，对已受伤目标伤害 +25%，并留下 1 层焰痕。。",
+          "signature": {
+            "style": "wounded",
+            "text": "对已受伤目标伤害 +25%，并留下 1 层焰痕。",
+            "bonus": 0.25,
+            "leave": 1
+          }
         }
+      },
+      "mark": {
+        "id": "flame_scar",
+        "name": "焰痕",
+        "on": "foe",
+        "max": 3,
+        "fx": "elem_taken",
+        "per": 0.06,
+        "elem": "fire",
+        "full": "burst",
+        "burst": 0.2
+      },
+      "art": {
+        "body": "bird",
+        "trait": "crest",
+        "aura": "rare"
       }
     },
     {
       "id": "p03",
       "names": [
         "熔岩獾",
-        "炎·熔岩獾",
-        "焚天·熔岩獾王"
+        "觉醒·熔岩獾",
+        "熔岩獾王"
       ],
-      "element": "fire",
+      "element": "ground",
       "class": "guardian",
+      "rarity": "epic",
       "starter": false,
       "stats": {
-        "hp": 1160,
-        "atk": 86,
-        "def": 96,
-        "spd": 84
+        "hp": 2595,
+        "atk": 69,
+        "def": 244,
+        "spd": 67
       },
       "skills": {
         "normal": {
           "id": "n_p03",
-          "name": "火盾击",
+          "name": "地面盾击",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "def_down",
           "desc": "重盾猛击前排，自身获得少量护盾。"
         },
         "ultimate": {
           "id": "u_p03",
-          "name": "烈焰壁垒",
+          "name": "熔岩壁垒",
           "kind": "ult_guardian",
           "target": "front",
           "mult": 1.8,
           "splash": 0.0,
-          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并附加 2 回合灼烧。"
+          "rider": "def_down",
+          "desc": "击退前排目标，自身获得 12% 最大生命护盾，无视 50% 防御，岩熔层数化为自身护盾。。",
+          "signature": {
+            "style": "pierce_shield",
+            "text": "无视 50% 防御，岩熔层数化为自身护盾。",
+            "ignore": 0.5,
+            "per": 0.06
+          }
         }
+      },
+      "mark": {
+        "id": "lava",
+        "name": "岩熔",
+        "on": "foe",
+        "max": 3,
+        "fx": "def_down",
+        "per": 0.08
+      },
+      "art": {
+        "body": "badger",
+        "trait": "shell",
+        "aura": "epic"
       }
     },
     {
       "id": "p04",
       "names": [
         "火绒猫",
-        "炎·火绒猫",
-        "焚天·火绒猫王"
+        "觉醒·火绒猫",
+        "火绒猫王"
       ],
-      "element": "fire",
+      "element": "normal",
       "class": "support",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 910,
-        "atk": 88,
-        "def": 62,
-        "spd": 111
+        "hp": 1235,
+        "atk": 94,
+        "def": 94,
+        "spd": 110
       },
       "skills": {
         "normal": {
           "id": "n_p04",
-          "name": "暖心灵息",
+          "name": "一般灵息",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "shield",
           "desc": "攻击前排，并为生命最低的友方回复少量生命。"
         },
         "ultimate": {
           "id": "u_p04",
-          "name": "烈焰赞歌",
+          "name": "一般赞歌",
           "kind": "ult_support",
           "target": "front",
           "mult": 0.0,
           "splash": 0.0,
-          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并附加 2 回合灼烧。"
+          "rider": "shield",
+          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并为友方附加护盾。"
         }
       }
     },
@@ -339,295 +628,446 @@
       "id": "p05",
       "names": [
         "烬狼",
-        "炎·烬狼",
-        "焚天·烬狼王"
+        "觉醒·烬狼",
+        "烬狼王"
       ],
       "element": "fire",
       "class": "warrior",
+      "rarity": "hero",
       "starter": false,
       "stats": {
-        "hp": 970,
-        "atk": 115,
-        "def": 69,
-        "spd": 99
+        "hp": 2400,
+        "atk": 240,
+        "def": 179,
+        "spd": 218
       },
       "skills": {
         "normal": {
           "id": "n_p05",
-          "name": "焰刃斩",
+          "name": "火斩击",
           "kind": "normal",
           "target": "front",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "burn",
           "desc": "挥刃攻击敌方前排。"
         },
         "ultimate": {
           "id": "u_p05",
-          "name": "烈焰破军",
+          "name": "烬狼破军",
           "kind": "ult_warrior",
           "target": "front",
           "mult": 2.15,
           "splash": 0.25,
-          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并附加 2 回合灼烧。"
+          "rider": "burn",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，消耗烬魂，每层对前排造成 50% 真实伤害；目标低于 25% 生命时斩杀。。",
+          "signature": {
+            "style": "true_exec",
+            "text": "消耗烬魂，每层对前排造成 50% 真实伤害；目标低于 25% 生命时斩杀。",
+            "per": 0.5,
+            "line": 0.25
+          }
         }
+      },
+      "mark": {
+        "id": "ember_soul",
+        "name": "烬魂",
+        "on": "self",
+        "max": 3,
+        "fx": "self_atk",
+        "per": 0.18,
+        "fx2": "death_nova",
+        "per2": 0.2,
+        "elem": "fire"
+      },
+      "art": {
+        "body": "wolf",
+        "trait": "myth",
+        "aura": "hero"
       }
     },
     {
       "id": "p06",
       "names": [
         "烈阳鹿",
-        "炎·烈阳鹿",
-        "焚天·烈阳鹿王"
+        "觉醒·烈阳鹿",
+        "烈阳鹿王"
       ],
-      "element": "fire",
+      "element": "dragon",
       "class": "mage",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 816,
-        "atk": 144,
-        "def": 49,
-        "spd": 112
+        "hp": 912,
+        "atk": 195,
+        "def": 54,
+        "spd": 86
       },
       "skills": {
         "normal": {
           "id": "n_p06",
-          "name": "火花弹",
+          "name": "龙弹",
           "kind": "normal",
           "target": "back",
           "mult": 0.95,
-          "splash": 0.0,
+          "rider": "vulnerable",
           "desc": "凝聚元素弹攻击敌方后排。"
         },
         "ultimate": {
           "id": "u_p06",
-          "name": "烈焰风暴",
+          "name": "烈阳风暴",
           "kind": "ult_mage",
           "target": "back",
           "mult": 1.35,
           "splash": 0.0,
-          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并附加 2 回合灼烧。"
+          "rider": "vulnerable",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，轰击目标所在一列，每层龙晖伤害 +12%。。",
+          "signature": {
+            "style": "column",
+            "text": "轰击目标所在一列，每层龙晖伤害 +12%。",
+            "per": 0.12
+          }
         }
+      },
+      "mark": {
+        "id": "dragon_glow",
+        "name": "龙晖",
+        "on": "self",
+        "max": 3,
+        "fx": "self_skill",
+        "per": 0.06
+      },
+      "art": {
+        "body": "deer",
+        "trait": "sun",
+        "aura": "rare"
       }
     },
     {
       "id": "p07",
       "names": [
         "炎角犀",
-        "炎·炎角犀",
-        "焚天·炎角犀王"
+        "觉醒·炎角犀",
+        "炎角犀王"
       ],
-      "element": "fire",
+      "element": "dragon",
       "class": "guardian",
+      "rarity": "epic",
       "starter": false,
       "stats": {
-        "hp": 1195,
-        "atk": 89,
-        "def": 99,
-        "spd": 87
+        "hp": 2518,
+        "atk": 67,
+        "def": 236,
+        "spd": 65
       },
       "skills": {
         "normal": {
           "id": "n_p07",
-          "name": "火盾击",
+          "name": "龙盾击",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "vulnerable",
           "desc": "重盾猛击前排，自身获得少量护盾。"
         },
         "ultimate": {
           "id": "u_p07",
-          "name": "烈焰壁垒",
+          "name": "炎角壁垒",
           "kind": "ult_guardian",
           "target": "front",
           "mult": 1.8,
           "splash": 0.0,
-          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并附加 2 回合灼烧。"
+          "rider": "vulnerable",
+          "desc": "击退前排目标，自身获得 12% 最大生命护盾，将前排目标撞到后排并眩晕 1 回合。。",
+          "signature": {
+            "style": "shove",
+            "text": "将前排目标撞到后排并眩晕 1 回合。"
+          }
         }
+      },
+      "mark": {
+        "id": "horn",
+        "name": "龙角",
+        "on": "self",
+        "max": 3,
+        "fx": "self_def",
+        "per": 0.06,
+        "full": "immune"
+      },
+      "art": {
+        "body": "rhino",
+        "trait": "horn",
+        "aura": "epic"
       }
     },
     {
       "id": "p08",
       "names": [
         "焚羽鹰",
-        "炎·焚羽鹰",
-        "焚天·焚羽鹰王"
+        "觉醒·焚羽鹰",
+        "焚羽鹰王"
       ],
-      "element": "fire",
+      "element": "flying",
       "class": "archer",
+      "rarity": "legend",
       "starter": false,
       "stats": {
-        "hp": 768,
-        "atk": 121,
-        "def": 48,
-        "spd": 116
+        "hp": 1411,
+        "atk": 233,
+        "def": 88,
+        "spd": 240
       },
       "skills": {
         "normal": {
           "id": "n_p08",
-          "name": "焰羽箭",
+          "name": "飞行射击",
           "kind": "normal",
           "target": "lowest",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "haste",
           "desc": "射出一箭，优先攻击残血敌人。"
         },
         "ultimate": {
           "id": "u_p08",
-          "name": "烈焰狙击",
+          "name": "焚羽狙击",
           "kind": "ult_archer",
           "target": "lowest",
           "mult": 2.0,
           "splash": 0.0,
-          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并附加 2 回合灼烧。"
+          "rider": "haste",
+          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，优先后排，目标生命低于 40% 时伤害 +50%。。",
+          "signature": {
+            "style": "back_exec",
+            "text": "优先后排，目标生命低于 40% 时伤害 +50%。",
+            "line": 0.4,
+            "bonus": 0.5
+          }
         }
+      },
+      "mark": {
+        "id": "sky_burn",
+        "name": "焚空",
+        "on": "foe",
+        "max": 3,
+        "fx": "elem_taken",
+        "per": 0.08,
+        "elem": "fire",
+        "fx2": "kill_spd",
+        "per2": 0.08
+      },
+      "art": {
+        "body": "hawk",
+        "trait": "firewing",
+        "aura": "legend"
       }
     },
     {
       "id": "p09",
       "names": [
         "琥珀蜥",
-        "炎·琥珀蜥",
-        "焚天·琥珀蜥王"
+        "觉醒·琥珀蜥",
+        "琥珀蜥王"
       ],
-      "element": "fire",
+      "element": "steel",
       "class": "mage",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 739,
-        "atk": 131,
-        "def": 44,
-        "spd": 102
+        "hp": 885,
+        "atk": 189,
+        "def": 53,
+        "spd": 84
       },
       "skills": {
         "normal": {
           "id": "n_p09",
-          "name": "火花弹",
+          "name": "钢弹",
           "kind": "normal",
           "target": "back",
           "mult": 0.95,
-          "splash": 0.0,
+          "rider": "def_down",
           "desc": "凝聚元素弹攻击敌方后排。"
         },
         "ultimate": {
           "id": "u_p09",
-          "name": "烈焰风暴",
+          "name": "琥珀风暴",
           "kind": "ult_mage",
           "target": "back",
           "mult": 1.35,
           "splash": 0.0,
-          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并附加 2 回合灼烧。"
+          "rider": "def_down",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，每层晶甲化为 8% 最大生命护盾，并对前排造成等额伤害。。",
+          "signature": {
+            "style": "thorn_shield",
+            "text": "每层晶甲化为 8% 最大生命护盾，并对前排造成等额伤害。",
+            "per": 0.08
+          }
         }
+      },
+      "mark": {
+        "id": "crystal_armor",
+        "name": "晶甲",
+        "on": "self",
+        "max": 3,
+        "fx": "self_thorns",
+        "per": 0.06
+      },
+      "art": {
+        "body": "lizard",
+        "trait": "plate",
+        "aura": "rare"
       }
     },
     {
       "id": "p10",
       "names": [
         "水泡獭",
-        "碧波·水泡獭",
-        "沧海·水泡獭王"
+        "觉醒·水泡獭",
+        "水泡獭王"
       ],
       "element": "water",
       "class": "support",
+      "rarity": "epic",
       "starter": true,
       "stats": {
-        "hp": 965,
-        "atk": 93,
-        "def": 66,
-        "spd": 118
+        "hp": 1865,
+        "atk": 142,
+        "def": 142,
+        "spd": 166
       },
       "skills": {
         "normal": {
           "id": "n_p10",
-          "name": "润泽灵息",
+          "name": "水灵息",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "slow",
           "desc": "攻击前排，并为生命最低的友方回复少量生命。"
         },
         "ultimate": {
           "id": "u_p10",
-          "name": "碧涛赞歌",
+          "name": "水泡赞歌",
           "kind": "ult_support",
           "target": "front",
           "mult": 0.0,
           "splash": 0.0,
-          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并使目标减速 2 回合。"
+          "rider": "slow",
+          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，全队获得 2 层泡影，并回复 10% 生命。。",
+          "signature": {
+            "style": "team_ward",
+            "text": "全队获得 2 层泡影，并回复 10% 生命。",
+            "stacks": 2,
+            "heal": 0.1
+          }
         }
+      },
+      "mark": {
+        "id": "bubble",
+        "name": "泡影",
+        "on": "self",
+        "max": 3,
+        "fx": "ward",
+        "per": 0.05
+      },
+      "art": {
+        "body": "otter",
+        "trait": "bubble",
+        "aura": "epic"
       }
     },
     {
       "id": "p11",
       "names": [
         "碧波豚",
-        "碧波·碧波豚",
-        "沧海·碧波豚王"
+        "觉醒·碧波豚",
+        "碧波豚王"
       ],
       "element": "water",
       "class": "mage",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 747,
-        "atk": 132,
-        "def": 45,
-        "spd": 103
+        "hp": 903,
+        "atk": 193,
+        "def": 54,
+        "spd": 85
       },
       "skills": {
         "normal": {
           "id": "n_p11",
-          "name": "水泡弹",
+          "name": "水弹",
           "kind": "normal",
           "target": "back",
           "mult": 0.95,
-          "splash": 0.0,
+          "rider": "slow",
           "desc": "凝聚元素弹攻击敌方后排。"
         },
         "ultimate": {
           "id": "u_p11",
-          "name": "碧涛风暴",
+          "name": "碧波风暴",
           "kind": "ult_mage",
           "target": "back",
           "mult": 1.35,
           "splash": 0.0,
-          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并使目标减速 2 回合。"
+          "rider": "slow",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，目标 2 回合无法加速，自身回复 8% 生命。。",
+          "signature": {
+            "style": "haste_lock",
+            "text": "目标 2 回合无法加速，自身回复 8% 生命。",
+            "heal": 0.08
+          }
         }
+      },
+      "mark": {
+        "id": "tide",
+        "name": "潮涌",
+        "on": "foe",
+        "max": 3,
+        "fx": "slow",
+        "per": 0.06
+      },
+      "art": {
+        "body": "fish",
+        "trait": "round",
+        "aura": "rare"
       }
     },
     {
       "id": "p12",
       "names": [
         "潮汐龟",
-        "碧波·潮汐龟",
-        "沧海·潮汐龟王"
+        "觉醒·潮汐龟",
+        "潮汐龟王"
       ],
       "element": "water",
       "class": "guardian",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 1090,
-        "atk": 81,
-        "def": 90,
-        "spd": 79
+        "hp": 1701,
+        "atk": 45,
+        "def": 160,
+        "spd": 44
       },
       "skills": {
         "normal": {
           "id": "n_p12",
-          "name": "碧潮盾击",
+          "name": "水盾击",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "slow",
           "desc": "重盾猛击前排，自身获得少量护盾。"
         },
         "ultimate": {
           "id": "u_p12",
-          "name": "碧涛壁垒",
+          "name": "水壁垒",
           "kind": "ult_guardian",
           "target": "front",
           "mult": 1.8,
           "splash": 0.0,
-          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并使目标减速 2 回合。"
+          "rider": "slow",
+          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并使其减速。"
         }
       }
     },
@@ -635,36 +1075,38 @@
       "id": "p13",
       "names": [
         "珊瑚蟹",
-        "碧波·珊瑚蟹",
-        "沧海·珊瑚蟹王"
+        "觉醒·珊瑚蟹",
+        "珊瑚蟹王"
       ],
-      "element": "water",
+      "element": "steel",
       "class": "guardian",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 1125,
-        "atk": 83,
-        "def": 93,
-        "spd": 81
+        "hp": 1771,
+        "atk": 47,
+        "def": 166,
+        "spd": 46
       },
       "skills": {
         "normal": {
           "id": "n_p13",
-          "name": "碧潮盾击",
+          "name": "钢盾击",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "def_down",
           "desc": "重盾猛击前排，自身获得少量护盾。"
         },
         "ultimate": {
           "id": "u_p13",
-          "name": "碧涛壁垒",
+          "name": "钢壁垒",
           "kind": "ult_guardian",
           "target": "front",
           "mult": 1.8,
           "splash": 0.0,
-          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并使目标减速 2 回合。"
+          "rider": "def_down",
+          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并降低目标防御。"
         }
       }
     },
@@ -672,73 +1114,97 @@
       "id": "p14",
       "names": [
         "霜鳍鲨",
-        "碧波·霜鳍鲨",
-        "沧海·霜鳍鲨王"
+        "觉醒·霜鳍鲨",
+        "霜鳍鲨王"
       ],
-      "element": "water",
+      "element": "ice",
       "class": "warrior",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 990,
-        "atk": 117,
-        "def": 71,
-        "spd": 101
+        "hp": 1369,
+        "atk": 137,
+        "def": 102,
+        "spd": 124
       },
       "skills": {
         "normal": {
           "id": "n_p14",
-          "name": "潮刃斩",
+          "name": "冰斩击",
           "kind": "normal",
           "target": "front",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "slow",
           "desc": "挥刃攻击敌方前排。"
         },
         "ultimate": {
           "id": "u_p14",
-          "name": "碧涛破军",
+          "name": "霜鳍破军",
           "kind": "ult_warrior",
           "target": "front",
           "mult": 2.15,
           "splash": 0.25,
-          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并使目标减速 2 回合。"
+          "rider": "slow",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，对冰封或减速目标伤害翻倍，并溅射 30%。。",
+          "signature": {
+            "style": "shatter",
+            "text": "对冰封或减速目标伤害翻倍，并溅射 30%。",
+            "mult": 2.0,
+            "splash": 0.3
+          }
         }
+      },
+      "mark": {
+        "id": "frost_fang",
+        "name": "霜牙",
+        "on": "foe",
+        "max": 3,
+        "fx": "slow",
+        "per": 0.05,
+        "full": "freeze"
+      },
+      "art": {
+        "body": "shark",
+        "trait": "fin",
+        "aura": "rare"
       }
     },
     {
       "id": "p15",
       "names": [
         "蓝鲸崽",
-        "碧波·蓝鲸崽",
-        "沧海·蓝鲸崽王"
+        "觉醒·蓝鲸崽",
+        "蓝鲸崽王"
       ],
-      "element": "water",
+      "element": "ice",
       "class": "support",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 919,
-        "atk": 89,
-        "def": 63,
-        "spd": 112
+        "hp": 1285,
+        "atk": 98,
+        "def": 98,
+        "spd": 114
       },
       "skills": {
         "normal": {
           "id": "n_p15",
-          "name": "润泽灵息",
+          "name": "冰灵息",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "slow",
           "desc": "攻击前排，并为生命最低的友方回复少量生命。"
         },
         "ultimate": {
           "id": "u_p15",
-          "name": "碧涛赞歌",
+          "name": "冰赞歌",
           "kind": "ult_support",
           "target": "front",
           "mult": 0.0,
           "splash": 0.0,
-          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并使目标减速 2 回合。"
+          "rider": "slow",
+          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并使其减速。"
         }
       }
     },
@@ -746,221 +1212,329 @@
       "id": "p16",
       "names": [
         "雾雨蛙",
-        "碧波·雾雨蛙",
-        "沧海·雾雨蛙王"
+        "觉醒·雾雨蛙",
+        "雾雨蛙王"
       ],
-      "element": "water",
+      "element": "poison",
       "class": "mage",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 793,
-        "atk": 140,
-        "def": 47,
-        "spd": 109
+        "hp": 885,
+        "atk": 189,
+        "def": 53,
+        "spd": 84
       },
       "skills": {
         "normal": {
           "id": "n_p16",
-          "name": "水泡弹",
+          "name": "毒弹",
           "kind": "normal",
           "target": "back",
           "mult": 0.95,
-          "splash": 0.0,
+          "rider": "poison",
           "desc": "凝聚元素弹攻击敌方后排。"
         },
         "ultimate": {
           "id": "u_p16",
-          "name": "碧涛风暴",
+          "name": "雾雨风暴",
           "kind": "ult_mage",
           "target": "back",
           "mult": 1.35,
           "splash": 0.0,
-          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并使目标减速 2 回合。"
+          "rider": "poison",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，敌方全体 +1 层毒雾，已有毒立刻结算 2 层。。",
+          "signature": {
+            "style": "poison_pop",
+            "text": "敌方全体 +1 层毒雾，已有毒立刻结算 2 层。"
+          }
         }
+      },
+      "mark": {
+        "id": "venom",
+        "name": "毒雾",
+        "on": "foe",
+        "max": 3,
+        "fx": "poison",
+        "per": 0.04
+      },
+      "art": {
+        "body": "frog",
+        "trait": "hood",
+        "aura": "rare"
       }
     },
     {
       "id": "p17",
       "names": [
         "涟漪鳗",
-        "碧波·涟漪鳗",
-        "沧海·涟漪鳗王"
+        "觉醒·涟漪鳗",
+        "涟漪鳗王"
       ],
-      "element": "water",
+      "element": "electric",
       "class": "archer",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 768,
-        "atk": 121,
-        "def": 48,
-        "spd": 116
+        "hp": 976,
+        "atk": 161,
+        "def": 61,
+        "spd": 166
       },
       "skills": {
         "normal": {
           "id": "n_p17",
-          "name": "霜羽箭",
+          "name": "电射击",
           "kind": "normal",
           "target": "lowest",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "shock",
           "desc": "射出一箭，优先攻击残血敌人。"
         },
         "ultimate": {
           "id": "u_p17",
-          "name": "碧涛狙击",
+          "name": "涟漪狙击",
           "kind": "ult_archer",
           "target": "lowest",
           "mult": 2.0,
           "splash": 0.0,
-          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并使目标减速 2 回合。"
+          "rider": "shock",
+          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，额外弹射 2 次；目标带感电时伤害 +20%。。",
+          "signature": {
+            "style": "bounce",
+            "text": "额外弹射 2 次；目标带感电时伤害 +20%。",
+            "jumps": 2,
+            "bonus": 0.2
+          }
         }
+      },
+      "mark": {
+        "id": "shock",
+        "name": "感电",
+        "on": "foe",
+        "max": 3,
+        "fx": "elem_taken",
+        "per": 0.08,
+        "elem": "electric",
+        "full": "chain",
+        "burst": 0.15
+      },
+      "art": {
+        "body": "eel",
+        "trait": "spark",
+        "aura": "rare"
       }
     },
     {
       "id": "p18",
       "names": [
         "冰晶水母",
-        "碧波·冰晶水母",
-        "沧海·冰晶水母王"
+        "觉醒·冰晶水母",
+        "冰晶水母王"
       ],
-      "element": "water",
+      "element": "ice",
       "class": "mage",
+      "rarity": "legend",
       "starter": false,
       "stats": {
-        "hp": 793,
-        "atk": 140,
-        "def": 47,
-        "spd": 109
+        "hp": 1305,
+        "atk": 279,
+        "def": 78,
+        "spd": 123
       },
       "skills": {
         "normal": {
           "id": "n_p18",
-          "name": "水泡弹",
+          "name": "冰弹",
           "kind": "normal",
           "target": "back",
           "mult": 0.95,
-          "splash": 0.0,
+          "rider": "slow",
           "desc": "凝聚元素弹攻击敌方后排。"
         },
         "ultimate": {
           "id": "u_p18",
-          "name": "碧涛风暴",
+          "name": "冰晶风暴",
           "kind": "ult_mage",
           "target": "back",
           "mult": 1.35,
           "splash": 0.0,
-          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并使目标减速 2 回合。"
+          "rider": "slow",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，敌方全体 +1 层晶冻，冰封者受到 40% 冰系碎裂伤害。。",
+          "signature": {
+            "style": "freeze_all",
+            "text": "敌方全体 +1 层晶冻，冰封者受到 40% 冰系碎裂伤害。",
+            "burst": 0.4
+          }
         }
+      },
+      "mark": {
+        "id": "jelly",
+        "name": "晶冻",
+        "on": "foe",
+        "max": 3,
+        "fx": "slow",
+        "per": 0.07,
+        "full": "freeze",
+        "fx2": "frozen_taken",
+        "per2": 0.2
+      },
+      "art": {
+        "body": "jelly",
+        "trait": "bell",
+        "aura": "legend"
       }
     },
     {
       "id": "p19",
       "names": [
         "风铃鼠",
-        "疾风·风铃鼠",
-        "天穹·风铃鼠王"
+        "觉醒·风铃鼠",
+        "风铃鼠王"
       ],
-      "element": "wind",
+      "element": "flying",
       "class": "archer",
-      "starter": true,
+      "rarity": "epic",
+      "starter": false,
       "stats": {
-        "hp": 760,
-        "atk": 120,
-        "def": 48,
-        "spd": 115
+        "hp": 1196,
+        "atk": 197,
+        "def": 75,
+        "spd": 203
       },
       "skills": {
         "normal": {
           "id": "n_p19",
-          "name": "疾风箭",
+          "name": "飞行射击",
           "kind": "normal",
           "target": "lowest",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "haste",
           "desc": "射出一箭，优先攻击残血敌人。"
         },
         "ultimate": {
           "id": "u_p19",
-          "name": "青岚狙击",
+          "name": "风铃狙击",
           "kind": "ult_archer",
           "target": "lowest",
           "mult": 2.0,
           "splash": 0.0,
-          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并提升自身速度 2 回合。"
+          "rider": "haste",
+          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，狙击残血，命中次数 = 1 + 铃风层数，每次 0.6 倍。。",
+          "signature": {
+            "style": "by_stacks",
+            "text": "狙击残血，命中次数 = 1 + 铃风层数，每次 0.6 倍。",
+            "ratio": 0.6
+          }
         }
+      },
+      "mark": {
+        "id": "bell_wind",
+        "name": "铃风",
+        "on": "self",
+        "max": 3,
+        "fx": "self_spd",
+        "per": 0.06
+      },
+      "art": {
+        "body": "mouse",
+        "trait": "bell",
+        "aura": "epic"
       }
     },
     {
       "id": "p20",
       "names": [
         "疾羽鸢",
-        "疾风·疾羽鸢",
-        "天穹·疾羽鸢王"
+        "觉醒·疾羽鸢",
+        "疾羽鸢王"
       ],
-      "element": "wind",
+      "element": "flying",
       "class": "archer",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 760,
-        "atk": 120,
-        "def": 48,
-        "spd": 115
+        "hp": 996,
+        "atk": 164,
+        "def": 62,
+        "spd": 169
       },
       "skills": {
         "normal": {
           "id": "n_p20",
-          "name": "疾风箭",
+          "name": "飞行射击",
           "kind": "normal",
           "target": "lowest",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "haste",
           "desc": "射出一箭，优先攻击残血敌人。"
         },
         "ultimate": {
           "id": "u_p20",
-          "name": "青岚狙击",
+          "name": "疾羽狙击",
           "kind": "ult_archer",
           "target": "lowest",
           "mult": 2.0,
           "splash": 0.0,
-          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并提升自身速度 2 回合。"
+          "rider": "haste",
+          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，必定暴击，每消耗 1 层锐羽伤害 +15%。。",
+          "signature": {
+            "style": "sure_crit",
+            "text": "必定暴击，每消耗 1 层锐羽伤害 +15%。",
+            "per": 0.15
+          }
         }
+      },
+      "mark": {
+        "id": "sharp_feather",
+        "name": "锐羽",
+        "on": "self",
+        "max": 3,
+        "fx": "self_crit",
+        "per": 0.06
+      },
+      "art": {
+        "body": "bird",
+        "trait": "bladewing",
+        "aura": "rare"
       }
     },
     {
       "id": "p21",
       "names": [
         "云朵羊",
-        "疾风·云朵羊",
-        "天穹·云朵羊王"
+        "觉醒·云朵羊",
+        "云朵羊王"
       ],
-      "element": "wind",
+      "element": "normal",
       "class": "support",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 883,
-        "atk": 85,
-        "def": 60,
-        "spd": 108
+        "hp": 1273,
+        "atk": 97,
+        "def": 97,
+        "spd": 113
       },
       "skills": {
         "normal": {
           "id": "n_p21",
-          "name": "清风灵息",
+          "name": "一般灵息",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "shield",
           "desc": "攻击前排，并为生命最低的友方回复少量生命。"
         },
         "ultimate": {
           "id": "u_p21",
-          "name": "青岚赞歌",
+          "name": "一般赞歌",
           "kind": "ult_support",
           "target": "front",
           "mult": 0.0,
           "splash": 0.0,
-          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并提升自身速度 2 回合。"
+          "rider": "shield",
+          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并为友方附加护盾。"
         }
       }
     },
@@ -968,36 +1542,38 @@
       "id": "p22",
       "names": [
         "旋岚貂",
-        "疾风·旋岚貂",
-        "天穹·旋岚貂王"
+        "觉醒·旋岚貂",
+        "旋岚貂王"
       ],
-      "element": "wind",
+      "element": "fighting",
       "class": "warrior",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 941,
-        "atk": 111,
-        "def": 67,
-        "spd": 96
+        "hp": 1078,
+        "atk": 108,
+        "def": 80,
+        "spd": 98
       },
       "skills": {
         "normal": {
           "id": "n_p22",
-          "name": "风刃斩",
+          "name": "格斗斩击",
           "kind": "normal",
           "target": "front",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "atk_self",
           "desc": "挥刃攻击敌方前排。"
         },
         "ultimate": {
           "id": "u_p22",
-          "name": "青岚破军",
+          "name": "格斗破军",
           "kind": "ult_warrior",
           "target": "front",
           "mult": 2.15,
           "splash": 0.25,
-          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并提升自身速度 2 回合。"
+          "rider": "atk_self",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并提升自身攻击。"
         }
       }
     },
@@ -1005,73 +1581,97 @@
       "id": "p23",
       "names": [
         "惊雷燕",
-        "疾风·惊雷燕",
-        "天穹·惊雷燕王"
+        "觉醒·惊雷燕",
+        "惊雷燕王"
       ],
-      "element": "wind",
+      "element": "electric",
       "class": "mage",
+      "rarity": "legend",
       "starter": false,
       "stats": {
-        "hp": 762,
-        "atk": 135,
-        "def": 46,
-        "spd": 105
+        "hp": 1319,
+        "atk": 282,
+        "def": 78,
+        "spd": 125
       },
       "skills": {
         "normal": {
           "id": "n_p23",
-          "name": "风旋弹",
+          "name": "电弹",
           "kind": "normal",
           "target": "back",
           "mult": 0.95,
-          "splash": 0.0,
+          "rider": "shock",
           "desc": "凝聚元素弹攻击敌方后排。"
         },
         "ultimate": {
           "id": "u_p23",
-          "name": "青岚风暴",
+          "name": "惊雷风暴",
           "kind": "ult_mage",
           "target": "back",
           "mult": 1.35,
           "splash": 0.0,
-          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并提升自身速度 2 回合。"
+          "rider": "shock",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，连锁全体，每次跳跃伤害 -20%，并减速。。",
+          "signature": {
+            "style": "chain",
+            "text": "连锁全体，每次跳跃伤害 -20%，并减速。",
+            "falloff": 0.2
+          }
         }
+      },
+      "mark": {
+        "id": "thunder_core",
+        "name": "雷核",
+        "on": "self",
+        "max": 3,
+        "fx": "self_elem",
+        "per": 0.1,
+        "elem": "electric",
+        "full": "aoe_next"
+      },
+      "art": {
+        "body": "bird",
+        "trait": "bolt",
+        "aura": "legend"
       }
     },
     {
       "id": "p24",
       "names": [
         "青岚鹿",
-        "疾风·青岚鹿",
-        "天穹·青岚鹿王"
+        "觉醒·青岚鹿",
+        "青岚鹿王"
       ],
-      "element": "wind",
+      "element": "electric",
       "class": "support",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 901,
-        "atk": 87,
-        "def": 61,
+        "hp": 1235,
+        "atk": 94,
+        "def": 94,
         "spd": 110
       },
       "skills": {
         "normal": {
           "id": "n_p24",
-          "name": "清风灵息",
+          "name": "电灵息",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "shock",
           "desc": "攻击前排，并为生命最低的友方回复少量生命。"
         },
         "ultimate": {
           "id": "u_p24",
-          "name": "青岚赞歌",
+          "name": "电赞歌",
           "kind": "ult_support",
           "target": "front",
           "mult": 0.0,
           "splash": 0.0,
-          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并提升自身速度 2 回合。"
+          "rider": "shock",
+          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并附加感电。"
         }
       }
     },
@@ -1079,73 +1679,97 @@
       "id": "p25",
       "names": [
         "蒲公英兔",
-        "疾风·蒲公英兔",
-        "天穹·蒲公英兔王"
+        "觉醒·蒲公英兔",
+        "蒲公英兔王"
       ],
-      "element": "wind",
+      "element": "grass",
       "class": "mage",
-      "starter": false,
+      "rarity": "epic",
+      "starter": true,
       "stats": {
-        "hp": 793,
-        "atk": 140,
-        "def": 47,
-        "spd": 109
+        "hp": 1106,
+        "atk": 236,
+        "def": 66,
+        "spd": 105
       },
       "skills": {
         "normal": {
           "id": "n_p25",
-          "name": "风旋弹",
+          "name": "草弹",
           "kind": "normal",
           "target": "back",
           "mult": 0.95,
-          "splash": 0.0,
+          "rider": "regen",
           "desc": "凝聚元素弹攻击敌方后排。"
         },
         "ultimate": {
           "id": "u_p25",
-          "name": "青岚风暴",
+          "name": "蒲公风暴",
           "kind": "ult_mage",
           "target": "back",
           "mult": 1.35,
           "splash": 0.0,
-          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并提升自身速度 2 回合。"
+          "rider": "regen",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，每层绒种引爆 30% 草系伤害，并回复该伤害的 30%。。",
+          "signature": {
+            "style": "seed_burst",
+            "text": "每层绒种引爆 30% 草系伤害，并回复该伤害的 30%。",
+            "per": 0.3,
+            "heal": 0.3
+          }
         }
+      },
+      "mark": {
+        "id": "seed",
+        "name": "绒种",
+        "on": "foe",
+        "max": 3,
+        "fx": "tick_adj",
+        "per": 0.08,
+        "elem": "grass"
+      },
+      "art": {
+        "body": "rabbit",
+        "trait": "fluff",
+        "aura": "epic"
       }
     },
     {
       "id": "p26",
       "names": [
         "逐风狼",
-        "疾风·逐风狼",
-        "天穹·逐风狼王"
+        "觉醒·逐风狼",
+        "逐风狼王"
       ],
-      "element": "wind",
+      "element": "rock",
       "class": "warrior",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 970,
-        "atk": 115,
-        "def": 69,
+        "hp": 1089,
+        "atk": 109,
+        "def": 81,
         "spd": 99
       },
       "skills": {
         "normal": {
           "id": "n_p26",
-          "name": "风刃斩",
+          "name": "岩石斩击",
           "kind": "normal",
           "target": "front",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "def_down",
           "desc": "挥刃攻击敌方前排。"
         },
         "ultimate": {
           "id": "u_p26",
-          "name": "青岚破军",
+          "name": "岩石破军",
           "kind": "ult_warrior",
           "target": "front",
           "mult": 2.15,
           "splash": 0.25,
-          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并提升自身速度 2 回合。"
+          "rider": "def_down",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并降低目标防御。"
         }
       }
     },
@@ -1153,36 +1777,38 @@
       "id": "p27",
       "names": [
         "岩壳龟",
-        "磐岩·岩壳龟",
-        "大地·岩壳龟王"
+        "觉醒·岩壳龟",
+        "岩壳龟王"
       ],
-      "element": "earth",
+      "element": "rock",
       "class": "guardian",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 1125,
-        "atk": 83,
-        "def": 93,
-        "spd": 81
+        "hp": 1701,
+        "atk": 45,
+        "def": 160,
+        "spd": 44
       },
       "skills": {
         "normal": {
           "id": "n_p27",
-          "name": "岩壳盾击",
+          "name": "岩石盾击",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "def_down",
           "desc": "重盾猛击前排，自身获得少量护盾。"
         },
         "ultimate": {
           "id": "u_p27",
-          "name": "裂地壁垒",
+          "name": "岩石壁垒",
           "kind": "ult_guardian",
           "target": "front",
           "mult": 1.8,
           "splash": 0.0,
-          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并降低目标防御 2 回合。"
+          "rider": "def_down",
+          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并降低目标防御。"
         }
       }
     },
@@ -1190,36 +1816,38 @@
       "id": "p28",
       "names": [
         "泥土熊",
-        "磐岩·泥土熊",
-        "大地·泥土熊王"
+        "觉醒·泥土熊",
+        "泥土熊王"
       ],
-      "element": "earth",
+      "element": "ground",
       "class": "guardian",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 1148,
-        "atk": 85,
-        "def": 95,
-        "spd": 83
+        "hp": 1701,
+        "atk": 45,
+        "def": 160,
+        "spd": 44
       },
       "skills": {
         "normal": {
           "id": "n_p28",
-          "name": "岩壳盾击",
+          "name": "地面盾击",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "def_down",
           "desc": "重盾猛击前排，自身获得少量护盾。"
         },
         "ultimate": {
           "id": "u_p28",
-          "name": "裂地壁垒",
+          "name": "地面壁垒",
           "kind": "ult_guardian",
           "target": "front",
           "mult": 1.8,
           "splash": 0.0,
-          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并降低目标防御 2 回合。"
+          "rider": "def_down",
+          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并降低目标防御。"
         }
       }
     },
@@ -1227,36 +1855,38 @@
       "id": "p29",
       "names": [
         "砂砾鼠",
-        "磐岩·砂砾鼠",
-        "大地·砂砾鼠王"
+        "觉醒·砂砾鼠",
+        "砂砾鼠王"
       ],
-      "element": "earth",
+      "element": "ground",
       "class": "archer",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 824,
-        "atk": 130,
-        "def": 52,
-        "spd": 125
+        "hp": 808,
+        "atk": 133,
+        "def": 50,
+        "spd": 137
       },
       "skills": {
         "normal": {
           "id": "n_p29",
-          "name": "砂砾箭",
+          "name": "地面射击",
           "kind": "normal",
           "target": "lowest",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "def_down",
           "desc": "射出一箭，优先攻击残血敌人。"
         },
         "ultimate": {
           "id": "u_p29",
-          "name": "裂地狙击",
+          "name": "地面狙击",
           "kind": "ult_archer",
           "target": "lowest",
           "mult": 2.0,
           "splash": 0.0,
-          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并降低目标防御 2 回合。"
+          "rider": "def_down",
+          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并降低目标防御。"
         }
       }
     },
@@ -1264,73 +1894,95 @@
       "id": "p30",
       "names": [
         "晶石蜥",
-        "磐岩·晶石蜥",
-        "大地·晶石蜥王"
+        "觉醒·晶石蜥",
+        "晶石蜥王"
       ],
-      "element": "earth",
+      "element": "rock",
       "class": "mage",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 770,
-        "atk": 136,
-        "def": 46,
-        "spd": 106
+        "hp": 903,
+        "atk": 193,
+        "def": 54,
+        "spd": 85
       },
       "skills": {
         "normal": {
           "id": "n_p30",
-          "name": "岩刺弹",
+          "name": "岩石弹",
           "kind": "normal",
           "target": "back",
           "mult": 0.95,
-          "splash": 0.0,
+          "rider": "def_down",
           "desc": "凝聚元素弹攻击敌方后排。"
         },
         "ultimate": {
           "id": "u_p30",
-          "name": "裂地风暴",
+          "name": "晶石风暴",
           "kind": "ult_mage",
           "target": "back",
           "mult": 1.35,
           "splash": 0.0,
-          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并降低目标防御 2 回合。"
+          "rider": "def_down",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，后排防御 -15%，持续 2 回合。。",
+          "signature": {
+            "style": "back_shred",
+            "text": "后排防御 -15%，持续 2 回合。",
+            "pct": 0.15
+          }
         }
+      },
+      "mark": {
+        "id": "crack",
+        "name": "裂晶",
+        "on": "foe",
+        "max": 3,
+        "fx": "def_down",
+        "per": 0.07
+      },
+      "art": {
+        "body": "lizard",
+        "trait": "crystal",
+        "aura": "rare"
       }
     },
     {
       "id": "p31",
       "names": [
         "藤蔓蟒",
-        "磐岩·藤蔓蟒",
-        "大地·藤蔓蟒王"
+        "觉醒·藤蔓蟒",
+        "藤蔓蟒王"
       ],
-      "element": "earth",
+      "element": "grass",
       "class": "warrior",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 951,
-        "atk": 113,
-        "def": 68,
-        "spd": 97
+        "hp": 1100,
+        "atk": 110,
+        "def": 82,
+        "spd": 100
       },
       "skills": {
         "normal": {
           "id": "n_p31",
-          "name": "裂地斩",
+          "name": "草斩击",
           "kind": "normal",
           "target": "front",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "regen",
           "desc": "挥刃攻击敌方前排。"
         },
         "ultimate": {
           "id": "u_p31",
-          "name": "裂地破军",
+          "name": "草破军",
           "kind": "ult_warrior",
           "target": "front",
           "mult": 2.15,
           "splash": 0.25,
-          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并降低目标防御 2 回合。"
+          "rider": "regen",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并回复自身生命。"
         }
       }
     },
@@ -1338,36 +1990,38 @@
       "id": "p32",
       "names": [
         "苔藓牛",
-        "磐岩·苔藓牛",
-        "大地·苔藓牛王"
+        "觉醒·苔藓牛",
+        "苔藓牛王"
       ],
-      "element": "earth",
+      "element": "grass",
       "class": "guardian",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 1172,
-        "atk": 87,
-        "def": 97,
-        "spd": 85
+        "hp": 1771,
+        "atk": 47,
+        "def": 166,
+        "spd": 46
       },
       "skills": {
         "normal": {
           "id": "n_p32",
-          "name": "岩壳盾击",
+          "name": "草盾击",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "regen",
           "desc": "重盾猛击前排，自身获得少量护盾。"
         },
         "ultimate": {
           "id": "u_p32",
-          "name": "裂地壁垒",
+          "name": "草壁垒",
           "kind": "ult_guardian",
           "target": "front",
           "mult": 1.8,
           "splash": 0.0,
-          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并降低目标防御 2 回合。"
+          "rider": "regen",
+          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并回复自身生命。"
         }
       }
     },
@@ -1375,36 +2029,38 @@
       "id": "p33",
       "names": [
         "蘑菇蛙",
-        "磐岩·蘑菇蛙",
-        "大地·蘑菇蛙王"
+        "觉醒·蘑菇蛙",
+        "蘑菇蛙王"
       ],
-      "element": "earth",
+      "element": "poison",
       "class": "support",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 883,
-        "atk": 85,
-        "def": 60,
-        "spd": 108
+        "hp": 1247,
+        "atk": 95,
+        "def": 95,
+        "spd": 111
       },
       "skills": {
         "normal": {
           "id": "n_p33",
-          "name": "大地灵息",
+          "name": "毒灵息",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "poison",
           "desc": "攻击前排，并为生命最低的友方回复少量生命。"
         },
         "ultimate": {
           "id": "u_p33",
-          "name": "裂地赞歌",
+          "name": "毒赞歌",
           "kind": "ult_support",
           "target": "front",
           "mult": 0.0,
           "splash": 0.0,
-          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并降低目标防御 2 回合。"
+          "rider": "poison",
+          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并附加中毒。"
         }
       }
     },
@@ -1412,36 +2068,38 @@
       "id": "p34",
       "names": [
         "琥珀蚁",
-        "磐岩·琥珀蚁",
-        "大地·琥珀蚁王"
+        "觉醒·琥珀蚁",
+        "琥珀蚁王"
       ],
-      "element": "earth",
+      "element": "bug",
       "class": "archer",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 792,
-        "atk": 125,
+        "hp": 800,
+        "atk": 132,
         "def": 50,
-        "spd": 120
+        "spd": 136
       },
       "skills": {
         "normal": {
           "id": "n_p34",
-          "name": "砂砾箭",
+          "name": "虫射击",
           "kind": "normal",
           "target": "lowest",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "slow",
           "desc": "射出一箭，优先攻击残血敌人。"
         },
         "ultimate": {
           "id": "u_p34",
-          "name": "裂地狙击",
+          "name": "虫狙击",
           "kind": "ult_archer",
           "target": "lowest",
           "mult": 2.0,
           "splash": 0.0,
-          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并降低目标防御 2 回合。"
+          "rider": "slow",
+          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并使其减速。"
         }
       }
     },
@@ -1449,100 +2107,141 @@
       "id": "p35",
       "names": [
         "光羽雀",
-        "圣辉·光羽雀",
-        "耀世·光羽雀王"
+        "觉醒·光羽雀",
+        "光羽雀王"
       ],
-      "element": "light",
+      "element": "psychic",
       "class": "archer",
+      "rarity": "epic",
       "starter": false,
       "stats": {
-        "hp": 848,
-        "atk": 134,
-        "def": 53,
-        "spd": 128
+        "hp": 1160,
+        "atk": 191,
+        "def": 73,
+        "spd": 197
       },
       "skills": {
         "normal": {
           "id": "n_p35",
-          "name": "光羽箭",
+          "name": "超能射击",
           "kind": "normal",
           "target": "lowest",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "shield",
           "desc": "射出一箭，优先攻击残血敌人。"
         },
         "ultimate": {
           "id": "u_p35",
-          "name": "圣辉狙击",
+          "name": "光羽狙击",
           "kind": "ult_archer",
           "target": "lowest",
           "mult": 2.0,
           "splash": 0.0,
-          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并为友方附加护盾。"
+          "rider": "shield",
+          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，随机攻击 4 次，优先命中带灵羽的目标。。",
+          "signature": {
+            "style": "random_mark",
+            "text": "随机攻击 4 次，优先命中带灵羽的目标。",
+            "hits": 4
+          }
         }
+      },
+      "mark": {
+        "id": "spirit",
+        "name": "灵羽",
+        "on": "foe",
+        "max": 3,
+        "fx": "true_hp",
+        "per": 0.02
+      },
+      "art": {
+        "body": "bird",
+        "trait": "halo",
+        "aura": "epic"
       }
     },
     {
       "id": "p36",
       "names": [
         "晨曦鹿",
-        "圣辉·晨曦鹿",
-        "耀世·晨曦鹿王"
+        "觉醒·晨曦鹿",
+        "晨曦鹿王"
       ],
-      "element": "light",
+      "element": "psychic",
       "class": "support",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 901,
-        "atk": 87,
-        "def": 61,
-        "spd": 110
+        "hp": 1553,
+        "atk": 118,
+        "def": 118,
+        "spd": 138
       },
       "skills": {
         "normal": {
           "id": "n_p36",
-          "name": "晨光灵息",
+          "name": "超能灵息",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "shield",
           "desc": "攻击前排，并为生命最低的友方回复少量生命。"
         },
         "ultimate": {
           "id": "u_p36",
-          "name": "圣辉赞歌",
+          "name": "晨曦赞歌",
           "kind": "ult_support",
           "target": "front",
           "mult": 0.0,
           "splash": 0.0,
-          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并为友方附加护盾。"
+          "rider": "shield",
+          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，全队回复 12% 生命，晨光层数化为等额护盾。。",
+          "signature": {
+            "style": "team_mend",
+            "text": "全队回复 12% 生命，晨光层数化为等额护盾。",
+            "heal": 0.12
+          }
         }
+      },
+      "mark": {
+        "id": "dawn",
+        "name": "晨光",
+        "on": "self",
+        "max": 3,
+        "fx": "self_heal",
+        "per": 0.08
+      },
+      "art": {
+        "body": "deer",
+        "trait": "soft",
+        "aura": "rare"
       }
     },
     {
       "id": "p37",
       "names": [
         "圣辉猫",
-        "圣辉·圣辉猫",
-        "耀世·圣辉猫王"
+        "觉醒·圣辉猫",
+        "圣辉猫王"
       ],
-      "element": "light",
+      "element": "fighting",
       "class": "warrior",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 1039,
-        "atk": 123,
-        "def": 74,
-        "spd": 106
+        "hp": 1342,
+        "atk": 134,
+        "def": 100,
+        "spd": 122
       },
       "skills": {
         "normal": {
           "id": "n_p37",
-          "name": "圣辉斩",
+          "name": "格斗斩击",
           "kind": "normal",
           "target": "front",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "atk_self",
           "desc": "挥刃攻击敌方前排。"
         },
         "ultimate": {
@@ -1552,117 +2251,178 @@
           "target": "front",
           "mult": 2.15,
           "splash": 0.25,
-          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并为友方附加护盾。"
+          "rider": "atk_self",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，追加一击（50%），每次命中叠加 1 层斗气。。",
+          "signature": {
+            "style": "double_hit",
+            "text": "追加一击（50%），每次命中叠加 1 层斗气。",
+            "ratio": 0.5
+          }
         }
+      },
+      "mark": {
+        "id": "fight_spirit",
+        "name": "斗气",
+        "on": "self",
+        "max": 3,
+        "fx": "self_atk",
+        "per": 0.05
+      },
+      "art": {
+        "body": "cat",
+        "trait": "fist",
+        "aura": "rare"
       }
     },
     {
       "id": "p38",
       "names": [
         "日冕狮",
-        "圣辉·日冕狮",
-        "耀世·日冕狮王"
+        "觉醒·日冕狮",
+        "日冕狮王"
       ],
-      "element": "light",
+      "element": "fighting",
       "class": "warrior",
+      "rarity": "legend",
       "starter": false,
       "stats": {
-        "hp": 951,
-        "atk": 113,
-        "def": 68,
-        "spd": 97
+        "hp": 1960,
+        "atk": 196,
+        "def": 146,
+        "spd": 178
       },
       "skills": {
         "normal": {
           "id": "n_p38",
-          "name": "圣辉斩",
+          "name": "格斗斩击",
           "kind": "normal",
           "target": "front",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "atk_self",
           "desc": "挥刃攻击敌方前排。"
         },
         "ultimate": {
           "id": "u_p38",
-          "name": "圣辉破军",
+          "name": "日冕破军",
           "kind": "ult_warrior",
           "target": "front",
           "mult": 2.15,
           "splash": 0.25,
-          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并为友方附加护盾。"
+          "rider": "atk_self",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，敌方攻击 -15% 持续 2 回合，并眩晕前排 1 回合。。",
+          "signature": {
+            "style": "roar",
+            "text": "敌方攻击 -15% 持续 2 回合，并眩晕前排 1 回合。",
+            "pct": 0.15
+          }
         }
+      },
+      "mark": {
+        "id": "pride",
+        "name": "王威",
+        "on": "foe",
+        "max": 3,
+        "fx": "dealt_down",
+        "per": 0.08
+      },
+      "art": {
+        "body": "lion",
+        "trait": "mane",
+        "aura": "legend"
       }
     },
     {
       "id": "p39",
       "names": [
         "莹光蛾",
-        "圣辉·莹光蛾",
-        "耀世·莹光蛾王"
+        "觉醒·莹光蛾",
+        "莹光蛾王"
       ],
-      "element": "light",
+      "element": "bug",
       "class": "mage",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 762,
-        "atk": 135,
-        "def": 46,
-        "spd": 105
+        "hp": 912,
+        "atk": 195,
+        "def": 54,
+        "spd": 86
       },
       "skills": {
         "normal": {
           "id": "n_p39",
-          "name": "光矢弹",
+          "name": "虫弹",
           "kind": "normal",
           "target": "back",
           "mult": 0.95,
-          "splash": 0.0,
+          "rider": "slow",
           "desc": "凝聚元素弹攻击敌方后排。"
         },
         "ultimate": {
           "id": "u_p39",
-          "name": "圣辉风暴",
+          "name": "莹光风暴",
           "kind": "ult_mage",
           "target": "back",
           "mult": 1.35,
           "splash": 0.0,
-          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并为友方附加护盾。"
+          "rider": "slow",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，对禁疗目标伤害 +35%，并驱散 1 个增益。。",
+          "signature": {
+            "style": "antiheal_dispel",
+            "text": "对禁疗目标伤害 +35%，并驱散 1 个增益。",
+            "bonus": 0.35
+          }
         }
+      },
+      "mark": {
+        "id": "dust",
+        "name": "粉尘",
+        "on": "foe",
+        "max": 3,
+        "fx": "antiheal",
+        "per": 0.25
+      },
+      "art": {
+        "body": "moth",
+        "trait": "dust",
+        "aura": "rare"
       }
     },
     {
       "id": "p40",
       "names": [
         "金铃羊",
-        "圣辉·金铃羊",
-        "耀世·金铃羊王"
+        "觉醒·金铃羊",
+        "金铃羊王"
       ],
-      "element": "light",
+      "element": "normal",
       "class": "support",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 901,
-        "atk": 87,
-        "def": 61,
+        "hp": 1235,
+        "atk": 94,
+        "def": 94,
         "spd": 110
       },
       "skills": {
         "normal": {
           "id": "n_p40",
-          "name": "晨光灵息",
+          "name": "一般灵息",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "shield",
           "desc": "攻击前排，并为生命最低的友方回复少量生命。"
         },
         "ultimate": {
           "id": "u_p40",
-          "name": "圣辉赞歌",
+          "name": "一般赞歌",
           "kind": "ult_support",
           "target": "front",
           "mult": 0.0,
           "splash": 0.0,
+          "rider": "shield",
           "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并为友方附加护盾。"
         }
       }
@@ -1671,73 +2431,98 @@
       "id": "p41",
       "names": [
         "星尘狐",
-        "圣辉·星尘狐",
-        "耀世·星尘狐王"
+        "觉醒·星尘狐",
+        "星尘狐王"
       ],
-      "element": "light",
+      "element": "psychic",
       "class": "mage",
+      "rarity": "hero",
       "starter": false,
       "stats": {
-        "hp": 747,
-        "atk": 132,
-        "def": 45,
-        "spd": 103
+        "hp": 1598,
+        "atk": 341,
+        "def": 95,
+        "spd": 151
       },
       "skills": {
         "normal": {
           "id": "n_p41",
-          "name": "光矢弹",
+          "name": "超能弹",
           "kind": "normal",
           "target": "back",
           "mult": 0.95,
-          "splash": 0.0,
+          "rider": "shield",
           "desc": "凝聚元素弹攻击敌方后排。"
         },
         "ultimate": {
           "id": "u_p41",
-          "name": "圣辉风暴",
+          "name": "星尘风暴",
           "kind": "ult_mage",
           "target": "back",
           "mult": 1.35,
           "splash": 0.0,
-          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并为友方附加护盾。"
+          "rider": "shield",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，攻击全体，每层星轨伤害 +15%，并驱散 2 个增益。。",
+          "signature": {
+            "style": "star_purge",
+            "text": "攻击全体，每层星轨伤害 +15%，并驱散 2 个增益。",
+            "per": 0.15,
+            "dispel": 2
+          }
         }
+      },
+      "mark": {
+        "id": "star_orbit",
+        "name": "星轨",
+        "on": "self",
+        "max": 3,
+        "fx": "self_ult",
+        "per": 0.12,
+        "fx2": "rage_chance",
+        "per2": 0.1
+      },
+      "art": {
+        "body": "fox",
+        "trait": "stars",
+        "aura": "hero"
       }
     },
     {
       "id": "p42",
       "names": [
         "白昼鸽",
-        "圣辉·白昼鸽",
-        "耀世·白昼鸽王"
+        "觉醒·白昼鸽",
+        "白昼鸽王"
       ],
-      "element": "light",
+      "element": "steel",
       "class": "archer",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 824,
-        "atk": 130,
-        "def": 52,
-        "spd": 125
+        "hp": 808,
+        "atk": 133,
+        "def": 50,
+        "spd": 137
       },
       "skills": {
         "normal": {
           "id": "n_p42",
-          "name": "光羽箭",
+          "name": "钢射击",
           "kind": "normal",
           "target": "lowest",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "def_down",
           "desc": "射出一箭，优先攻击残血敌人。"
         },
         "ultimate": {
           "id": "u_p42",
-          "name": "圣辉狙击",
+          "name": "钢狙击",
           "kind": "ult_archer",
           "target": "lowest",
           "mult": 2.0,
           "splash": 0.0,
-          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并为友方附加护盾。"
+          "rider": "def_down",
+          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并降低目标防御。"
         }
       }
     },
@@ -1745,258 +2530,389 @@
       "id": "p43",
       "names": [
         "影刃豹",
-        "幽影·影刃豹",
-        "永夜·影刃豹王"
+        "觉醒·影刃豹",
+        "影刃豹王"
       ],
       "element": "dark",
       "class": "warrior",
+      "rarity": "hero",
       "starter": false,
       "stats": {
-        "hp": 980,
-        "atk": 116,
-        "def": 70,
-        "spd": 100
+        "hp": 2376,
+        "atk": 238,
+        "def": 177,
+        "spd": 216
       },
       "skills": {
         "normal": {
           "id": "n_p43",
-          "name": "暗刃斩",
+          "name": "恶斩击",
           "kind": "normal",
           "target": "front",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "atk_down",
           "desc": "挥刃攻击敌方前排。"
         },
         "ultimate": {
           "id": "u_p43",
-          "name": "暗蚀破军",
+          "name": "影刃破军",
           "kind": "ult_warrior",
           "target": "front",
           "mult": 2.15,
           "splash": 0.25,
-          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并降低目标攻击 2 回合。"
+          "rider": "atk_down",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，随机攻击 4 次，暴击时返还 1 点气势。。",
+          "signature": {
+            "style": "shadow_refund",
+            "text": "随机攻击 4 次，暴击时返还 1 点气势。",
+            "hits": 4
+          }
         }
+      },
+      "mark": {
+        "id": "shadow_blade",
+        "name": "影刃",
+        "on": "foe",
+        "max": 3,
+        "fx": "crit_taken",
+        "per": 0.1,
+        "fx2": "self_spd",
+        "per2": 0.04
+      },
+      "art": {
+        "body": "panther",
+        "trait": "blade",
+        "aura": "hero"
       }
     },
     {
       "id": "p44",
       "names": [
         "幽夜鸦",
-        "幽影·幽夜鸦",
-        "永夜·幽夜鸦王"
+        "觉醒·幽夜鸦",
+        "幽夜鸦王"
       ],
-      "element": "dark",
+      "element": "ghost",
       "class": "archer",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 840,
-        "atk": 132,
-        "def": 52,
-        "spd": 127
+        "hp": 956,
+        "atk": 158,
+        "def": 60,
+        "spd": 163
       },
       "skills": {
         "normal": {
           "id": "n_p44",
-          "name": "暗羽箭",
+          "name": "幽灵射击",
           "kind": "normal",
           "target": "lowest",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "atk_down",
           "desc": "射出一箭，优先攻击残血敌人。"
         },
         "ultimate": {
           "id": "u_p44",
-          "name": "暗蚀狙击",
+          "name": "幽夜狙击",
           "kind": "ult_archer",
           "target": "lowest",
           "mult": 2.0,
           "splash": 0.0,
-          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并降低目标攻击 2 回合。"
+          "rider": "atk_down",
+          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，优先残血，每层咒羽按已损失生命追加伤害，最多 +24%。。",
+          "signature": {
+            "style": "missing",
+            "text": "优先残血，每层咒羽按已损失生命追加伤害，最多 +24%。",
+            "per": 0.08,
+            "cap": 0.24
+          }
         }
+      },
+      "mark": {
+        "id": "curse_feather",
+        "name": "咒羽",
+        "on": "foe",
+        "max": 3,
+        "fx": "crit_taken",
+        "per": 0.08
+      },
+      "art": {
+        "body": "bird",
+        "trait": "shroud",
+        "aura": "rare"
       }
     },
     {
       "id": "p45",
       "names": [
         "暮色蝠",
-        "幽影·暮色蝠",
-        "永夜·暮色蝠王"
+        "觉醒·暮色蝠",
+        "暮色蝠王"
       ],
-      "element": "dark",
+      "element": "ghost",
       "class": "mage",
+      "rarity": "epic",
       "starter": false,
       "stats": {
-        "hp": 816,
-        "atk": 144,
-        "def": 49,
-        "spd": 112
+        "hp": 1084,
+        "atk": 232,
+        "def": 64,
+        "spd": 103
       },
       "skills": {
         "normal": {
           "id": "n_p45",
-          "name": "影球弹",
+          "name": "幽灵弹",
           "kind": "normal",
           "target": "back",
           "mult": 0.95,
-          "splash": 0.0,
+          "rider": "atk_down",
           "desc": "凝聚元素弹攻击敌方后排。"
         },
         "ultimate": {
           "id": "u_p45",
-          "name": "暗蚀风暴",
+          "name": "暮色风暴",
           "kind": "ult_mage",
           "target": "back",
           "mult": 1.35,
           "splash": 0.0,
-          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并降低目标攻击 2 回合。"
+          "rider": "atk_down",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，敌方攻击 -12% 持续 2 回合，层数最高者眩晕 1 回合。。",
+          "signature": {
+            "style": "fear",
+            "text": "敌方攻击 -12% 持续 2 回合，层数最高者眩晕 1 回合。",
+            "pct": 0.12
+          }
         }
+      },
+      "mark": {
+        "id": "siphon",
+        "name": "吸魂",
+        "on": "self",
+        "max": 3,
+        "fx": "self_vamp",
+        "per": 0.05
+      },
+      "art": {
+        "body": "bat",
+        "trait": "fang",
+        "aura": "epic"
       }
     },
     {
       "id": "p46",
       "names": [
         "暗焰犬",
-        "幽影·暗焰犬",
-        "永夜·暗焰犬王"
+        "觉醒·暗焰犬",
+        "暗焰犬王"
       ],
       "element": "dark",
       "class": "warrior",
+      "rarity": "rare",
       "starter": false,
       "stats": {
-        "hp": 1000,
-        "atk": 118,
-        "def": 71,
-        "spd": 102
+        "hp": 1329,
+        "atk": 133,
+        "def": 99,
+        "spd": 121
       },
       "skills": {
         "normal": {
           "id": "n_p46",
-          "name": "暗刃斩",
+          "name": "恶斩击",
           "kind": "normal",
           "target": "front",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "atk_down",
           "desc": "挥刃攻击敌方前排。"
         },
         "ultimate": {
           "id": "u_p46",
-          "name": "暗蚀破军",
+          "name": "暗焰破军",
           "kind": "ult_warrior",
           "target": "front",
           "mult": 2.15,
           "splash": 0.25,
-          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并降低目标攻击 2 回合。"
+          "rider": "atk_down",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，消耗蚀火，每层造成 30% 攻击的暗蚀伤害并吸血。。",
+          "signature": {
+            "style": "drain",
+            "text": "消耗蚀火，每层造成 30% 攻击的暗蚀伤害并吸血。",
+            "per": 0.3
+          }
         }
+      },
+      "mark": {
+        "id": "eclipse_fire",
+        "name": "蚀火",
+        "on": "foe",
+        "max": 3,
+        "fx": "atk_down",
+        "per": 0.05,
+        "fx2": "self_vamp",
+        "per2": 0.03
+      },
+      "art": {
+        "body": "hound",
+        "trait": "ember",
+        "aura": "rare"
       }
     },
     {
       "id": "p47",
       "names": [
         "幻梦蛛",
-        "幽影·幻梦蛛",
-        "永夜·幻梦蛛王"
+        "觉醒·幻梦蛛",
+        "幻梦蛛王"
       ],
-      "element": "dark",
+      "element": "poison",
       "class": "support",
+      "rarity": "epic",
       "starter": false,
       "stats": {
-        "hp": 892,
-        "atk": 86,
-        "def": 61,
-        "spd": 109
+        "hp": 1846,
+        "atk": 141,
+        "def": 141,
+        "spd": 164
       },
       "skills": {
         "normal": {
           "id": "n_p47",
-          "name": "夜歌灵息",
+          "name": "毒灵息",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "poison",
           "desc": "攻击前排，并为生命最低的友方回复少量生命。"
         },
         "ultimate": {
           "id": "u_p47",
-          "name": "暗蚀赞歌",
+          "name": "幻梦赞歌",
           "kind": "ult_support",
           "target": "front",
           "mult": 0.0,
           "splash": 0.0,
-          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，并降低目标攻击 2 回合。"
+          "rider": "poison",
+          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，封印目标 1 回合，梦丝层数化为自身护盾。。",
+          "signature": {
+            "style": "seal",
+            "text": "封印目标 1 回合，梦丝层数化为自身护盾。",
+            "per": 0.06
+          }
         }
+      },
+      "mark": {
+        "id": "dream",
+        "name": "梦丝",
+        "on": "foe",
+        "max": 3,
+        "fx": "slow",
+        "per": 0.04,
+        "full": "nocrit"
+      },
+      "art": {
+        "body": "spider",
+        "trait": "web",
+        "aura": "epic"
       }
     },
     {
       "id": "p48",
       "names": [
         "蚀月蛇",
-        "幽影·蚀月蛇",
-        "永夜·蚀月蛇王"
+        "觉醒·蚀月蛇",
+        "蚀月蛇王"
       ],
-      "element": "dark",
+      "element": "dragon",
       "class": "mage",
+      "rarity": "legend",
       "starter": false,
       "stats": {
-        "hp": 793,
-        "atk": 140,
-        "def": 47,
-        "spd": 109
+        "hp": 1319,
+        "atk": 282,
+        "def": 78,
+        "spd": 125
       },
       "skills": {
         "normal": {
           "id": "n_p48",
-          "name": "影球弹",
+          "name": "龙弹",
           "kind": "normal",
           "target": "back",
           "mult": 0.95,
-          "splash": 0.0,
+          "rider": "vulnerable",
           "desc": "凝聚元素弹攻击敌方后排。"
         },
         "ultimate": {
           "id": "u_p48",
-          "name": "暗蚀风暴",
+          "name": "蚀月风暴",
           "kind": "ult_mage",
           "target": "back",
           "mult": 1.35,
           "splash": 0.0,
-          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并降低目标攻击 2 回合。"
+          "rider": "vulnerable",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，目标每损失 1% 生命，伤害 +0.4%，并偷取 1 个增益。。",
+          "signature": {
+            "style": "eclipse",
+            "text": "目标每损失 1% 生命，伤害 +0.4%，并偷取 1 个增益。",
+            "per": 0.004
+          }
         }
+      },
+      "mark": {
+        "id": "moon",
+        "name": "月蚀",
+        "on": "foe",
+        "max": 3,
+        "fx": "elem_taken",
+        "per": 0.06,
+        "elem": "dark",
+        "fx2": "antiheal",
+        "per2": 0.06
+      },
+      "art": {
+        "body": "snake",
+        "trait": "moon",
+        "aura": "legend"
       }
     },
     {
       "id": "p49",
       "names": [
         "黑雾猫",
-        "幽影·黑雾猫",
-        "永夜·黑雾猫王"
+        "觉醒·黑雾猫",
+        "黑雾猫王"
       ],
       "element": "dark",
       "class": "archer",
+      "rarity": "common",
       "starter": false,
       "stats": {
-        "hp": 848,
-        "atk": 134,
-        "def": 53,
-        "spd": 128
+        "hp": 800,
+        "atk": 132,
+        "def": 50,
+        "spd": 136
       },
       "skills": {
         "normal": {
           "id": "n_p49",
-          "name": "暗羽箭",
+          "name": "恶射击",
           "kind": "normal",
           "target": "lowest",
           "mult": 1.0,
-          "splash": 0.0,
+          "rider": "atk_down",
           "desc": "射出一箭，优先攻击残血敌人。"
         },
         "ultimate": {
           "id": "u_p49",
-          "name": "暗蚀狙击",
+          "name": "恶狙击",
           "kind": "ult_archer",
           "target": "lowest",
           "mult": 2.0,
           "splash": 0.0,
-          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并降低目标攻击 2 回合。"
+          "rider": "atk_down",
+          "desc": "狙击生命最低的敌人，造成 2.0 倍伤害且暴击率 +25%，并降低目标攻击。"
         }
       }
     },
@@ -2004,40 +2920,1060 @@
       "id": "p50",
       "names": [
         "夜巡枭",
-        "幽影·夜巡枭",
-        "永夜·夜巡枭王"
+        "觉醒·夜巡枭",
+        "夜巡枭王"
       ],
-      "element": "dark",
+      "element": "ghost",
       "class": "guardian",
+      "rarity": "legend",
       "starter": false,
       "stats": {
-        "hp": 1125,
+        "hp": 3125,
         "atk": 83,
-        "def": 93,
+        "def": 293,
         "spd": 81
       },
       "skills": {
         "normal": {
           "id": "n_p50",
-          "name": "暗影盾击",
+          "name": "幽灵盾击",
           "kind": "normal",
           "target": "front",
           "mult": 0.9,
-          "splash": 0.0,
+          "rider": "atk_down",
           "desc": "重盾猛击前排，自身获得少量护盾。"
         },
         "ultimate": {
           "id": "u_p50",
-          "name": "暗蚀壁垒",
+          "name": "夜巡壁垒",
+          "kind": "ult_guardian",
+          "target": "front",
+          "mult": 1.0,
+          "splash": 0.0,
+          "rider": "atk_down",
+          "desc": "击退前排目标，自身获得 12% 最大生命护盾，嘲讽敌方全体只攻击自己。",
+          "signature": {
+            "style": "owl",
+            "text": "护盾完全挡住一次攻击后，立即行动一次。（三回合一次）",
+            "ult_mult": 1.0,
+            "def_up": 0.4,
+            "desc": "击退前排目标，自身获得 12% 最大生命护盾，嘲讽敌方全体只攻击自己。"
+          }
+        }
+      },
+      "mark": {
+        "id": "night_eye",
+        "name": "夜瞳",
+        "on": "self",
+        "max": 3,
+        "fx": "self_def",
+        "per": 0.15,
+        "full": "shield",
+        "burst": 0.5
+      },
+      "art": {
+        "body": "owl",
+        "trait": "eye",
+        "aura": "legend"
+      }
+    },
+    {
+      "id": "p51",
+      "names": [
+        "甘露蝶",
+        "觉醒·甘露蝶",
+        "甘露蝶王"
+      ],
+      "element": "bug",
+      "class": "support",
+      "rarity": "epic",
+      "starter": false,
+      "stats": {
+        "hp": 1865,
+        "atk": 142,
+        "def": 142,
+        "spd": 166
+      },
+      "skills": {
+        "normal": {
+          "id": "n_p51",
+          "name": "虫灵息",
+          "kind": "normal",
+          "target": "front",
+          "mult": 0.9,
+          "rider": "slow",
+          "desc": "攻击前排，并为生命最低的友方回复少量生命。"
+        },
+        "ultimate": {
+          "id": "u_p51",
+          "name": "甘露赞歌",
+          "kind": "ult_support",
+          "target": "front",
+          "mult": 0.0,
+          "splash": 0.0,
+          "rider": "slow",
+          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，全队回复 14% 生命，甘露层数化为等额护盾。。",
+          "signature": {
+            "style": "team_mend",
+            "text": "全队回复 14% 生命，甘露层数化为等额护盾。",
+            "heal": 0.14
+          }
+        }
+      },
+      "mark": {
+        "id": "dew",
+        "name": "甘露",
+        "on": "self",
+        "max": 3,
+        "fx": "self_heal",
+        "per": 0.08
+      },
+      "art": {
+        "body": "moth",
+        "trait": "dew",
+        "aura": "epic"
+      }
+    },
+    {
+      "id": "p52",
+      "names": [
+        "潮歌鲸",
+        "觉醒·潮歌鲸",
+        "潮歌鲸王"
+      ],
+      "element": "water",
+      "class": "support",
+      "rarity": "legend",
+      "starter": false,
+      "stats": {
+        "hp": 2245,
+        "atk": 171,
+        "def": 171,
+        "spd": 200
+      },
+      "skills": {
+        "normal": {
+          "id": "n_p52",
+          "name": "水灵息",
+          "kind": "normal",
+          "target": "front",
+          "mult": 0.9,
+          "rider": "slow",
+          "desc": "攻击前排，并为生命最低的友方回复少量生命。"
+        },
+        "ultimate": {
+          "id": "u_p52",
+          "name": "潮歌赞歌",
+          "kind": "ult_support",
+          "target": "front",
+          "mult": 0.0,
+          "splash": 0.0,
+          "rider": "slow",
+          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，全队获得 2 层潮歌，并回复 12% 生命。。",
+          "signature": {
+            "style": "team_ward",
+            "text": "全队获得 2 层潮歌，并回复 12% 生命。",
+            "stacks": 2,
+            "heal": 0.12
+          }
+        }
+      },
+      "mark": {
+        "id": "tide_song",
+        "name": "潮歌",
+        "on": "self",
+        "max": 3,
+        "fx": "ward",
+        "per": 0.06,
+        "fx2": "self_heal",
+        "per2": 0.04
+      },
+      "art": {
+        "body": "fish",
+        "trait": "song",
+        "aura": "legend"
+      }
+    },
+    {
+      "id": "p53",
+      "names": [
+        "星祷鹿",
+        "觉醒·星祷鹿",
+        "星祷鹿王"
+      ],
+      "element": "psychic",
+      "class": "support",
+      "rarity": "hero",
+      "starter": false,
+      "stats": {
+        "hp": 2749,
+        "atk": 209,
+        "def": 209,
+        "spd": 244
+      },
+      "skills": {
+        "normal": {
+          "id": "n_p53",
+          "name": "超能灵息",
+          "kind": "normal",
+          "target": "front",
+          "mult": 0.9,
+          "rider": "shield",
+          "desc": "攻击前排，并为生命最低的友方回复少量生命。"
+        },
+        "ultimate": {
+          "id": "u_p53",
+          "name": "星祷赞歌",
+          "kind": "ult_support",
+          "target": "front",
+          "mult": 0.0,
+          "splash": 0.0,
+          "rider": "shield",
+          "desc": "为全体友方回复 15% 最大生命并提升 10% 攻击，全队回复 18% 生命，星祷层数化为等额护盾。。",
+          "signature": {
+            "style": "team_mend",
+            "text": "全队回复 18% 生命，星祷层数化为等额护盾。",
+            "heal": 0.18
+          }
+        }
+      },
+      "mark": {
+        "id": "star_prayer",
+        "name": "星祷",
+        "on": "self",
+        "max": 3,
+        "fx": "self_heal",
+        "per": 0.1,
+        "fx2": "self_spd",
+        "per2": 0.04
+      },
+      "art": {
+        "body": "deer",
+        "trait": "halo",
+        "aura": "hero"
+      }
+    }
+  ],
+  "demons": [
+    {
+      "id": "d1",
+      "names": [
+        "熔核魔人·赫炎",
+        "熔核魔人·赫炎",
+        "熔核魔人·赫炎"
+      ],
+      "name": "熔核魔人·赫炎",
+      "element": "fire",
+      "class": "warrior",
+      "rarity": "demon",
+      "starter": false,
+      "from_boss": "b1",
+      "stats": {
+        "hp": 2750,
+        "atk": 275,
+        "def": 205,
+        "spd": 250
+      },
+      "mark": {
+        "id": "demon_fire",
+        "name": "魔炎",
+        "on": "foe",
+        "max": 3,
+        "fx": "elem_taken",
+        "per": 0.08,
+        "elem": "fire",
+        "full": "burst",
+        "burst": 0.25
+      },
+      "art": {
+        "body": "demon",
+        "trait": "horn",
+        "aura": "demon"
+      },
+      "skills": {
+        "normal": {
+          "id": "n_d1",
+          "name": "火斩击",
+          "kind": "normal",
+          "target": "front",
+          "mult": 1.0,
+          "rider": "burn",
+          "desc": "挥刃攻击敌方前排。"
+        },
+        "ultimate": {
+          "id": "u_d1",
+          "name": "熔核魔人",
+          "kind": "ult_warrior",
+          "target": "front",
+          "mult": 2.15,
+          "splash": 0.25,
+          "rider": "burn",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并附加灼烧。",
+          "signature": {
+            "style": "triple",
+            "text": "熔核三连击，第 3 击在目标有魔炎时轰向全体。",
+            "hits": 3,
+            "ratio": 0.75
+          }
+        }
+      }
+    },
+    {
+      "id": "d2",
+      "names": [
+        "永夜魔人·瑟琳影",
+        "永夜魔人·瑟琳影",
+        "永夜魔人·瑟琳影"
+      ],
+      "name": "永夜魔人·瑟琳影",
+      "element": "dark",
+      "class": "mage",
+      "rarity": "demon",
+      "starter": false,
+      "from_boss": "b2",
+      "stats": {
+        "hp": 1832,
+        "atk": 391,
+        "def": 109,
+        "spd": 173
+      },
+      "mark": {
+        "id": "demon_night",
+        "name": "魔夜",
+        "on": "foe",
+        "max": 3,
+        "fx": "atk_down",
+        "per": 0.07,
+        "fx2": "antiheal",
+        "per2": 0.08
+      },
+      "art": {
+        "body": "demon",
+        "trait": "veil",
+        "aura": "demon"
+      },
+      "skills": {
+        "normal": {
+          "id": "n_d2",
+          "name": "恶弹",
+          "kind": "normal",
+          "target": "back",
+          "mult": 0.95,
+          "rider": "atk_down",
+          "desc": "凝聚元素弹攻击敌方后排。"
+        },
+        "ultimate": {
+          "id": "u_d2",
+          "name": "永夜魔人",
+          "kind": "ult_mage",
+          "target": "back",
+          "mult": 1.35,
+          "splash": 0.0,
+          "rider": "atk_down",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并降低目标攻击。",
+          "signature": {
+            "style": "fear",
+            "text": "永夜压低全体攻击，并眩晕层数最高的目标。",
+            "pct": 0.15
+          }
+        }
+      }
+    },
+    {
+      "id": "d3",
+      "names": [
+        "雷岩魔人·罡石",
+        "雷岩魔人·罡石",
+        "雷岩魔人·罡石"
+      ],
+      "name": "雷岩魔人·罡石",
+      "element": "rock",
+      "class": "guardian",
+      "rarity": "demon",
+      "starter": false,
+      "from_boss": "b4",
+      "stats": {
+        "hp": 4427,
+        "atk": 117,
+        "def": 416,
+        "spd": 115
+      },
+      "mark": {
+        "id": "demon_rock",
+        "name": "魔岩",
+        "on": "foe",
+        "max": 3,
+        "fx": "def_down",
+        "per": 0.08,
+        "full": "freeze"
+      },
+      "art": {
+        "body": "demon",
+        "trait": "boulder",
+        "aura": "demon"
+      },
+      "skills": {
+        "normal": {
+          "id": "n_d3",
+          "name": "岩石盾击",
+          "kind": "normal",
+          "target": "front",
+          "mult": 0.9,
+          "rider": "def_down",
+          "desc": "重盾猛击前排，自身获得少量护盾。"
+        },
+        "ultimate": {
+          "id": "u_d3",
+          "name": "雷岩魔人",
           "kind": "ult_guardian",
           "target": "front",
           "mult": 1.8,
           "splash": 0.0,
-          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并降低目标攻击 2 回合。"
+          "rider": "def_down",
+          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并降低目标防御。",
+          "signature": {
+            "style": "roar",
+            "text": "雷岩震慑，全体攻击下降并眩晕前排。",
+            "pct": 0.12
+          }
+        }
+      }
+    },
+    {
+      "id": "d4",
+      "names": [
+        "星蚀魔人·奥羽",
+        "星蚀魔人·奥羽",
+        "星蚀魔人·奥羽"
+      ],
+      "name": "星蚀魔人·奥羽",
+      "element": "dragon",
+      "class": "warrior",
+      "rarity": "demon",
+      "starter": false,
+      "from_boss": "b3",
+      "stats": {
+        "hp": 2750,
+        "atk": 275,
+        "def": 205,
+        "spd": 250
+      },
+      "mark": {
+        "id": "demon_star",
+        "name": "魔星",
+        "on": "foe",
+        "max": 3,
+        "fx": "vuln",
+        "per": 0.08,
+        "fx2": "crit_taken",
+        "per2": 0.08
+      },
+      "art": {
+        "body": "demon",
+        "trait": "wing",
+        "aura": "demon"
+      },
+      "skills": {
+        "normal": {
+          "id": "n_d4",
+          "name": "龙斩击",
+          "kind": "normal",
+          "target": "front",
+          "mult": 1.0,
+          "rider": "vulnerable",
+          "desc": "挥刃攻击敌方前排。"
+        },
+        "ultimate": {
+          "id": "u_d4",
+          "name": "星蚀魔人",
+          "kind": "ult_warrior",
+          "target": "front",
+          "mult": 2.15,
+          "splash": 0.25,
+          "rider": "vulnerable",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并施加易伤。",
+          "signature": {
+            "style": "eclipse",
+            "text": "按目标已损失生命追加伤害，并偷取 1 个增益。",
+            "per": 0.005
+          }
+        }
+      }
+    },
+    {
+      "id": "d5",
+      "names": [
+        "赤潮魔人·烬牙",
+        "赤潮魔人·烬牙",
+        "赤潮魔人·烬牙"
+      ],
+      "name": "赤潮魔人·烬牙",
+      "element": "fire",
+      "class": "warrior",
+      "rarity": "demon",
+      "starter": false,
+      "from_boss": "k1",
+      "stats": {
+        "hp": 2805,
+        "atk": 280,
+        "def": 209,
+        "spd": 255
+      },
+      "mark": {
+        "id": "demon_tide",
+        "name": "赤潮",
+        "on": "foe",
+        "max": 3,
+        "fx": "elem_taken",
+        "per": 0.08,
+        "elem": "fire",
+        "full": "burst",
+        "burst": 0.22
+      },
+      "art": {
+        "body": "demon",
+        "trait": "horn",
+        "aura": "demon"
+      },
+      "skills": {
+        "normal": {
+          "id": "n_d5",
+          "name": "火斩击",
+          "kind": "normal",
+          "target": "front",
+          "mult": 1.0,
+          "rider": "burn",
+          "desc": "挥刃攻击敌方前排。"
+        },
+        "ultimate": {
+          "id": "u_d5",
+          "name": "赤潮魔人",
+          "kind": "ult_warrior",
+          "target": "front",
+          "mult": 2.15,
+          "splash": 0.25,
+          "rider": "burn",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并附加灼烧。",
+          "signature": {
+            "style": "triple",
+            "text": "赤潮三连击，第 3 击轰向全体。",
+            "hits": 3,
+            "ratio": 0.72
+          }
+        }
+      }
+    },
+    {
+      "id": "d6",
+      "names": [
+        "霜狱魔人·白澪",
+        "霜狱魔人·白澪",
+        "霜狱魔人·白澪"
+      ],
+      "name": "霜狱魔人·白澪",
+      "element": "ice",
+      "class": "mage",
+      "rarity": "demon",
+      "starter": false,
+      "from_boss": "k2",
+      "stats": {
+        "hp": 1832,
+        "atk": 391,
+        "def": 109,
+        "spd": 173
+      },
+      "mark": {
+        "id": "demon_frost",
+        "name": "霜狱",
+        "on": "foe",
+        "max": 3,
+        "fx": "slow",
+        "per": 0.08,
+        "full": "freeze"
+      },
+      "art": {
+        "body": "demon",
+        "trait": "veil",
+        "aura": "demon"
+      },
+      "skills": {
+        "normal": {
+          "id": "n_d6",
+          "name": "冰弹",
+          "kind": "normal",
+          "target": "back",
+          "mult": 0.95,
+          "rider": "slow",
+          "desc": "凝聚元素弹攻击敌方后排。"
+        },
+        "ultimate": {
+          "id": "u_d6",
+          "name": "霜狱魔人",
+          "kind": "ult_mage",
+          "target": "back",
+          "mult": 1.35,
+          "splash": 0.0,
+          "rider": "slow",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并使其减速。",
+          "signature": {
+            "style": "fear",
+            "text": "霜狱压低全体速度，并眩晕层数最高的目标。",
+            "pct": 0.14
+          }
+        }
+      }
+    },
+    {
+      "id": "d7",
+      "names": [
+        "蚀月魔人·晦羽",
+        "蚀月魔人·晦羽",
+        "蚀月魔人·晦羽"
+      ],
+      "name": "蚀月魔人·晦羽",
+      "element": "dark",
+      "class": "mage",
+      "rarity": "demon",
+      "starter": false,
+      "from_boss": "k3",
+      "stats": {
+        "hp": 1850,
+        "atk": 395,
+        "def": 110,
+        "spd": 175
+      },
+      "mark": {
+        "id": "demon_moon",
+        "name": "蚀月",
+        "on": "foe",
+        "max": 3,
+        "fx": "atk_down",
+        "per": 0.08,
+        "fx2": "antiheal",
+        "per2": 0.08
+      },
+      "art": {
+        "body": "demon",
+        "trait": "boulder",
+        "aura": "demon"
+      },
+      "skills": {
+        "normal": {
+          "id": "n_d7",
+          "name": "恶弹",
+          "kind": "normal",
+          "target": "back",
+          "mult": 0.95,
+          "rider": "atk_down",
+          "desc": "凝聚元素弹攻击敌方后排。"
+        },
+        "ultimate": {
+          "id": "u_d7",
+          "name": "蚀月魔人",
+          "kind": "ult_mage",
+          "target": "back",
+          "mult": 1.35,
+          "splash": 0.0,
+          "rider": "atk_down",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并降低目标攻击。",
+          "signature": {
+            "style": "roar",
+            "text": "蚀月震慑，全体攻击下降并眩晕前排。",
+            "pct": 0.12
+          }
+        }
+      }
+    },
+    {
+      "id": "d8",
+      "names": [
+        "终焉魔人·陨卫",
+        "终焉魔人·陨卫",
+        "终焉魔人·陨卫"
+      ],
+      "name": "终焉魔人·陨卫",
+      "element": "dragon",
+      "class": "guardian",
+      "rarity": "demon",
+      "starter": false,
+      "from_boss": "k4",
+      "stats": {
+        "hp": 4340,
+        "atk": 115,
+        "def": 408,
+        "spd": 112
+      },
+      "mark": {
+        "id": "demon_end",
+        "name": "终焉",
+        "on": "foe",
+        "max": 3,
+        "fx": "vuln",
+        "per": 0.09,
+        "fx2": "def_down",
+        "per2": 0.08
+      },
+      "art": {
+        "body": "demon",
+        "trait": "wing",
+        "aura": "demon"
+      },
+      "skills": {
+        "normal": {
+          "id": "n_d8",
+          "name": "龙盾击",
+          "kind": "normal",
+          "target": "front",
+          "mult": 0.9,
+          "rider": "vulnerable",
+          "desc": "重盾猛击前排，自身获得少量护盾。"
+        },
+        "ultimate": {
+          "id": "u_d8",
+          "name": "终焉魔人",
+          "kind": "ult_guardian",
+          "target": "front",
+          "mult": 1.8,
+          "splash": 0.0,
+          "rider": "vulnerable",
+          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并施加易伤。",
+          "signature": {
+            "style": "eclipse",
+            "text": "按目标已损失生命追加伤害，并偷取 1 个增益。",
+            "per": 0.006
+          }
+        }
+      }
+    },
+    {
+      "id": "d9",
+      "names": [
+        "渊律魔人·沧骨",
+        "渊律魔人·沧骨",
+        "渊律魔人·沧骨"
+      ],
+      "name": "渊律魔人·沧骨",
+      "element": "water",
+      "class": "guardian",
+      "rarity": "demon",
+      "starter": false,
+      "from_boss": "k9",
+      "stats": {
+        "hp": 4253,
+        "atk": 113,
+        "def": 399,
+        "spd": 110
+      },
+      "mark": {
+        "id": "demon_tidewell",
+        "name": "渊律",
+        "on": "foe",
+        "max": 3,
+        "fx": "slow",
+        "per": 0.09,
+        "full": "freeze"
+      },
+      "art": {
+        "body": "demon",
+        "trait": "boulder",
+        "aura": "demon"
+      },
+      "skills": {
+        "normal": {
+          "id": "n_d9",
+          "name": "水盾击",
+          "kind": "normal",
+          "target": "front",
+          "mult": 0.9,
+          "rider": "slow",
+          "desc": "重盾猛击前排，自身获得少量护盾。"
+        },
+        "ultimate": {
+          "id": "u_d9",
+          "name": "渊律魔人",
+          "kind": "ult_guardian",
+          "target": "front",
+          "mult": 1.8,
+          "splash": 0.0,
+          "rider": "slow",
+          "desc": "击退前排目标，自身获得 12% 最大生命护盾，并使其减速。",
+          "signature": {
+            "style": "roar",
+            "text": "渊律震慑，全体攻击下降并眩晕前排。",
+            "pct": 0.13
+          }
+        }
+      }
+    },
+    {
+      "id": "d10",
+      "names": [
+        "焚天魔人·赤冕",
+        "焚天魔人·赤冕",
+        "焚天魔人·赤冕"
+      ],
+      "name": "焚天魔人·赤冕",
+      "element": "fire",
+      "class": "warrior",
+      "rarity": "demon",
+      "starter": false,
+      "from_boss": "k10",
+      "stats": {
+        "hp": 2778,
+        "atk": 278,
+        "def": 207,
+        "spd": 252
+      },
+      "mark": {
+        "id": "demon_crown",
+        "name": "焚天",
+        "on": "foe",
+        "max": 3,
+        "fx": "elem_taken",
+        "per": 0.09,
+        "elem": "fire",
+        "full": "burst",
+        "burst": 0.24
+      },
+      "art": {
+        "body": "demon",
+        "trait": "horn",
+        "aura": "demon"
+      },
+      "skills": {
+        "normal": {
+          "id": "n_d10",
+          "name": "火斩击",
+          "kind": "normal",
+          "target": "front",
+          "mult": 1.0,
+          "rider": "burn",
+          "desc": "挥刃攻击敌方前排。"
+        },
+        "ultimate": {
+          "id": "u_d10",
+          "name": "焚天魔人",
+          "kind": "ult_warrior",
+          "target": "front",
+          "mult": 2.15,
+          "splash": 0.25,
+          "rider": "burn",
+          "desc": "对前排目标造成 2.15 倍重击，并溅射 25% 伤害至相邻敌人，并附加灼烧。",
+          "signature": {
+            "style": "triple",
+            "text": "焚天三连击，第 3 击轰向全体。",
+            "hits": 3,
+            "ratio": 0.74
+          }
+        }
+      }
+    },
+    {
+      "id": "d11",
+      "names": [
+        "无相魔人·归墟",
+        "无相魔人·归墟",
+        "无相魔人·归墟"
+      ],
+      "name": "无相魔人·归墟",
+      "element": "ghost",
+      "class": "mage",
+      "rarity": "demon",
+      "starter": false,
+      "from_boss": "k11",
+      "stats": {
+        "hp": 1850,
+        "atk": 395,
+        "def": 110,
+        "spd": 175
+      },
+      "mark": {
+        "id": "demon_void",
+        "name": "无相",
+        "on": "foe",
+        "max": 3,
+        "fx": "vuln",
+        "per": 0.1,
+        "fx2": "antiheal",
+        "per2": 0.09
+      },
+      "art": {
+        "body": "demon",
+        "trait": "veil",
+        "aura": "demon"
+      },
+      "skills": {
+        "normal": {
+          "id": "n_d11",
+          "name": "幽灵弹",
+          "kind": "normal",
+          "target": "back",
+          "mult": 0.95,
+          "rider": "atk_down",
+          "desc": "凝聚元素弹攻击敌方后排。"
+        },
+        "ultimate": {
+          "id": "u_d11",
+          "name": "无相魔人",
+          "kind": "ult_mage",
+          "target": "back",
+          "mult": 1.35,
+          "splash": 0.0,
+          "rider": "atk_down",
+          "desc": "对最多 3 名敌人造成 1.35 倍元素风暴，并降低目标攻击。",
+          "signature": {
+            "style": "eclipse",
+            "text": "按目标已损失生命追加伤害，并偷取 1 个增益。",
+            "per": 0.007
+          }
         }
       }
     }
   ],
+  "type_chart": {
+    "normal": {
+      "rock": 0.5,
+      "ghost": 0,
+      "steel": 0.5
+    },
+    "fire": {
+      "fire": 0.5,
+      "water": 0.5,
+      "grass": 2,
+      "ice": 2,
+      "bug": 2,
+      "rock": 0.5,
+      "dragon": 0.5,
+      "steel": 2
+    },
+    "water": {
+      "fire": 2,
+      "water": 0.5,
+      "grass": 0.5,
+      "ground": 2,
+      "rock": 2,
+      "dragon": 0.5
+    },
+    "electric": {
+      "water": 2,
+      "electric": 0.5,
+      "grass": 0.5,
+      "ground": 0,
+      "flying": 2,
+      "dragon": 0.5
+    },
+    "grass": {
+      "fire": 0.5,
+      "water": 2,
+      "grass": 0.5,
+      "poison": 0.5,
+      "ground": 2,
+      "flying": 0.5,
+      "bug": 0.5,
+      "rock": 2,
+      "dragon": 0.5,
+      "steel": 0.5
+    },
+    "ice": {
+      "fire": 0.5,
+      "water": 0.5,
+      "grass": 2,
+      "ice": 0.5,
+      "ground": 2,
+      "flying": 2,
+      "dragon": 2,
+      "steel": 0.5
+    },
+    "fighting": {
+      "normal": 2,
+      "ice": 2,
+      "poison": 0.5,
+      "flying": 0.5,
+      "psychic": 0.5,
+      "bug": 0.5,
+      "rock": 2,
+      "ghost": 0,
+      "dark": 2,
+      "steel": 2
+    },
+    "poison": {
+      "grass": 2,
+      "poison": 0.5,
+      "ground": 0.5,
+      "rock": 0.5,
+      "ghost": 0.5,
+      "steel": 0
+    },
+    "ground": {
+      "fire": 2,
+      "electric": 2,
+      "grass": 0.5,
+      "poison": 2,
+      "flying": 0,
+      "bug": 0.5,
+      "rock": 2,
+      "steel": 2
+    },
+    "flying": {
+      "electric": 0.5,
+      "grass": 2,
+      "fighting": 2,
+      "bug": 2,
+      "rock": 0.5,
+      "steel": 0.5
+    },
+    "psychic": {
+      "fighting": 2,
+      "poison": 2,
+      "psychic": 0.5,
+      "dark": 0,
+      "steel": 0.5
+    },
+    "bug": {
+      "fire": 0.5,
+      "grass": 2,
+      "fighting": 0.5,
+      "poison": 0.5,
+      "flying": 0.5,
+      "psychic": 2,
+      "ghost": 0.5,
+      "dark": 2,
+      "steel": 0.5
+    },
+    "rock": {
+      "fire": 2,
+      "ice": 2,
+      "fighting": 0.5,
+      "ground": 0.5,
+      "flying": 2,
+      "bug": 2,
+      "steel": 0.5
+    },
+    "ghost": {
+      "normal": 0,
+      "psychic": 2,
+      "ghost": 2,
+      "dark": 0.5
+    },
+    "dragon": {
+      "dragon": 2,
+      "steel": 0.5
+    },
+    "dark": {
+      "fighting": 0.5,
+      "psychic": 2,
+      "ghost": 2,
+      "dark": 0.5
+    },
+    "steel": {
+      "fire": 0.5,
+      "water": 0.5,
+      "electric": 0.5,
+      "ice": 2,
+      "rock": 2,
+      "steel": 0.5
+    }
+  },
   "affixes": [
     {
       "id": "sharp",
@@ -2086,7 +4022,7 @@
       "name": "净化",
       "rarity": "common",
       "desc": "使用后清除自身 1 个负面状态。",
-      "value": 1.0
+      "value": 1
     },
     {
       "id": "heal_ally",
@@ -2159,11 +4095,67 @@
       "value": 0.08
     },
     {
-      "id": "rage_fuel",
-      "name": "燃魂",
+      "id": "spirit_cut",
+      "name": "节灵",
       "rarity": "epic",
-      "desc": "使用后额外获得 1 点气势。",
-      "value": 1.0
+      "desc": "该技能灵力消耗 -1，最低为 0。",
+      "value": 1
+    },
+    {
+      "id": "miracle",
+      "name": "天命",
+      "rarity": "epic",
+      "desc": "2% 概率直接造成 99999 点伤害。不进入宝箱。",
+      "value": 0.02,
+      "pool": false
+    },
+    {
+      "id": "rebound",
+      "name": "反震",
+      "rarity": "epic",
+      "desc": "使用后获得 1 回合，受到的伤害全部反弹。",
+      "value": 1.0,
+      "pool": false
+    },
+    {
+      "id": "volley",
+      "name": "齐射",
+      "rarity": "epic",
+      "desc": "攻击有 20% 概率令其他友方一起攻击同一目标。",
+      "value": 0.2,
+      "pool": false
+    },
+    {
+      "id": "aegis",
+      "name": "无伤",
+      "rarity": "epic",
+      "desc": "使用后获得 1 回合免疫伤害。",
+      "value": 1.0,
+      "pool": false
+    },
+    {
+      "id": "still",
+      "name": "断势",
+      "rarity": "epic",
+      "desc": "攻击使目标气势归零，并锁定 1 回合。",
+      "value": 1.0,
+      "pool": false
+    },
+    {
+      "id": "barrier_blade",
+      "name": "破魔圣剑",
+      "rarity": "epic",
+      "desc": "旧档里贴在技能上的圣剑仍然有效。新获得的圣剑是可携带道具。",
+      "value": 1.0,
+      "pool": false
+    },
+    {
+      "id": "unbound",
+      "name": "无限",
+      "rarity": "epic",
+      "desc": "只能赋予开局选定的精灵：没有等级上限，技能词条可以无限叠加。",
+      "value": 1.0,
+      "pool": false
     }
   ],
   "items": [
@@ -2171,7 +4163,7 @@
       "id": "hp_charm",
       "name": "生命护符",
       "rarity": "common",
-      "desc": "全队最大生命 +12%。",
+      "desc": "携带者最大生命 +12%。",
       "stat": "hp",
       "value": 0.12
     },
@@ -2179,7 +4171,7 @@
       "id": "atk_charm",
       "name": "力量护符",
       "rarity": "common",
-      "desc": "全队攻击 +10%。",
+      "desc": "携带者攻击 +10%。",
       "stat": "atk",
       "value": 0.1
     },
@@ -2187,7 +4179,7 @@
       "id": "def_charm",
       "name": "铁壁护符",
       "rarity": "common",
-      "desc": "全队防御 +15%。",
+      "desc": "携带者防御 +15%。",
       "stat": "def",
       "value": 0.15
     },
@@ -2195,7 +4187,7 @@
       "id": "spd_boots",
       "name": "疾风之靴",
       "rarity": "common",
-      "desc": "全队速度 +10%。",
+      "desc": "携带者速度 +10%。",
       "stat": "spd",
       "value": 0.1
     },
@@ -2203,7 +4195,7 @@
       "id": "vampire_fang",
       "name": "吸血獠牙",
       "rarity": "rare",
-      "desc": "全队攻击吸血 +10%。",
+      "desc": "携带者攻击吸血 +10%。",
       "hook": "lifesteal",
       "value": 0.1
     },
@@ -2211,7 +4203,7 @@
       "id": "crit_eye",
       "name": "暴击之瞳",
       "rarity": "rare",
-      "desc": "全队暴击率 +10%。",
+      "desc": "携带者暴击率 +10%。",
       "hook": "crit",
       "value": 0.1
     },
@@ -2219,7 +4211,7 @@
       "id": "tide_pendant",
       "name": "潮汐吊坠",
       "rarity": "rare",
-      "desc": "每回合开始全体回复 2% 最大生命。",
+      "desc": "每回合开始，携带者回复 2% 最大生命。",
       "hook": "regen",
       "value": 0.02
     },
@@ -2227,9 +4219,10 @@
       "id": "rage_amulet",
       "name": "战意项链",
       "rarity": "common",
-      "desc": "战斗开始全员气势 +1。",
-      "hook": "start_rage",
-      "value": 1.0
+      "desc": "战斗开始，灵力 +1。最多持有 2 件。",
+      "hook": "start_spirit",
+      "value": 1,
+      "max_stack": 2
     },
     {
       "id": "thorn_mail",
@@ -2243,15 +4236,15 @@
       "id": "phoenix_feather",
       "name": "不死羽",
       "rarity": "epic",
-      "desc": "每只精灵一次：受到致死伤害后保留 1 点生命。",
+      "desc": "携带者一次：受到致死伤害后保留 1 点生命。",
       "hook": "last_stand",
-      "value": 1.0
+      "value": 1
     },
     {
       "id": "giant_slayer",
       "name": "屠龙徽记",
       "rarity": "rare",
-      "desc": "对 Boss 造成的伤害 +25%。",
+      "desc": "对首领与英雄造成的伤害 +25%。",
       "hook": "vs_boss",
       "value": 0.25
     },
@@ -2299,7 +4292,7 @@
       "id": "guardian_angel",
       "name": "守护天使",
       "rarity": "rare",
-      "desc": "战斗开始时全队获得 8% 最大生命护盾。",
+      "desc": "战斗开始时，携带者获得 8% 最大生命护盾。",
       "hook": "start_shield",
       "value": 0.08
     },
@@ -2315,19 +4308,77 @@
       "id": "lucky_coin",
       "name": "幸运金币",
       "rarity": "rare",
-      "desc": "道具宝箱判定概率 +15%。",
+      "desc": "道具稀有度提升（更易开出稀有 / 史诗）。",
       "hook": "item_luck",
-      "value": 0.15
+      "value": 0.35
     },
     {
       "id": "nourish_seed",
       "name": "森林之种",
       "rarity": "common",
-      "desc": "全队防御 +8%，每回合回复 1.5% 最大生命。",
+      "desc": "携带者防御 +8%，每回合回复 1.5% 最大生命。",
       "stat": "def",
       "value": 0.08,
       "hook": "regen",
       "hook_value": 0.015
+    },
+    {
+      "id": "barrier_blade",
+      "name": "破魔圣剑",
+      "rarity": "epic",
+      "pool": false,
+      "max_stack": 1,
+      "desc": "四块碎片合成。携带者的攻击击碎魔王屏障，暴击率 +20%，暴击伤害 +80%，对魔王和魔人伤害翻倍。免疫 10 次致命伤害。魔王战中，每有 1 名队友倒下就升一档：9999 真实伤害，再削减生命上限、斩杀，最后免控。",
+      "hook": "barrier_blade",
+      "value": 1
+    },
+    {
+      "id": "blade_shard_1",
+      "name": "圣剑碎片·一",
+      "rarity": "epic",
+      "pool": false,
+      "max_stack": 1,
+      "desc": "试炼碎片。携带者暴击率 +10%。集齐四块后自动合成破魔圣剑。",
+      "hook": "crit",
+      "value": 0.1
+    },
+    {
+      "id": "blade_shard_2",
+      "name": "圣剑碎片·二",
+      "rarity": "epic",
+      "pool": false,
+      "max_stack": 1,
+      "desc": "试炼碎片。携带者暴击伤害 +50%。集齐四块后自动合成破魔圣剑。",
+      "hook": "crit_bonus",
+      "value": 0.5
+    },
+    {
+      "id": "blade_shard_3",
+      "name": "圣剑碎片·三",
+      "rarity": "epic",
+      "pool": false,
+      "max_stack": 1,
+      "desc": "试炼碎片。携带者对魔王精灵伤害 +50%。集齐四块后自动合成破魔圣剑。",
+      "hook": "vs_king",
+      "value": 0.5
+    },
+    {
+      "id": "blade_shard_4",
+      "name": "圣剑碎片·四",
+      "rarity": "epic",
+      "pool": false,
+      "max_stack": 1,
+      "desc": "试炼碎片。携带者免疫 5 次致命伤害。集齐四块后自动合成破魔圣剑。",
+      "hook": "shard_lives",
+      "value": 5
+    },
+    {
+      "id": "pokeball",
+      "name": "灵契球",
+      "rarity": "rare",
+      "pool": false,
+      "desc": "商店购入。战斗中丢出占一次行动。除魔王外都有机会收服，稀有度越低越容易。",
+      "value": 1
     }
   ],
   "bosses": [
@@ -2336,24 +4387,34 @@
       "name": "熔核领主·赫岩",
       "element": "fire",
       "class": "guardian",
-      "level_offset": 2,
+      "level_offset": 3,
       "stat_mult": {
-        "hp": 1.85,
-        "atk": 2.1,
-        "def": 1.4,
-        "spd": 0.95
+        "hp": 1.72,
+        "atk": 1.76,
+        "def": 1.28,
+        "spd": 1.0
       },
-      "buff_count": 1,
+      "buff_count": 2,
       "tier": 1,
-      "phases": [],
+      "phases": [
+        {
+          "hp_pct": 0.65,
+          "buff": "frenzy",
+          "text": "熔核领主的岩浆沸腾了！攻击力大幅提升！"
+        },
+        {
+          "hp_pct": 0.3,
+          "buff": "barbed",
+          "text": "熔核领主硬化外壳，反弹一切伤害！"
+        }
+      ],
       "skills": {
         "normal": {
           "id": "n_b1",
           "name": "熔岩重锤",
           "kind": "normal",
           "target": "front",
-          "mult": 1.0,
-          "splash": 0.0,
+          "mult": 1.1,
           "desc": "重锤前排，附加灼烧。"
         },
         "ultimate": {
@@ -2361,8 +4422,7 @@
           "name": "熔核震击",
           "kind": "ult_boss_aoe",
           "target": "front",
-          "mult": 1.55,
-          "splash": 0.0,
+          "mult": 1.75,
           "desc": "震荡最多 3 名敌人并附加灼烧。"
         }
       }
@@ -2372,24 +4432,34 @@
       "name": "幽夜女巫·瑟琳",
       "element": "dark",
       "class": "mage",
-      "level_offset": 2,
+      "level_offset": 3,
       "stat_mult": {
-        "hp": 2.35,
-        "atk": 2.25,
-        "def": 1.25,
-        "spd": 1.1
+        "hp": 2.0,
+        "atk": 1.92,
+        "def": 1.14,
+        "spd": 1.08
       },
-      "buff_count": 1,
+      "buff_count": 2,
       "tier": 1,
-      "phases": [],
+      "phases": [
+        {
+          "hp_pct": 0.6,
+          "buff": "swift",
+          "text": "永夜帷幕展开，女巫的速度攀升！"
+        },
+        {
+          "hp_pct": 0.3,
+          "buff": "frenzy",
+          "text": "瑟琳撕开夜幕，暗影之力沸腾！"
+        }
+      ],
       "skills": {
         "normal": {
           "id": "n_b2",
           "name": "暮影弹",
           "kind": "normal",
           "target": "back",
-          "mult": 1.0,
-          "splash": 0.0,
+          "mult": 1.1,
           "desc": "攻击后排并降低攻击。"
         },
         "ultimate": {
@@ -2397,25 +4467,69 @@
           "name": "永夜帷幕",
           "kind": "ult_boss_aoe",
           "target": "all",
-          "mult": 1.7,
-          "splash": 0.0,
+          "mult": 1.85,
           "desc": "对全体敌人造成暗影伤害并降低攻击。"
+        }
+      }
+    },
+    {
+      "id": "b4",
+      "name": "雷霆巨像·罡岳",
+      "element": "rock",
+      "class": "guardian",
+      "level_offset": 3,
+      "stat_mult": {
+        "hp": 2.16,
+        "atk": 1.96,
+        "def": 1.36,
+        "spd": 1.04
+      },
+      "buff_count": 2,
+      "tier": 1,
+      "phases": [
+        {
+          "hp_pct": 0.6,
+          "buff": "bedrock",
+          "text": "巨像拔起大地之铠，防御暴涨！"
+        },
+        {
+          "hp_pct": 0.28,
+          "buff": "frenzy",
+          "text": "雷霆核心过载，巨像的攻击失去节制！"
+        }
+      ],
+      "skills": {
+        "normal": {
+          "id": "n_b4",
+          "name": "雷岩重踏",
+          "kind": "normal",
+          "target": "front",
+          "mult": 1.15,
+          "desc": "踏碎前排，附加破甲。"
+        },
+        "ultimate": {
+          "id": "u_b4",
+          "name": "天雷崩落",
+          "kind": "ult_boss_aoe",
+          "target": "front",
+          "mult": 1.9,
+          "desc": "召来天雷轰击最多 3 名敌人并降低防御。"
         }
       }
     },
     {
       "id": "b3",
       "name": "星蚀龙皇·奥瑞恩",
-      "element": "dark",
+      "element": "dragon",
       "class": "warrior",
-      "level_offset": 3,
+      "level_offset": 4,
       "stat_mult": {
-        "hp": 2.4,
-        "atk": 2.35,
-        "def": 1.55,
-        "spd": 1.05
+        "hp": 2.45,
+        "atk": 2.12,
+        "def": 1.48,
+        "spd": 1.06
       },
-      "buff_count": 2,
+      "buff_count": 3,
       "tier": 2,
       "phases": [
         {
@@ -2424,9 +4538,14 @@
           "text": "龙皇的血液沸腾了！攻击力大幅提升！"
         },
         {
-          "hp_pct": 0.4,
+          "hp_pct": 0.45,
           "buff": "swift",
           "text": "星蚀之力爆发！龙皇的速度与气势攀升至极限！"
+        },
+        {
+          "hp_pct": 0.2,
+          "buff": "undying",
+          "text": "星蚀龙皇拒绝终结，生命与护盾再度充盈！"
         }
       ],
       "skills": {
@@ -2435,8 +4554,7 @@
           "name": "星蚀爪",
           "kind": "normal",
           "target": "front",
-          "mult": 1.1,
-          "splash": 0.0,
+          "mult": 1.25,
           "desc": "撕裂前排，附加易伤。"
         },
         "ultimate": {
@@ -2444,9 +4562,220 @@
           "name": "星蚀灭世",
           "kind": "ult_boss_aoe",
           "target": "all",
-          "mult": 2.0,
-          "splash": 0.0,
+          "mult": 2.05,
           "desc": "对最多 3 名敌人造成毁灭打击并施加易伤。"
+        }
+      }
+    },
+    {
+      "id": "k1",
+      "name": "赤潮魔王·焚渊",
+      "element": "fire",
+      "class": "warrior",
+      "level_offset": 3,
+      "stat_mult": {
+        "hp": 2.35,
+        "atk": 1.95,
+        "def": 1.32,
+        "spd": 1.02
+      },
+      "buff_count": 2,
+      "tier": 2,
+      "demon_king": true,
+      "generation": 1,
+      "reward_demon": "d5",
+      "phases": [
+        {
+          "hp_pct": 0.65,
+          "buff": "frenzy",
+          "text": "赤潮翻涌！焚渊的攻击变得狂暴！"
+        },
+        {
+          "hp_pct": 0.3,
+          "buff": "swift",
+          "text": "熔核贴地奔流，焚渊的速度骤然拔高！"
+        }
+      ],
+      "skills": {
+        "normal": {
+          "id": "n_k1",
+          "name": "赤潮斩",
+          "kind": "normal",
+          "target": "front",
+          "mult": 1.2,
+          "desc": "灼热的潮刃劈向前排。"
+        },
+        "ultimate": {
+          "id": "u_k1",
+          "name": "焚渊潮",
+          "kind": "ult_boss_aoe",
+          "target": "all",
+          "mult": 1.9,
+          "desc": "赤潮席卷最多 3 名敌人。"
+        }
+      }
+    },
+    {
+      "id": "k2",
+      "name": "霜狱魔王·溟雪",
+      "element": "ice",
+      "class": "mage",
+      "level_offset": 4,
+      "stat_mult": {
+        "hp": 2.9,
+        "atk": 2.25,
+        "def": 1.48,
+        "spd": 1.04
+      },
+      "buff_count": 3,
+      "tier": 2,
+      "demon_king": true,
+      "generation": 2,
+      "reward_demon": "d6",
+      "phases": [
+        {
+          "hp_pct": 0.7,
+          "buff": "bedrock",
+          "text": "霜狱合拢，溟雪的防御与护盾同时抬升！"
+        },
+        {
+          "hp_pct": 0.45,
+          "buff": "frenzy",
+          "text": "寒潮倒灌，溟雪的攻击变得刺骨！"
+        },
+        {
+          "hp_pct": 0.22,
+          "buff": "swift",
+          "text": "冰晶碎裂，溟雪抢在所有人之前出手！"
+        }
+      ],
+      "skills": {
+        "normal": {
+          "id": "n_k2",
+          "name": "霜狱刺",
+          "kind": "normal",
+          "target": "front",
+          "mult": 1.22,
+          "desc": "冰刺钉向前排。"
+        },
+        "ultimate": {
+          "id": "u_k2",
+          "name": "溟雪葬",
+          "kind": "ult_boss_aoe",
+          "target": "all",
+          "mult": 2.0,
+          "desc": "暴雪埋葬最多 3 名敌人。"
+        }
+      }
+    },
+    {
+      "id": "k3",
+      "name": "蚀月魔王·夜冕",
+      "element": "dark",
+      "class": "mage",
+      "level_offset": 6,
+      "stat_mult": {
+        "hp": 4.6,
+        "atk": 2.85,
+        "def": 1.78,
+        "spd": 1.06
+      },
+      "buff_count": 3,
+      "tier": 3,
+      "demon_king": true,
+      "generation": 3,
+      "reward_demon": "d7",
+      "phases": [
+        {
+          "hp_pct": 0.72,
+          "buff": "frenzy",
+          "text": "月蚀加深，夜冕的攻击被黑暗放大！"
+        },
+        {
+          "hp_pct": 0.46,
+          "buff": "bedrock",
+          "text": "夜冕拉起暗幕，防御与护盾同时充盈！"
+        },
+        {
+          "hp_pct": 0.22,
+          "buff": "undying",
+          "text": "蚀月拒绝坠落，生命再度充盈！"
+        }
+      ],
+      "skills": {
+        "normal": {
+          "id": "n_k3",
+          "name": "夜冕击",
+          "kind": "normal",
+          "target": "lowest",
+          "mult": 1.24,
+          "desc": "暗芒追着最脆弱的目标。"
+        },
+        "ultimate": {
+          "id": "u_k3",
+          "name": "蚀月礼",
+          "kind": "ult_boss_aoe",
+          "target": "all",
+          "mult": 2.1,
+          "desc": "月蚀砸向最多 3 名敌人。"
+        }
+      }
+    },
+    {
+      "id": "k4",
+      "name": "终焉魔王·星陨",
+      "element": "dragon",
+      "class": "warrior",
+      "level_offset": 12,
+      "stat_mult": {
+        "hp": 16.0,
+        "atk": 4.6,
+        "def": 2.4,
+        "spd": 1.12
+      },
+      "buff_count": 4,
+      "tier": 3,
+      "demon_king": true,
+      "generation": 4,
+      "reward_demon": "d8",
+      "phases": [
+        {
+          "hp_pct": 0.78,
+          "buff": "frenzy",
+          "text": "星陨苏醒，终焉的攻击压过整座塔！"
+        },
+        {
+          "hp_pct": 0.55,
+          "buff": "bedrock",
+          "text": "陨铁合拢，终焉的防御与护盾同时抬升！"
+        },
+        {
+          "hp_pct": 0.32,
+          "buff": "swift",
+          "text": "星屑加速，终焉抢在所有人之前出手！"
+        },
+        {
+          "hp_pct": 0.15,
+          "buff": "undying",
+          "text": "终焉拒绝落幕，生命与护盾再度充盈！"
+        }
+      ],
+      "skills": {
+        "normal": {
+          "id": "n_k4",
+          "name": "星陨爪",
+          "kind": "normal",
+          "target": "front",
+          "mult": 1.32,
+          "desc": "陨星般的爪击撕裂前排。"
+        },
+        "ultimate": {
+          "id": "u_k4",
+          "name": "终焉坠落",
+          "kind": "ult_boss_aoe",
+          "target": "all",
+          "mult": 2.35,
+          "desc": "星辰坠落，砸向最多 3 名敌人。"
         }
       }
     }
@@ -2455,52 +4784,67 @@
     {
       "id": "frenzy",
       "name": "狂暴",
-      "desc": "攻击 +25%。"
+      "desc": "攻击 +30%。"
     },
     {
       "id": "undying",
       "name": "不灭",
-      "desc": "最大生命 +30%。"
+      "desc": "最大生命 +40% 并回满。"
     },
     {
       "id": "bedrock",
       "name": "磐石",
-      "desc": "防御 +25%。"
+      "desc": "防御 +30%。"
     },
     {
       "id": "swift",
       "name": "疾影",
-      "desc": "速度 +20%。"
+      "desc": "速度 +25%。"
     },
     {
       "id": "bloodthirst",
       "name": "嗜血",
-      "desc": "攻击吸血 20%。"
+      "desc": "攻击吸血 25%。"
     },
     {
       "id": "barbed",
       "name": "荆棘",
-      "desc": "反弹 12% 受到的伤害。"
+      "desc": "反弹 18% 受到的伤害。"
     },
     {
       "id": "renewal",
       "name": "复苏",
-      "desc": "每回合回复 5% 最大生命。"
+      "desc": "每回合回复 7% 最大生命。"
     },
     {
       "id": "oppress",
       "name": "威压",
-      "desc": "敌方全体攻击 -10%。"
+      "desc": "敌方全体攻击 -15%。"
     },
     {
       "id": "warded",
       "name": "元素护体",
-      "desc": "受到伤害 -10%。"
+      "desc": "受到伤害 -15%。"
     },
     {
       "id": "surge",
       "name": "狂潮",
-      "desc": "大招伤害 +30%。"
+      "desc": "大招伤害 +40%。"
+    },
+    {
+      "id": "pierce",
+      "name": "破防",
+      "desc": "无视目标 30% 防御。"
+    },
+    {
+      "id": "enrage",
+      "name": "狂怒",
+      "desc": "生命越低伤害越高，最多 +35%。"
+    },
+    {
+      "id": "siphon",
+      "name": "噬魂",
+      "desc": "吸血 15%，每回合回复 3% 最大生命。"
     }
   ],
   "maps": {
@@ -2593,6 +4937,96 @@
       ],
       "accent": "#ff8a5c",
       "style": "throne"
+    },
+    "lava2": {
+      "name": "熔心深渊",
+      "sky": [
+        "#320610",
+        "#731512"
+      ],
+      "accent": "#ff4426",
+      "style": "lava"
+    },
+    "ocean2": {
+      "name": "沉没神殿",
+      "sky": [
+        "#020d18",
+        "#073a4a"
+      ],
+      "accent": "#35d6cf",
+      "style": "ocean"
+    },
+    "sky2": {
+      "name": "云端天阶",
+      "sky": [
+        "#101c3a",
+        "#2a6a7a"
+      ],
+      "accent": "#8ef0dc",
+      "style": "sky"
+    },
+    "storm2": {
+      "name": "雷罚高原",
+      "sky": [
+        "#1a0f2e",
+        "#452a63"
+      ],
+      "accent": "#c9a0ff",
+      "style": "storm"
+    },
+    "forest2": {
+      "name": "世界树根",
+      "sky": [
+        "#06130b",
+        "#274a26"
+      ],
+      "accent": "#a4f07c",
+      "style": "forest"
+    },
+    "desert2": {
+      "name": "流沙王陵",
+      "sky": [
+        "#33200c",
+        "#6d4a1c"
+      ],
+      "accent": "#ffd98a",
+      "style": "desert"
+    },
+    "temple2": {
+      "name": "星辉中枢",
+      "sky": [
+        "#101430",
+        "#364a7a"
+      ],
+      "accent": "#ffe08a",
+      "style": "temple"
+    },
+    "night2": {
+      "name": "永夜圣所",
+      "sky": [
+        "#0d0718",
+        "#301a52"
+      ],
+      "accent": "#c48bff",
+      "style": "night"
+    },
+    "void2": {
+      "name": "次元夹缝",
+      "sky": [
+        "#1d0620",
+        "#4d1248"
+      ],
+      "accent": "#ff6bdc",
+      "style": "void"
+    },
+    "throne2": {
+      "name": "终焉星座",
+      "sky": [
+        "#0d0718",
+        "#38205a"
+      ],
+      "accent": "#ff9a6a",
+      "style": "throne"
     }
   },
   "floors": [
@@ -2607,26 +5041,16 @@
         "p01",
         "p02",
         "p03",
-        "p04",
         "p05",
-        "p06",
-        "p07",
-        "p08",
-        "p09",
-        "p27",
         "p28",
-        "p29",
-        "p30",
-        "p31",
-        "p32",
-        "p33",
-        "p34"
+        "p29"
       ],
       "boss": null,
       "minion_count": 0,
       "minion_level_offset": 0,
       "minion_stat_mult": 1.0,
-      "enemy_stat_mult": 0.8,
+      "enemy_stat_mult": 0.78,
+      "minion_affix_count": 0,
       "elite": false
     },
     {
@@ -2635,31 +5059,22 @@
       "map": "ocean",
       "kind": "normal",
       "enemy_count": 2,
-      "level": 20,
+      "level": 15,
       "pool": [
         "p10",
         "p11",
         "p12",
-        "p13",
         "p14",
         "p15",
-        "p16",
-        "p17",
         "p18",
-        "p19",
-        "p20",
-        "p21",
-        "p22",
-        "p23",
-        "p24",
-        "p25",
-        "p26"
+        "p52"
       ],
       "boss": null,
       "minion_count": 0,
       "minion_level_offset": 0,
       "minion_stat_mult": 1.0,
-      "enemy_stat_mult": 0.8,
+      "enemy_stat_mult": 0.792,
+      "minion_affix_count": 0,
       "elite": false
     },
     {
@@ -2668,134 +5083,237 @@
       "map": "sky",
       "kind": "normal",
       "enemy_count": 3,
-      "level": 30,
+      "level": 20,
       "pool": [
+        "p08",
         "p19",
         "p20",
-        "p21",
-        "p22",
-        "p23",
-        "p24",
-        "p25",
-        "p26",
         "p35",
         "p36",
-        "p37",
-        "p38",
-        "p39",
-        "p40",
         "p41",
-        "p42"
+        "p53"
       ],
       "boss": null,
       "minion_count": 0,
       "minion_level_offset": 0,
       "minion_stat_mult": 1.0,
-      "enemy_stat_mult": 0.9,
+      "enemy_stat_mult": 0.804,
+      "minion_affix_count": 0,
       "elite": false
     },
     {
       "floor": 4,
       "name": "第四层 · 雷鸣裂谷",
       "map": "storm",
+      "kind": "normal",
+      "enemy_count": 4,
+      "level": 25,
+      "pool": [
+        "p08",
+        "p17",
+        "p19",
+        "p20",
+        "p23",
+        "p24"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 0.816,
+      "minion_affix_count": 0,
+      "elite": false
+    },
+    {
+      "floor": 5,
+      "name": "第五层 · 熔心祭坛",
+      "map": "lava",
       "kind": "boss",
       "enemy_count": 5,
-      "level": 40,
+      "level": 30,
       "pool": [
         "p01",
         "p02",
-        "p03",
-        "p04",
         "p05",
-        "p06",
-        "p07",
-        "p08",
-        "p09",
+        "p26",
         "p27",
-        "p28",
-        "p29",
-        "p30",
-        "p31",
-        "p32",
-        "p33",
-        "p34"
+        "p30"
       ],
       "boss": "b1",
       "minion_count": 4,
       "minion_level_offset": -5,
-      "minion_stat_mult": 0.8,
-      "enemy_stat_mult": 1.0,
+      "minion_stat_mult": 0.776,
+      "enemy_stat_mult": 0.908,
+      "minion_affix_count": 1,
       "elite": true
     },
     {
-      "floor": 5,
-      "name": "第五层 · 远古森林",
+      "floor": 6,
+      "name": "第六层 · 远古森林",
       "map": "forest",
       "kind": "normal",
       "enemy_count": 5,
-      "level": 50,
+      "level": 35,
       "pool": [
-        "p19",
-        "p20",
-        "p21",
-        "p22",
-        "p23",
-        "p24",
         "p25",
-        "p26",
-        "p35",
-        "p36",
-        "p37",
-        "p38",
-        "p39",
-        "p40",
-        "p41",
-        "p42"
-      ],
-      "boss": null,
-      "minion_count": 0,
-      "minion_level_offset": 0,
-      "minion_stat_mult": 1.0,
-      "enemy_stat_mult": 0.92,
-      "elite": false
-    },
-    {
-      "floor": 6,
-      "name": "第六层 · 荒芜沙海",
-      "map": "desert",
-      "kind": "normal",
-      "enemy_count": 5,
-      "level": 60,
-      "pool": [
-        "p01",
-        "p02",
-        "p03",
-        "p04",
-        "p05",
-        "p06",
-        "p07",
-        "p08",
-        "p09",
-        "p27",
-        "p28",
-        "p29",
-        "p30",
         "p31",
         "p32",
-        "p33",
-        "p34"
+        "p34",
+        "p39",
+        "p51"
       ],
       "boss": null,
       "minion_count": 0,
       "minion_level_offset": 0,
       "minion_stat_mult": 1.0,
-      "enemy_stat_mult": 0.92,
+      "enemy_stat_mult": 0.84,
+      "minion_affix_count": 1,
       "elite": false
     },
     {
       "floor": 7,
-      "name": "第七层 · 星辉圣殿",
+      "name": "第七层 · 荒芜沙海",
+      "map": "desert",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 40,
+      "pool": [
+        "p03",
+        "p26",
+        "p27",
+        "p28",
+        "p29",
+        "p30"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 0.852,
+      "minion_affix_count": 1,
+      "elite": false
+    },
+    {
+      "floor": 8,
+      "name": "第八层 · 星辉圣殿",
       "map": "temple",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 45,
+      "pool": [
+        "p22",
+        "p35",
+        "p36",
+        "p37",
+        "p38",
+        "p41",
+        "p53"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 0.864,
+      "minion_affix_count": 1,
+      "elite": false
+    },
+    {
+      "floor": 9,
+      "name": "第九层 · 永夜回廊",
+      "map": "night",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 50,
+      "pool": [
+        "p43",
+        "p44",
+        "p45",
+        "p46",
+        "p49",
+        "p50"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 0.876,
+      "minion_affix_count": 1,
+      "elite": false
+    },
+    {
+      "floor": 10,
+      "name": "第十层 · 赤潮王座",
+      "map": "night2",
+      "kind": "boss",
+      "enemy_count": 5,
+      "level": 55,
+      "pool": [
+        "p43",
+        "p44",
+        "p45",
+        "p46",
+        "p49",
+        "p50"
+      ],
+      "boss": "k1",
+      "minion_count": 4,
+      "minion_level_offset": -5,
+      "minion_stat_mult": 0.91,
+      "enemy_stat_mult": 1.04,
+      "minion_affix_count": 1,
+      "elite": true
+    },
+    {
+      "floor": 11,
+      "name": "第十一层 · 虚空裂隙",
+      "map": "void",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 60,
+      "pool": [
+        "p35",
+        "p36",
+        "p41",
+        "p44",
+        "p45",
+        "p50",
+        "p53"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 0.9,
+      "minion_affix_count": 1,
+      "elite": false
+    },
+    {
+      "floor": 12,
+      "name": "第十二层 · 熔心深渊",
+      "map": "lava2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 65,
+      "pool": [
+        "p01",
+        "p02",
+        "p05",
+        "p06",
+        "p07",
+        "p48"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 0.912,
+      "minion_affix_count": 1,
+      "elite": false
+    },
+    {
+      "floor": 13,
+      "name": "第十三层 · 沉没神殿",
+      "map": "ocean2",
       "kind": "normal",
       "enemy_count": 5,
       "level": 70,
@@ -2803,92 +5321,379 @@
         "p10",
         "p11",
         "p12",
-        "p13",
-        "p14",
-        "p15",
         "p16",
+        "p33",
+        "p47",
+        "p52"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 0.924,
+      "minion_affix_count": 1,
+      "elite": false
+    },
+    {
+      "floor": 14,
+      "name": "第十四层 · 云端天阶",
+      "map": "sky2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 75,
+      "pool": [
+        "p08",
         "p17",
-        "p18",
-        "p35",
-        "p36",
-        "p37",
-        "p38",
-        "p39",
-        "p40",
-        "p41",
+        "p19",
+        "p20",
+        "p23",
+        "p24"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 0.936,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 15,
+      "name": "第十五层 · 幽夜边陲",
+      "map": "storm2",
+      "kind": "boss",
+      "enemy_count": 5,
+      "level": 80,
+      "pool": [
+        "p17",
+        "p23",
+        "p24",
+        "p26",
+        "p27",
+        "p30"
+      ],
+      "boss": "b2",
+      "minion_count": 4,
+      "minion_level_offset": -5,
+      "minion_stat_mult": 0.866,
+      "enemy_stat_mult": 1.028,
+      "minion_affix_count": 2,
+      "elite": true
+    },
+    {
+      "floor": 16,
+      "name": "第十六层 · 世界树根",
+      "map": "forest2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 85,
+      "pool": [
+        "p16",
+        "p25",
+        "p31",
+        "p32",
+        "p33",
+        "p47"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 0.96,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 17,
+      "name": "第十七层 · 流沙王陵",
+      "map": "desert2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 90,
+      "pool": [
+        "p03",
+        "p09",
+        "p13",
+        "p28",
+        "p29",
         "p42"
       ],
       "boss": null,
       "minion_count": 0,
       "minion_level_offset": 0,
       "minion_stat_mult": 1.0,
-      "enemy_stat_mult": 0.92,
+      "enemy_stat_mult": 0.972,
+      "minion_affix_count": 2,
       "elite": false
     },
     {
-      "floor": 8,
-      "name": "第八层 · 永夜回廊",
-      "map": "night",
-      "kind": "boss",
+      "floor": 18,
+      "name": "第十八层 · 星辉中枢",
+      "map": "temple2",
+      "kind": "normal",
       "enemy_count": 5,
-      "level": 80,
+      "level": 95,
       "pool": [
-        "p19",
-        "p20",
+        "p04",
         "p21",
-        "p22",
-        "p23",
-        "p24",
-        "p25",
-        "p26",
-        "p43",
+        "p35",
+        "p36",
+        "p40",
+        "p41",
+        "p53"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 0.984,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 19,
+      "name": "第十九层 · 次元夹缝",
+      "map": "void2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 97,
+      "pool": [
+        "p06",
+        "p07",
         "p44",
         "p45",
-        "p46",
-        "p47",
         "p48",
-        "p49",
         "p50"
       ],
-      "boss": "b2",
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 0.996,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 20,
+      "name": "第二十层 · 霜狱王庭",
+      "map": "ocean2",
+      "kind": "boss",
+      "enemy_count": 5,
+      "level": 99,
+      "pool": [
+        "p06",
+        "p07",
+        "p43",
+        "p46",
+        "p48",
+        "p49"
+      ],
+      "boss": "k2",
       "minion_count": 4,
       "minion_level_offset": -5,
-      "minion_stat_mult": 0.9,
-      "enemy_stat_mult": 1.0,
+      "minion_stat_mult": 1.01,
+      "enemy_stat_mult": 1.14,
+      "minion_affix_count": 2,
       "elite": true
     },
     {
-      "floor": 9,
-      "name": "第九层 · 虚空裂隙",
-      "map": "void",
+      "floor": 21,
+      "name": "第二十一层 · 熔核回廊",
+      "map": "lava2",
       "kind": "normal",
       "enemy_count": 5,
-      "level": 90,
+      "level": 101,
       "pool": [
         "p01",
         "p02",
-        "p03",
-        "p04",
         "p05",
         "p06",
         "p07",
-        "p08",
-        "p09",
+        "p48"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.006,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 22,
+      "name": "第二十二层 · 潮汐墓道",
+      "map": "ocean2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 103,
+      "pool": [
         "p10",
         "p11",
         "p12",
-        "p13",
         "p14",
         "p15",
-        "p16",
-        "p17",
         "p18",
+        "p52"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.012,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 23,
+      "name": "第二十三层 · 浮空断桥",
+      "map": "sky2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 105,
+      "pool": [
+        "p08",
+        "p17",
+        "p19",
+        "p20",
+        "p23",
+        "p24"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.018,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 24,
+      "name": "第二十四层 · 流沙神殿",
+      "map": "desert2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 107,
+      "pool": [
+        "p03",
+        "p26",
+        "p27",
+        "p28",
+        "p29",
+        "p30"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.024,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 25,
+      "name": "第二十五层 · 永夜祭坛",
+      "map": "night2",
+      "kind": "boss",
+      "enemy_count": 5,
+      "level": 109,
+      "pool": [
         "p43",
         "p44",
         "p45",
         "p46",
-        "p47",
-        "p48",
+        "p49",
+        "p50"
+      ],
+      "boss": "b4",
+      "minion_count": 4,
+      "minion_level_offset": -5,
+      "minion_stat_mult": 0.956,
+      "enemy_stat_mult": 1.148,
+      "minion_affix_count": 2,
+      "elite": true
+    },
+    {
+      "floor": 26,
+      "name": "第二十六层 · 森影回廊",
+      "map": "forest2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 111,
+      "pool": [
+        "p25",
+        "p31",
+        "p32",
+        "p34",
+        "p39",
+        "p51"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.036,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 27,
+      "name": "第二十七层 · 雷罚高坛",
+      "map": "storm2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 113,
+      "pool": [
+        "p09",
+        "p13",
+        "p26",
+        "p27",
+        "p30",
+        "p42"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.042,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 28,
+      "name": "第二十八层 · 星辉回廊",
+      "map": "temple2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 115,
+      "pool": [
+        "p22",
+        "p35",
+        "p36",
+        "p37",
+        "p38",
+        "p41",
+        "p53"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.048,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 29,
+      "name": "第二十九层 · 虚空阶梯",
+      "map": "void",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 117,
+      "pool": [
+        "p43",
+        "p44",
+        "p45",
+        "p46",
         "p49",
         "p50"
       ],
@@ -2896,39 +5701,263 @@
       "minion_count": 0,
       "minion_level_offset": 0,
       "minion_stat_mult": 1.0,
-      "enemy_stat_mult": 1.03,
+      "enemy_stat_mult": 1.054,
+      "minion_affix_count": 2,
       "elite": false
     },
     {
-      "floor": 10,
-      "name": "第十层 · 星蚀王座",
+      "floor": 30,
+      "name": "第三十层 · 蚀月魔庭",
+      "map": "night2",
+      "kind": "boss",
+      "enemy_count": 5,
+      "level": 119,
+      "pool": [
+        "p06",
+        "p07",
+        "p43",
+        "p46",
+        "p48",
+        "p49"
+      ],
+      "boss": "k3",
+      "minion_count": 4,
+      "minion_level_offset": -5,
+      "minion_stat_mult": 1.11,
+      "enemy_stat_mult": 1.24,
+      "minion_affix_count": 2,
+      "elite": true
+    },
+    {
+      "floor": 31,
+      "name": "第三十一层 · 次元深井",
+      "map": "void2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 121,
+      "pool": [
+        "p16",
+        "p33",
+        "p44",
+        "p45",
+        "p47",
+        "p50"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.066,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 32,
+      "name": "第三十二层 · 熔心深座",
+      "map": "lava2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 123,
+      "pool": [
+        "p01",
+        "p02",
+        "p05",
+        "p26",
+        "p27",
+        "p30"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.072,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 33,
+      "name": "第三十三层 · 沉渊海沟",
+      "map": "ocean",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 125,
+      "pool": [
+        "p09",
+        "p10",
+        "p11",
+        "p12",
+        "p13",
+        "p42",
+        "p52"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.078,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 34,
+      "name": "第三十四层 · 云巅裂口",
+      "map": "sky2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 127,
+      "pool": [
+        "p08",
+        "p17",
+        "p19",
+        "p20",
+        "p23",
+        "p24"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.084,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 35,
+      "name": "第三十五层 · 星蚀龙庭",
       "map": "throne",
       "kind": "boss",
       "enemy_count": 5,
-      "level": 100,
+      "level": 129,
       "pool": [
-        "p35",
-        "p36",
-        "p37",
-        "p38",
-        "p39",
-        "p40",
-        "p41",
-        "p42",
-        "p43",
-        "p44",
-        "p45",
-        "p46",
-        "p47",
-        "p48",
-        "p49",
-        "p50"
+        "p01",
+        "p02",
+        "p05",
+        "p06",
+        "p07",
+        "p48"
       ],
       "boss": "b3",
       "minion_count": 4,
       "minion_level_offset": -5,
-      "minion_stat_mult": 0.8,
-      "enemy_stat_mult": 1.0,
+      "minion_stat_mult": 1.046,
+      "enemy_stat_mult": 1.268,
+      "minion_affix_count": 2,
+      "elite": true
+    },
+    {
+      "floor": 36,
+      "name": "第三十六层 · 世界树冠",
+      "map": "forest2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 130,
+      "pool": [
+        "p03",
+        "p25",
+        "p28",
+        "p29",
+        "p31",
+        "p32"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.096,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 37,
+      "name": "第三十七层 · 铁砂王陵",
+      "map": "desert2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 132,
+      "pool": [
+        "p09",
+        "p13",
+        "p22",
+        "p37",
+        "p38",
+        "p42"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.102,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 38,
+      "name": "第三十八层 · 圣殿穹顶",
+      "map": "temple2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 134,
+      "pool": [
+        "p35",
+        "p36",
+        "p41",
+        "p44",
+        "p45",
+        "p50",
+        "p53"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.108,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 39,
+      "name": "第三十九层 · 次元深渊",
+      "map": "void2",
+      "kind": "normal",
+      "enemy_count": 5,
+      "level": 136,
+      "pool": [
+        "p06",
+        "p07",
+        "p43",
+        "p46",
+        "p48",
+        "p49"
+      ],
+      "boss": null,
+      "minion_count": 0,
+      "minion_level_offset": 0,
+      "minion_stat_mult": 1.0,
+      "enemy_stat_mult": 1.114,
+      "minion_affix_count": 2,
+      "elite": false
+    },
+    {
+      "floor": 40,
+      "name": "第四十层 · 终焉魔座",
+      "map": "throne2",
+      "kind": "boss",
+      "enemy_count": 5,
+      "level": 138,
+      "pool": [
+        "p06",
+        "p07",
+        "p43",
+        "p46",
+        "p48",
+        "p49"
+      ],
+      "boss": "k4",
+      "minion_count": 4,
+      "minion_level_offset": -5,
+      "minion_stat_mult": 1.21,
+      "enemy_stat_mult": 1.34,
+      "minion_affix_count": 2,
       "elite": true
     }
   ],
@@ -3159,8 +6188,235 @@
             1
           ]
         ]
+      },
+      "b4": {
+        "boss": [
+          1,
+          2
+        ],
+        "minions": [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      },
+      "k1": {
+        "boss": [
+          1,
+          2
+        ],
+        "minions": [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      },
+      "k2": {
+        "boss": [
+          1,
+          2
+        ],
+        "minions": [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      },
+      "k3": {
+        "boss": [
+          1,
+          2
+        ],
+        "minions": [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      },
+      "k4": {
+        "boss": [
+          1,
+          2
+        ],
+        "minions": [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ]
       }
-    }
+    },
+    "links": [
+      {
+        "a": "guardian",
+        "b": "archer",
+        "mods": {
+          "archer": {
+            "taken": -0.12
+          }
+        }
+      },
+      {
+        "a": "guardian",
+        "b": "mage",
+        "mods": {
+          "mage": {
+            "taken": -0.1
+          }
+        }
+      },
+      {
+        "a": "guardian",
+        "b": "support",
+        "mods": {
+          "support": {
+            "shield": 0.2
+          }
+        }
+      },
+      {
+        "a": "guardian",
+        "b": "warrior",
+        "mods": {
+          "warrior": {
+            "atk": 0.08
+          },
+          "guardian": {
+            "def": 0.08
+          }
+        }
+      },
+      {
+        "a": "warrior",
+        "b": "warrior",
+        "mods": {
+          "warrior": {
+            "atk": 0.08
+          }
+        }
+      },
+      {
+        "a": "warrior",
+        "b": "archer",
+        "mods": {
+          "warrior": {
+            "atk": 0.06
+          },
+          "archer": {
+            "crit": 0.08
+          }
+        }
+      },
+      {
+        "a": "mage",
+        "b": "support",
+        "mods": {
+          "mage": {
+            "heal": 0.15
+          },
+          "support": {
+            "heal": 0.15
+          }
+        }
+      },
+      {
+        "a": "mage",
+        "b": "archer",
+        "mods": {
+          "mage": {
+            "skill": 0.08
+          },
+          "archer": {
+            "skill": 0.08
+          }
+        }
+      },
+      {
+        "a": "archer",
+        "b": "support",
+        "mods": {
+          "archer": {
+            "spd": 0.08
+          },
+          "support": {
+            "heal": 0.08
+          }
+        }
+      },
+      {
+        "a": "support",
+        "b": "support",
+        "mods": {
+          "support": {
+            "heal": 0.12
+          }
+        }
+      }
+    ]
   },
   "combat": {
     "level_steps": {
@@ -3169,9 +6425,29 @@
       "def": 0.05,
       "spd": 0.02
     },
-    "max_level": 100,
-    "level_up_per_floor": 10,
+    "max_level": 500,
+    "rarity_max_level": {
+      "common": 60,
+      "rare": 70,
+      "epic": 80,
+      "legend": 90,
+      "hero": 100,
+      "demon": 180,
+      "demon_king": 150
+    },
+    "king_level_caps": {
+      "d5": 195,
+      "d6": 215,
+      "d7": 220,
+      "d8": 230,
+      "d9": 280,
+      "d10": 350,
+      "d11": 500
+    },
+    "level_up_per_floor": 5,
+    "level_per_floor": 5,
     "base_level": 10,
+    "total_floors": 40,
     "evo_levels": [
       30,
       60
@@ -3182,14 +6458,186 @@
       1.55
     ],
     "def_coefficient": 0.4,
-    "rage_max": 2,
+    "rage_max": 4,
     "crit_base": 0.05,
     "crit_mult": 1.6,
-    "element_advantage": 1.25,
-    "element_disadvantage": 0.8,
+    "element_advantage": 2.0,
+    "element_disadvantage": 0.5,
+    "stab": 1.2,
+    "type_chart": {
+      "normal": {
+        "rock": 0.5,
+        "ghost": 0,
+        "steel": 0.5
+      },
+      "fire": {
+        "fire": 0.5,
+        "water": 0.5,
+        "grass": 2,
+        "ice": 2,
+        "bug": 2,
+        "rock": 0.5,
+        "dragon": 0.5,
+        "steel": 2
+      },
+      "water": {
+        "fire": 2,
+        "water": 0.5,
+        "grass": 0.5,
+        "ground": 2,
+        "rock": 2,
+        "dragon": 0.5
+      },
+      "electric": {
+        "water": 2,
+        "electric": 0.5,
+        "grass": 0.5,
+        "ground": 0,
+        "flying": 2,
+        "dragon": 0.5
+      },
+      "grass": {
+        "fire": 0.5,
+        "water": 2,
+        "grass": 0.5,
+        "poison": 0.5,
+        "ground": 2,
+        "flying": 0.5,
+        "bug": 0.5,
+        "rock": 2,
+        "dragon": 0.5,
+        "steel": 0.5
+      },
+      "ice": {
+        "fire": 0.5,
+        "water": 0.5,
+        "grass": 2,
+        "ice": 0.5,
+        "ground": 2,
+        "flying": 2,
+        "dragon": 2,
+        "steel": 0.5
+      },
+      "fighting": {
+        "normal": 2,
+        "ice": 2,
+        "poison": 0.5,
+        "flying": 0.5,
+        "psychic": 0.5,
+        "bug": 0.5,
+        "rock": 2,
+        "ghost": 0,
+        "dark": 2,
+        "steel": 2
+      },
+      "poison": {
+        "grass": 2,
+        "poison": 0.5,
+        "ground": 0.5,
+        "rock": 0.5,
+        "ghost": 0.5,
+        "steel": 0
+      },
+      "ground": {
+        "fire": 2,
+        "electric": 2,
+        "grass": 0.5,
+        "poison": 2,
+        "flying": 0,
+        "bug": 0.5,
+        "rock": 2,
+        "steel": 2
+      },
+      "flying": {
+        "electric": 0.5,
+        "grass": 2,
+        "fighting": 2,
+        "bug": 2,
+        "rock": 0.5,
+        "steel": 0.5
+      },
+      "psychic": {
+        "fighting": 2,
+        "poison": 2,
+        "psychic": 0.5,
+        "dark": 0,
+        "steel": 0.5
+      },
+      "bug": {
+        "fire": 0.5,
+        "grass": 2,
+        "fighting": 0.5,
+        "poison": 0.5,
+        "flying": 0.5,
+        "psychic": 2,
+        "ghost": 0.5,
+        "dark": 2,
+        "steel": 0.5
+      },
+      "rock": {
+        "fire": 2,
+        "ice": 2,
+        "fighting": 0.5,
+        "ground": 0.5,
+        "flying": 2,
+        "bug": 2,
+        "steel": 0.5
+      },
+      "ghost": {
+        "normal": 0,
+        "psychic": 2,
+        "ghost": 2,
+        "dark": 0.5
+      },
+      "dragon": {
+        "dragon": 2,
+        "steel": 0.5
+      },
+      "dark": {
+        "fighting": 0.5,
+        "psychic": 2,
+        "ghost": 2,
+        "dark": 0.5
+      },
+      "steel": {
+        "fire": 0.5,
+        "water": 0.5,
+        "electric": 0.5,
+        "ice": 2,
+        "rock": 2,
+        "steel": 0.5
+      }
+    },
     "chest_pet_chance": 1.0,
-    "chest_item_chance": 0.5,
-    "chest_affix_chance": 0.25,
+    "chest_item_chance": 1.0,
+    "chest_affix_chance": 1.0,
+    "chest_hero_chance": 0.0,
+    "chest_rarity_weights": {
+      "common": 45,
+      "rare": 25,
+      "epic": 15,
+      "legend": 10,
+      "hero": 5
+    },
+    "rarity_stat_mult": {
+      "common": 1.0,
+      "rare": 1.0,
+      "epic": 1.0,
+      "legend": 1.0,
+      "hero": 1.0,
+      "demon": 1.0
+    },
+    "hero_stat_mult": {
+      "hp": 1.55,
+      "atk": 1.5,
+      "def": 1.35,
+      "spd": 1.1
+    },
+    "hero_buff_scale": 0.6,
+    "hero_star_bonus": 0.06,
+    "hero_max_star": 6,
+    "hero_skill_mult": 1.12,
+    "hero_upgrade_cost": 1,
     "affix_weights": {
       "common": 60,
       "rare": 30,
@@ -3203,6 +6651,432 @@
     "affix_max_per_skill": 3,
     "affix_max_per_pet": 6,
     "resonance_bonus": 0.08,
-    "max_rounds": 60
+    "max_rounds": 80,
+    "event_floors": [
+      2,
+      5,
+      8,
+      11,
+      14,
+      17,
+      20,
+      23,
+      26,
+      29,
+      32,
+      35,
+      38
+    ],
+    "curse_stat_mult": 1.25,
+    "curse_bonus_items": 1,
+    "king_contract_chance": 0.15,
+    "rare_affix_chance": 0.1,
+    "rare_affix_ids": [
+      "rebound",
+      "volley",
+      "aegis",
+      "still"
+    ],
+    "king_escort_min": 2,
+    "king_might_pct": 0.08,
+    "king_might_cap": 5,
+    "fallen_stat_mult": 1.35,
+    "fallen_skill_mult": 1.4
+  },
+  "resonance": {
+    "normal": {
+      "name": "一般系共鸣",
+      "color": "#b9c4d8",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队最大生命 +8%。",
+          "mods": {
+            "hp": 0.08
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队最大生命 +16%，防御 +8%。",
+          "mods": {
+            "hp": 0.16,
+            "def": 0.08
+          }
+        }
+      ]
+    },
+    "fire": {
+      "name": "火系共鸣",
+      "color": "#ff7043",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队攻击 +8%。",
+          "mods": {
+            "atk": 0.08
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队攻击 +16%，暴击 +5%。",
+          "mods": {
+            "atk": 0.16,
+            "crit": 0.05
+          }
+        }
+      ]
+    },
+    "water": {
+      "name": "水系共鸣",
+      "color": "#41a6ff",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队最大生命 +8%。",
+          "mods": {
+            "hp": 0.08
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队最大生命 +16%，防御 +8%。",
+          "mods": {
+            "hp": 0.16,
+            "def": 0.08
+          }
+        }
+      ]
+    },
+    "electric": {
+      "name": "电系共鸣",
+      "color": "#f5d76e",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队速度 +8%。",
+          "mods": {
+            "spd": 0.08
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队速度 +16%，暴击 +4%。",
+          "mods": {
+            "spd": 0.16,
+            "crit": 0.04
+          }
+        }
+      ]
+    },
+    "grass": {
+      "name": "草系共鸣",
+      "color": "#7dce6a",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队最大生命 +8%。",
+          "mods": {
+            "hp": 0.08
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队最大生命 +16%，防御 +8%。",
+          "mods": {
+            "hp": 0.16,
+            "def": 0.08
+          }
+        }
+      ]
+    },
+    "ice": {
+      "name": "冰系共鸣",
+      "color": "#9fd7ff",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队防御 +10%。",
+          "mods": {
+            "def": 0.1
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队防御 +20%，最大生命 +6%。",
+          "mods": {
+            "def": 0.2,
+            "hp": 0.06
+          }
+        }
+      ]
+    },
+    "fighting": {
+      "name": "格斗系共鸣",
+      "color": "#e07050",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队攻击 +8%。",
+          "mods": {
+            "atk": 0.08
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队攻击 +16%，暴击 +5%。",
+          "mods": {
+            "atk": 0.16,
+            "crit": 0.05
+          }
+        }
+      ]
+    },
+    "poison": {
+      "name": "毒系共鸣",
+      "color": "#b06ad4",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队暴击 +5%，攻击 +5%。",
+          "mods": {
+            "crit": 0.05,
+            "atk": 0.05
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队暴击 +10%，攻击 +10%。",
+          "mods": {
+            "crit": 0.1,
+            "atk": 0.1
+          }
+        }
+      ]
+    },
+    "ground": {
+      "name": "地面系共鸣",
+      "color": "#d9a94c",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队防御 +10%。",
+          "mods": {
+            "def": 0.1
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队防御 +20%，最大生命 +6%。",
+          "mods": {
+            "def": 0.2,
+            "hp": 0.06
+          }
+        }
+      ]
+    },
+    "flying": {
+      "name": "飞行系共鸣",
+      "color": "#8fd0c8",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队速度 +8%。",
+          "mods": {
+            "spd": 0.08
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队速度 +16%，暴击 +4%。",
+          "mods": {
+            "spd": 0.16,
+            "crit": 0.04
+          }
+        }
+      ]
+    },
+    "psychic": {
+      "name": "超能系共鸣",
+      "color": "#ff8fb8",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队暴击 +5%，攻击 +5%。",
+          "mods": {
+            "crit": 0.05,
+            "atk": 0.05
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队暴击 +10%，攻击 +10%。",
+          "mods": {
+            "crit": 0.1,
+            "atk": 0.1
+          }
+        }
+      ]
+    },
+    "bug": {
+      "name": "虫系共鸣",
+      "color": "#b6c44a",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队速度 +8%。",
+          "mods": {
+            "spd": 0.08
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队速度 +16%，暴击 +4%。",
+          "mods": {
+            "spd": 0.16,
+            "crit": 0.04
+          }
+        }
+      ]
+    },
+    "rock": {
+      "name": "岩石系共鸣",
+      "color": "#b08a62",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队防御 +10%。",
+          "mods": {
+            "def": 0.1
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队防御 +20%，最大生命 +6%。",
+          "mods": {
+            "def": 0.2,
+            "hp": 0.06
+          }
+        }
+      ]
+    },
+    "ghost": {
+      "name": "幽灵系共鸣",
+      "color": "#8a6ad4",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队暴击 +5%，攻击 +5%。",
+          "mods": {
+            "crit": 0.05,
+            "atk": 0.05
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队暴击 +10%，攻击 +10%。",
+          "mods": {
+            "crit": 0.1,
+            "atk": 0.1
+          }
+        }
+      ]
+    },
+    "dragon": {
+      "name": "龙系共鸣",
+      "color": "#6a7dff",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队攻击 +8%。",
+          "mods": {
+            "atk": 0.08
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队攻击 +16%，暴击 +5%。",
+          "mods": {
+            "atk": 0.16,
+            "crit": 0.05
+          }
+        }
+      ]
+    },
+    "dark": {
+      "name": "恶系共鸣",
+      "color": "#6d6480",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队攻击 +8%。",
+          "mods": {
+            "atk": 0.08
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队攻击 +16%，暴击 +5%。",
+          "mods": {
+            "atk": 0.16,
+            "crit": 0.05
+          }
+        }
+      ]
+    },
+    "steel": {
+      "name": "钢系共鸣",
+      "color": "#b9c6d6",
+      "tiers": [
+        {
+          "count": 2,
+          "name": "二重",
+          "desc": "全队防御 +10%。",
+          "mods": {
+            "def": 0.1
+          }
+        },
+        {
+          "count": 3,
+          "name": "三重",
+          "desc": "全队防御 +20%，最大生命 +6%。",
+          "mods": {
+            "def": 0.2,
+            "hp": 0.06
+          }
+        }
+      ]
+    }
   }
 }

@@ -43,17 +43,40 @@ func soft_style(bg: Color, border: Color = Color.TRANSPARENT, border_w: int = 0,
 	return s
 
 
-func build_theme() -> Theme:
-	var t := Theme.new()
+func _cjk_font() -> Font:
+	var path := "res://fonts/NotoSansCJKsc-Regular.otf"
+	if ResourceLoader.exists(path):
+		var loaded: Font = load(path)
+		if loaded != null:
+			return _bold(loaded)
+	if FileAccess.file_exists(path):
+		var file := FontFile.new()
+		if file.load_dynamic_font(path) == OK:
+			file.antialiasing = TextServer.FONT_ANTIALIASING_GRAY
+			return _bold(file)
+	push_warning("中文字体读取失败，退回系统字体")
 	var font := SystemFont.new()
 	font.font_names = PackedStringArray([
-		"Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC",
-		"SimHei", "Noto Sans CJK SC", "Arial",
+		"PingFang SC", "Hiragino Sans GB", "Heiti SC", "Songti SC",
+		"Noto Sans CJK SC", "Arial Unicode MS",
 	])
-	font.font_weight = 500
+	font.font_weight = 700
 	font.antialiasing = TextServer.FONT_ANTIALIASING_GRAY
+	return _bold(font)
+
+
+func _bold(base: Font) -> Font:
+	var varied := FontVariation.new()
+	varied.base_font = base
+	varied.variation_embolden = 0.85
+	return varied
+
+
+func build_theme() -> Theme:
+	var t := Theme.new()
+	var font := _cjk_font()
 	t.default_font = font
-	t.default_font_size = 16
+	t.default_font_size = 19
 
 	var normal := soft_style(PANEL2, BORDER, 1, 10, 14)
 	var hover := soft_style(PANEL3, ACCENT.darkened(0.15), 1, 10, 14)
@@ -73,7 +96,7 @@ func build_theme() -> Theme:
 	t.set_color("font_pressed_color", "Button", ACCENT)
 	t.set_color("font_disabled_color", "Button", FAINT)
 	t.set_color("font_focus_color", "Button", Color.WHITE)
-	t.set_font_size("font_size", "Button", 17)
+	t.set_font_size("font_size", "Button", 20)
 
 	t.set_color("font_color", "Label", TEXT)
 	t.set_color("font_shadow_color", "Label", Color(0, 0, 0, 0.35))
@@ -90,17 +113,17 @@ func build_theme() -> Theme:
 	t.set_color("default_color", "RichTextLabel", TEXT)
 	t.set_stylebox("normal", "RichTextLabel", StyleBoxEmpty.new())
 	t.set_constant("line_separation", "RichTextLabel", 4)
-	t.set_font_size("normal_font_size", "RichTextLabel", 16)
+	t.set_font_size("normal_font_size", "RichTextLabel", 19)
 
 	t.set_stylebox("panel", "PopupPanel", soft_style(PANEL, BORDER, 1, 14, 16))
 	t.set_stylebox("panel", "TooltipPanel", soft_style(Color("#0d1524"), BORDER, 1, 8, 10))
 	return t
 
 
-func label(text: String, size: int = 16, color: Color = TEXT, wrap: bool = false) -> Label:
+func label(text: String, size: int = 19, color: Color = TEXT, wrap: bool = false) -> Label:
 	var l := Label.new()
 	l.text = text
-	l.add_theme_font_size_override("font_size", size)
+	l.add_theme_font_size_override("font_size", size + 2)
 	l.add_theme_color_override("font_color", color)
 	if wrap:
 		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -108,13 +131,13 @@ func label(text: String, size: int = 16, color: Color = TEXT, wrap: bool = false
 	return l
 
 
-func rich(text: String, size: int = 16, color: Color = TEXT) -> RichTextLabel:
+func rich(text: String, size: int = 19, color: Color = TEXT) -> RichTextLabel:
 	var r := RichTextLabel.new()
 	r.bbcode_enabled = true
 	r.fit_content = true
 	r.scroll_active = false
 	r.text = text
-	r.add_theme_font_size_override("normal_font_size", size)
+	r.add_theme_font_size_override("normal_font_size", size + 2)
 	r.add_theme_color_override("default_color", color)
 	return r
 
@@ -131,11 +154,11 @@ func panel_with(style: StyleBoxFlat) -> PanelContainer:
 	return p
 
 
-func button(text: String, accent: Color = Color.TRANSPARENT, size: int = 17) -> Button:
+func button(text: String, accent: Color = Color.TRANSPARENT, size: int = 20) -> Button:
 	var b := Button.new()
 	b.text = text
 	b.custom_minimum_size = Vector2(0, 46)
-	b.add_theme_font_size_override("font_size", size)
+	b.add_theme_font_size_override("font_size", size + 2)
 	if accent.a > 0:
 		var n := soft_style(accent, accent.lightened(0.2), 1, 10, 14)
 		var h := soft_style(accent.lightened(0.12), Color.WHITE, 1, 10, 14)

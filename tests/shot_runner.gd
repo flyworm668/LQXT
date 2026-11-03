@@ -60,8 +60,16 @@ func _ready() -> void:
 	if str(pr.get("affix", {}).get("kind", "none")) != "affix":
 		pr["affix"] = {"kind": "affix", "candidates": ContentDB.affix_candidates(GameState.rng, 3)}
 		pr["claimed"]["affix"] = false
+	if str(pr.get("hero", {}).get("kind", "none")) != "hero":
+		pr["hero"] = {"kind": "hero", "species": "p02", "buff": "frenzy"}
+		pr["claimed"]["hero"] = false
 	await main.goto("res://scripts/ui/reward_screen.gd", {"evolutions": []})
 	await _shot("08_reward")
+
+	GameState.current_floor = 2
+	GameState.roll_event()
+	await main.goto("res://scripts/ui/event_screen.gd")
+	await _shot("19_event")
 
 	await main.goto("res://scripts/ui/affix_screen.gd")
 	await _shot("09_affix")
@@ -75,6 +83,11 @@ func _ready() -> void:
 			await _shot("10_affix_skill")
 
 	await main.goto("res://scripts/ui/result_screen.gd", {"win": true})
+	var result_screen = main.current_screen
+	if result_screen != null and result_screen.has_method("finish_scroll"):
+		result_screen.call("finish_scroll")
+		await get_tree().process_frame
+		await get_tree().process_frame
 	await _shot("11_result")
 
 	# --- 5v5 mid-game visual ---
@@ -99,9 +112,9 @@ func _ready() -> void:
 
 	# --- boss floor visual ---
 	for entry in GameState.roster:
-		entry["level"] = 40
-	GameState.current_floor = 4
-	GameState.generate_encounter(4)
+		entry["level"] = 45
+	GameState.current_floor = 5
+	GameState.generate_encounter(5)
 	_place_roster()
 	await main.goto("res://scripts/ui/map_screen.gd")
 	await _shot("14_map_boss")
@@ -109,7 +122,7 @@ func _ready() -> void:
 	await get_tree().create_timer(1.2).timeout
 	await _shot("15_battle_boss")
 
-	# --- floor 8 stress / FPS sample ---
+	# --- deep-floor stress / FPS sample ---
 	GameState.start_run("veteran", "p01", 888888)
 	var added := 0
 	for pid in ContentDB.all_pet_ids():
@@ -123,18 +136,18 @@ func _ready() -> void:
 	for i in range(6):
 		var it := ContentDB.random_item(GameState.rng)
 		if not it.is_empty():
-			GameState.items.append(str(it["id"]))
-	GameState.current_floor = 8
-	GameState.generate_encounter(8)
+			GameState.add_item(str(it["id"]))
+	GameState.current_floor = 14
+	GameState.generate_encounter(14)
 	_place_roster()
 	await main.goto("res://scripts/ui/battle_screen.gd")
 	await get_tree().create_timer(0.8).timeout
-	await _shot("18_battle_floor8")
+	await _shot("18_battle_floor14")
 	var samples: Array = []
 	for i in range(10):
 		await get_tree().create_timer(0.35).timeout
 		samples.append(Engine.get_frames_per_second())
-	print("FLOOR8 FPS SAMPLES: ", samples)
+	print("FLOOR14 FPS SAMPLES: ", samples)
 
 	print("SHOTS SAVED: ", abs_dir)
 	get_tree().quit()

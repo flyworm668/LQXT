@@ -1,4 +1,5 @@
 .godot/
+godot/
 shots/
 *.tmp
 *.log
@@ -6,3 +7,9 @@ export/
 __pycache__/
 *.pyc
 docs/screenshots/*.import
+.DS_Store
+*.apk
+*.apk.idsig
+*.apk.zip
+*.app/
+web/

@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "success": true,
+  "status": "completed",
+  "generation_status": "succeeded",
+  "model": "nano-banana-2-lite",
+  "mode": "generate",
+  "operation": "submit",
+  "source": "image-gen-skill",
+  "service_url": "http://10.0.0.252:12018",
+  "result_file": "/Users/hank/hupo/2.1/generated_images/nano-banana-2-lite_20261029_155519_a35c794906b1428eb1546cd7856a9309.json",
+  "saved_paths": [
+    "/Users/hank/hupo/2.1/generated_images/nano-banana-2-lite_20261029_155519_a35c794906b1428eb1546cd7856a9309_1.jpg"
+  ],
+  "source_urls": [
+    "http://10.0.0.6:5003/image-service/2026/10/29/dd988c69-acef-4a67-b019-065c36841d60.jpg"
+  ],
+  "images": [
+    {
+      "index": 1,
+      "filename": "nano-banana-2-lite_20261029_155519_a35c794906b1428eb1546cd7856a9309_1.png",
+      "url": "http://10.0.0.6:5003/image-service/2026/10/29/dd988c69-acef-4a67-b019-065c36841d60.jpg",
+      "saved_path": "/Users/hank/hupo/2.1/generated_images/nano-banana-2-lite_20261029_155519_a35c794906b1428eb1546cd7856a9309_1.jpg"
+    }
+  ],
+  "download_errors": [],
+  "clipboard_copied": false,
+  "clipboard_status": "disabled",
+  "retry_action": "none",
+  "api_key_config": "/Users/hank/.image-service/config.json",
+  "elapsed_seconds": 5.3,
+  "usage": {
+    "model": "nano-banana-2-lite",
+    "channel": "gemini",
+    "input_tokens": 133,
+    "output_tokens": 1485,
+    "total_tokens": 1618,
+    "input_image_tokens": 0,
+    "input_text_tokens": 133,
+    "output_image_tokens": 1120,
+    "output_text_tokens": 365,
+    "service_tier": "standard",
+    "upstream": {
+      "promptTokenCount": 133,
+      "candidatesTokenCount": 1485,
+      "totalTokenCount": 1618,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 133
+        }
+      ],
+      "candidatesTokensDetails": [
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1120
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "provider": "nano-banana-2-lite",
+    "cost_usd": 0.0342,
+    "cost_basis": "gemini nano-banana-2-lite standard $0.25/M input + $30/M image output + $1.5/M text/thinking output",
+    "estimated": false,
+    "cost_status": "known"
+  },
+  "auth_status": "authenticated",
+  "auth": {
+    "status": "authenticated",
+    "principal_type": "user",
+    "principal_name": "梁高嘉",
+    "key_name": "image-gen-skill-hank-mac"
+  }
+}
